@@ -1,0 +1,8 @@
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background: #d16821;
+    display: grid;
+    grid-template-columns: 100px 200px;
+}

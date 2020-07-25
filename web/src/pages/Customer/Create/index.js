@@ -1,11 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Header from '../../../components/Header';
-import Input from '../../../components/Input';
+import Input, { CheckBox } from '../../../components/Input';
 import { Container } from './styles';
 
 const Create = () => {
-  const credentialsRef = useRef(null);
+  const [hasCredentials, setHasCredentials] = useState(true);
+
+  const onChangeCredentialsInput = useCallback((event) => setHasCredentials(!event.target.checked), []);
+
   return (
     <>
       <Header />
@@ -16,11 +19,10 @@ const Create = () => {
         </section>
 
         <main>
-          <Input label="Nome completo" type="text" placeholder="Ex. João da Silva" required />
-          <Input label="Potência da usina (kWp)" type="number" placeholder="Ex. 288.2" required />
-          <Input ref={credentialsRef} label="Tem acesso às credenciais?" type="checkbox" />
-          <Input disabled={credentialsRef.current && !!credentialsRef.current.value} label="Produção estimada (kWh)" type="number" placeholder="Ex. 198.5" />
-
+          <Input name="name" label="Nome completo" type="text" placeholder="Ex. João da Silva" required />
+          <Input name="kwp" label="Potência da usina (kWp)" type="number" placeholder="Ex. 288.2" required />
+          <CheckBox name="credentials" label="Tem acesso as credenciais?" name="teste" onClick={onChangeCredentialsInput}></CheckBox>
+          <Input name="expected" disabled={hasCredentials} label="Produção estimada (kWh)" type="number" placeholder="Ex. 198.5" />
         </main>
       </Container>
     </>

@@ -32,3 +32,11 @@ export const Container = styled.div`
     visibility: hidden;
   }
 `;
+
+export const CheckBoxContainer = styled.div`
+  margin-top: 10px;
+
+  span {
+    margin-left: 10px;
+  }
+`;

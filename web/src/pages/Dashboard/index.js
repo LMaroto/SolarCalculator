@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
 
 import { FiMaximize2 } from 'react-icons/fi';
 import Header from '../../components/Header';
 
 import { Container } from './styles';
+
+import { Link } from "react-router-dom"
 
 function Dashboard() {
   return (
@@ -15,8 +16,8 @@ function Dashboard() {
         <section>
           <span>Clientes</span>
           <div>
-            <button type="submit" className="print">Gerar relatório</button>
-            <button type="submit" className="new-customer">Novo cliente</button>
+            <Link to="/new-customer" className="print">Gerar Relatório</Link>
+            <Link to="/new-customer" className="new-customer">Novo Cliente</Link>
           </div>
         </section>
         <main>

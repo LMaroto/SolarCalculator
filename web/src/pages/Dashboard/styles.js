@@ -15,9 +15,12 @@ export const Container = styled.div`
       font-size: 20px;
     }
 
+    div {
+      display: flex;
+    }
 
-    button{
-
+    a{
+      text-decoration: none;
       height: 30px;
       padding: 0 15px;
       border: 0;
@@ -26,6 +29,8 @@ export const Container = styled.div`
       font-size: 13px;
       color: #fff;
 
+      display: flex;
+      align-items: center;
     }
     .print{
       background: #EE8143;

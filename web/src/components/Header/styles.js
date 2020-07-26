@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-    
+
     height: 50px;
     max-width: 900px;
     margin: 0 auto;
@@ -24,6 +24,16 @@ export const Content = styled.div`
         strong {
             font-weight: bold;
             color: #fff;
+        }
+
+        button {
+          display: flex;
+          align-items: center;
+          background: transparent;
+          border: 0;
+          outline: 0;
+          padding: 0;
+          margin-right: 5px;
         }
     }
 

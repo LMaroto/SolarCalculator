@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { useField } from "@unform/core";
+import { useField } from '@unform/core';
 
 import { Container, CheckBoxContainer } from './styles';
 
@@ -14,14 +14,16 @@ const Input = ({
   const [focused, setFocused] = React.useState(false);
   const [filled, setFilled] = React.useState(false);
 
-  const { registerField, fieldName, error, defaultValue } = useField(name);
+  const {
+    registerField, fieldName, error, defaultValue,
+  } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'value'
-    })
+      path: 'value',
+    });
   }, [fieldName, registerField]);
 
   const onFocus = React.useCallback(() => {
@@ -65,7 +67,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   disabled: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -74,24 +76,26 @@ Input.defaultProps = {
   disabled: false,
 };
 
-export const CheckBox = ({ label, required, onClick, name, ...props }) => {
-  return <CheckBoxContainer>
+export const CheckBox = ({
+  label, required, onClick, name, ...props
+}) => (
+  <CheckBoxContainer>
     <label>
       <input type="checkbox" name={name} {... (onClick ? { onClick } : {})} {...props} />
       {label}
     </label>
-  </CheckBoxContainer>;
-};
+  </CheckBoxContainer>
+);
 
 CheckBox.propTypes = {
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  onClick: PropTypes.func
-}
+  onClick: PropTypes.func,
+};
 
 CheckBox.defaultProps = {
   required: false,
-  onClick: undefined
-}
+  onClick: undefined,
+};
 
 export default Input;

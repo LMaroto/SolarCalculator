@@ -26,9 +26,9 @@ export const Container = styled.div`
       border: 1px solid #ee8143;
     `}
   }
+  transition: visibility 2s;
 
   &:disabled {
-    display: none;
     visibility: hidden;
   }
 `;
@@ -36,7 +36,7 @@ export const Container = styled.div`
 export const CheckBoxContainer = styled.div`
   margin-top: 10px;
 
-  span {
-    margin-left: 10px;
+  input {
+    margin-right: 10px;
   }
 `;

@@ -1,16 +1,28 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
+
+import { useField } from "@unform/core";
 
 import { Container, CheckBoxContainer } from './styles';
 
 const Input = ({
-  label, type, onClick, placeholder, required, disabled, ...props
+  label, type, onClick, placeholder, name, required, disabled, ...props
 }) => {
   const inputRef = useRef(null);
 
   const [focused, setFocused] = React.useState(false);
   const [filled, setFilled] = React.useState(false);
+
+  const { registerField, fieldName, error, defaultValue } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'value'
+    })
+  }, [fieldName, registerField]);
 
   const onFocus = React.useCallback(() => {
     setFocused(true);
@@ -33,9 +45,11 @@ const Input = ({
           onFocus={onFocus}
           onBlur={onBlur}
           ref={inputRef}
+          name={fieldName}
           type={type}
           placeholder={placeholder}
           required={required}
+          defaultValue={defaultValue}
           {...props}
         />
       </Container>
@@ -62,8 +76,10 @@ Input.defaultProps = {
 
 export const CheckBox = ({ label, required, onClick, name, ...props }) => {
   return <CheckBoxContainer>
-    <input type="checkbox" name={name} {... (onClick ? { onClick } : {})} {...props} />
-    <span>{label}</span>
+    <label>
+      <input type="checkbox" name={name} {... (onClick ? { onClick } : {})} {...props} />
+      {label}
+    </label>
   </CheckBoxContainer>;
 };
 

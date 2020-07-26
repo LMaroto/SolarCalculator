@@ -78,14 +78,29 @@ Input.defaultProps = {
 
 export const CheckBox = ({
   label, required, onClick, name, ...props
-}) => (
-  <CheckBoxContainer>
-    <label>
-      <input type="checkbox" name={name} {... (onClick ? { onClick } : {})} {...props} />
-      {label}
-    </label>
-  </CheckBoxContainer>
-);
+}) => {
+  const inputRef = useRef(null);
+  const {
+    registerField, fieldName
+  } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'checked',
+    });
+  }, [fieldName, registerField]);
+
+  return (
+    <CheckBoxContainer>
+      <label>
+        <input ref={inputRef} type="checkbox" name={name} {... (onClick ? { onClick } : {})} {...props} />
+        {label}
+      </label>
+    </CheckBoxContainer>
+  );
+}
 
 CheckBox.propTypes = {
   label: PropTypes.string.isRequired,

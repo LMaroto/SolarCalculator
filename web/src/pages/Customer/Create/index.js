@@ -21,7 +21,7 @@ const Create = () => {
       const expected = parseFloat(data.expected);
 
       console.log(expected);
-
+      console.log(data);
       const newData = {
         name: data.name,
         address: data.address,
@@ -53,7 +53,7 @@ const Create = () => {
             <Input name="address" label="Endereço" type="text" placeholder="Ex. Rua das Camélias, 2000, Cuiabá - MT" required />
             <Input name="kwp" label="Potência da usina (kWp)" type="number" placeholder="Ex. 288.2" required />
             <CheckBox name="access" label="Tem acesso às credenciais?" onClick={onChangeCredentialsInput} />
-            <Input name="expected" disabled={hasCredentials} label="Produção estimada (kWh)" type="number" placeholder="Ex. 198.5" />
+            <Input name="asdfasdf" label="Produção estimada (kWh)" type="number" required placeholder="Ex. 198.5" />
 
           </Form>
         </main>

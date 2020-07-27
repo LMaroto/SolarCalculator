@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { useField } from '@unform/core';
 
-import { Container, CheckBoxContainer } from './styles';
+import { Container, CheckBoxContainer, Error } from './styles';
 
 const Input = ({
   label, type, onClick, placeholder, name, required, disabled, ...props
@@ -41,7 +41,7 @@ const Input = ({
 
     !disabled
     && (
-      <Container focused={focused} filled={filled}>
+      <Container focused={focused} filled={filled} invalid={!!error}>
         <span>{label}</span>
         <input
           onFocus={onFocus}
@@ -54,6 +54,8 @@ const Input = ({
           defaultValue={defaultValue}
           {...props}
         />
+
+        <Error>{error}</Error>
       </Container>
     )
 

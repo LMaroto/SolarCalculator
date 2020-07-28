@@ -33,7 +33,7 @@ function Dashboard() {
         <main>
           {customers.map((customer) => (
 
-            <div id={customer.id}>
+            <div key={customer.id}>
               <strong>
                 {customer.id}
                 {' '}

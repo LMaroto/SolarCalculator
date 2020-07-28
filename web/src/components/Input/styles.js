@@ -25,12 +25,21 @@ export const Container = styled.div`
     ${(props) => (props.filled) && css`
       border: 1px solid #ee8143;
     `}
+
+    ${(props) => (props.invalid) && css`
+      border: 2px solid #eb4034;
+    `}
+
   }
   transition: visibility 2s;
 
   &:disabled {
     visibility: hidden;
   }
+`;
+
+export const Error = styled.p`
+  color: #eb4034;
 `;
 
 export const CheckBoxContainer = styled.div`

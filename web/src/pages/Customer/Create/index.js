@@ -87,7 +87,6 @@ const Create = () => {
             <Input name="address" label="Endereço" type="text" placeholder="Ex. Rua das Camélias, 2000, Cuiabá - MT" required />
             <Input name="kWp" label="Potência da usina (kWp)" type="number" placeholder="Ex. 288.2" required />
             <CheckBox name="access" label="Tem acesso às credenciais?" onClick={onChangeCredentialsInput} />
-            <Input name="expected" label="Produção estimada (kWh)" type="number" required placeholder="Ex. 198.5" />
             {!hasCredentials && (
             <Input
               name="expected"
@@ -97,7 +96,6 @@ const Create = () => {
               placeholder="Ex. 198.5"
             />
             )}
-
           </Form>
         </main>
       </Container>

@@ -1,14 +1,13 @@
 import React, { useState, useCallback, useRef } from 'react';
 
 import { Form } from '@unform/web';
+import * as Yup from 'yup';
+import { useHistory } from 'react-router-dom';
 import api from '../../../services/api';
 
 import Header from '../../../components/Header';
 import Input, { CheckBox } from '../../../components/Input';
 import { Container } from './styles';
-
-import * as Yup from "yup";
-import { useHistory } from 'react-router-dom';
 
 const Create = () => {
   const formRef = useRef(null);
@@ -32,9 +31,9 @@ const Create = () => {
             is: true,
             then: Yup.number('Precisa ser um número')
               .required('Produção estimada é obrigatória'),
-            otherwise: Yup.number('Precisa ser um número')
-          })
-      }
+            otherwise: Yup.number('Precisa ser um número'),
+          }),
+      },
     );
 
   const formSubmit = useCallback(async (data) => {
@@ -60,7 +59,7 @@ const Create = () => {
       if (err instanceof Yup.ValidationError) {
         const errors = {}; // objeto no formato: {campo: MensagemErro}
 
-        err.inner.forEach(validationError => {
+        err.inner.forEach((validationError) => {
           errors[validationError.path] = validationError.message;
         });
 
@@ -88,14 +87,15 @@ const Create = () => {
             <Input name="address" label="Endereço" type="text" placeholder="Ex. Rua das Camélias, 2000, Cuiabá - MT" required />
             <Input name="kWp" label="Potência da usina (kWp)" type="number" placeholder="Ex. 288.2" required />
             <CheckBox name="access" label="Tem acesso às credenciais?" onClick={onChangeCredentialsInput} />
-            {!hasCredentials && <Input
+            {!hasCredentials && (
+            <Input
               name="expected"
               label="Produção estimada (kWh)"
               type="number"
               required
-              placeholder="Ex. 198.5" />
-            }
-
+              placeholder="Ex. 198.5"
+            />
+            )}
           </Form>
         </main>
       </Container>

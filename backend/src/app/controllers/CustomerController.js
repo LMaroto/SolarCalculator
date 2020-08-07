@@ -8,6 +8,13 @@ class CustomerController {
     return res.json(customers);
   }
 
+  async findById(req, res) {
+    const { id } = req.params;
+    const customer = await CustomerRepository.findById(id);
+
+    return res.json(customer);
+  }
+
   async create(req, res) {
     const customer = await CustomerRepository.store(req.body);
 

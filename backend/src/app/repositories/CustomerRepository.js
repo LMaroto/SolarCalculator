@@ -6,6 +6,12 @@ class CustomerRepository {
     return customers;
   }
 
+  async findById(id) {
+    const customer = await connection('customers').select('*').where('id', id);
+
+    return customer[0];
+  }
+
   async store({
     name, address, kWp, expected, access,
   }) {

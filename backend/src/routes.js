@@ -9,6 +9,8 @@ const routes = new Router();
 
 // Customers Management
 routes.get('/customers', CustomerController.index);
+routes.get('/customers/:id', CustomerController.findById);
+
 routes.post('/customers', CustomerController.create);
 routes.put('/customers/:id', CustomerController.update);
 routes.delete('/customers/:id', CustomerController.delete);

@@ -52,6 +52,7 @@ const Create = () => {
 
       await api.post('customers', newData);
 
+      // trocar por Toast ?
       alert('Cadastro realizado com sucesso!');
       history.goBack();
     } catch (err) {
@@ -67,10 +68,11 @@ const Create = () => {
           formRef.current.setErrors(errors);
         }
       } else {
+        // trocar por Toast ?
         alert('Alguma coisa de errado aconteceu. Tente novamente mais tarde.');
       }
     }
-  }, []);
+  }, [customerSchema, history]);
 
   return (
     <>
@@ -88,13 +90,13 @@ const Create = () => {
             <Input name="kWp" label="Potência da usina (kWp)" type="number" placeholder="Ex. 288.2" required />
             <CheckBox name="access" label="Tem acesso às credenciais?" onClick={onChangeCredentialsInput} />
             {!hasCredentials && (
-            <Input
-              name="expected"
-              label="Produção estimada (kWh)"
-              type="number"
-              required
-              placeholder="Ex. 198.5"
-            />
+              <Input
+                name="expected"
+                label="Produção estimada (kWh)"
+                type="number"
+                required
+                placeholder="Ex. 198.5"
+              />
             )}
           </Form>
         </main>

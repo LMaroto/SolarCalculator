@@ -33,7 +33,7 @@ function Dashboard() {
         <main>
           {customers.map((customer) => (
 
-            <div key={customer.id}>
+            <Link to={`/customer/${customer.id}`} key={customer.id}>
               <strong>
                 {customer.id}
                 {' '}
@@ -41,9 +41,9 @@ function Dashboard() {
                 {' '}
                 {customer.name}
               </strong>
-              <Link to="/"><FiMaximize2 color="#138DD2" /></Link>
+              <FiMaximize2 color="#fff" />
 
-            </div>
+            </Link>
           ))}
         </main>
       </Container>

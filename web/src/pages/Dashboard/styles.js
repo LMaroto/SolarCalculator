@@ -52,13 +52,13 @@ export const Container = styled.div`
 
     margin: 20px auto;
 
-    div{
+    a {
 
-      background: #F6C3A6;
+      background: #f2a378;
       color: #fff;
 
       margin: 15px 0;
-      height: 35px;
+      height: 45px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -66,11 +66,15 @@ export const Container = styled.div`
       border-radius: 4px;
 
       strong{
-          font-size: 16px;
+        font-size: 16px;
       }
 
       &:hover{
-          background: ${darken(0.05, '#F6C3A6')}
+        background: ${darken(0.05, '#f2a378')}
+      }
+
+      svg {
+        margin-right: 10px;
       }
     }
 }

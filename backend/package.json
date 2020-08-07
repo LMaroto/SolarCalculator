@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "npx knex migrate:latest && npx knex seed:run",
     "start": "nodemon src/server.js"
   },
   "keywords": [],

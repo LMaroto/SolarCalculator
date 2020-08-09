@@ -3,20 +3,22 @@ import { Link, useHistory } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
+import { FiChevronLeft } from 'react-icons/fi';
 import { Container, Content } from './styles';
 
-import { FiChevronLeft } from "react-icons/fi";
-
-function Header({ showBackButton }) {
-
+function Header({ showBackButton, large }) {
   const history = useHistory();
   return (
     <Container>
-      <Content>
-        <nav>
-          {showBackButton && <button onClick={() => history.goBack()}><FiChevronLeft size={20} color="#fff" /></button>}
+      <Content large={large}>
+        <div>
+          {showBackButton && (
+            <button type="button" onClick={() => history.goBack()}>
+              <FiChevronLeft size={20} color="#fff" />
+            </button>
+          )}
           <Link to="/"><strong>Dashboard</strong></Link>
-        </nav>
+        </div>
 
         <aside>
           <div>
@@ -30,10 +32,12 @@ function Header({ showBackButton }) {
 
 Header.propTypes = {
   showBackButton: PropTypes.bool,
-}
+  large: PropTypes.bool,
+};
 
-Header.defaultValue = {
+Header.defaultProps = {
   showBackButton: false,
-}
+  large: false,
+};
 
 export default Header;

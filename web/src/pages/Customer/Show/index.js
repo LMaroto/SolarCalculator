@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FiPrinter } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
+import {
+  FaHouseDamage, FaLocationArrow, FaCheckDouble, FaUserCheck,
+} from 'react-icons/fa';
 import Header from '../../../components/Header';
 
-import { Container, UserDetails, PrintButton } from './styles';
+import {
+  Container, Actions, PrintButton, UserAside, UserAnalytics, UserInfo, UserStats,
+} from './styles';
 import api from '../../../services/api';
 
 const Show = () => {
@@ -21,21 +26,39 @@ const Show = () => {
 
   return (
     <>
-      <Header showBackButton />
-      <Container>
-        {user
-          && (
-            <UserDetails>
-              <div>
-                <h3>{user.name}</h3>
-              </div>
+      <Header showBackButton large />
 
-              <PrintButton to="#">
-                <FiPrinter size={20} color="#fff" />
-                Imprimir
-              </PrintButton>
-            </UserDetails>
-          )}
+      <Container>
+        <Actions>
+          <PrintButton to="#">
+            <FiPrinter size={20} color="#fff" />
+            Imprimir
+          </PrintButton>
+        </Actions>
+        <section>
+          <UserAside>
+            <FaHouseDamage size={150} color="#ccc" />
+            <UserInfo>
+              <span>Código: 5</span>
+              <strong>Leonardo Henrique de Braz</strong>
+            </UserInfo>
+            <UserStats>
+              <li>
+                <FaLocationArrow size={16} />
+                <span>Rua Cristiano de Souza, 14, Centro, Lavras, MG</span>
+              </li>
+              <li>
+                <FaCheckDouble size={16} />
+                <span>Produção esperada: 200kWp</span>
+              </li>
+              <li>
+                <FaUserCheck size={16} />
+                <span>Possui credenciais</span>
+              </li>
+            </UserStats>
+          </UserAside>
+          <UserAnalytics>asdf</UserAnalytics>
+        </section>
       </Container>
     </>
   );

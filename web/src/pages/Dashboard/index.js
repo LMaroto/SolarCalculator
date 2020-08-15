@@ -26,8 +26,8 @@ function Dashboard() {
         <section>
           <span>Clientes</span>
           <div>
-            <Link to="/" className="print">Gerar Relatório</Link>
             <Link to="/new-customer" className="new-customer">Novo Cliente</Link>
+            <Link to="/" className="print">Gerar Relatório</Link>
           </div>
         </section>
         <main>

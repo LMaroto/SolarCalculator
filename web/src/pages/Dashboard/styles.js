@@ -34,6 +34,7 @@ export const Container = styled.div`
     }
     .print{
       background: #EE8143;
+      margin: 0 0 0 5px;
 
       &:hover{
         background: ${darken(0.05, '#EE8143')};
@@ -41,7 +42,7 @@ export const Container = styled.div`
     }
     .new-customer{
       background: #138DD2;
-      margin: 0 0 0 15px;
+
 
       &:hover{
         background: ${darken(0.05, '#138DD2')};

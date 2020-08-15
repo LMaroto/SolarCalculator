@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { FiPrinter } from 'react-icons/fi';
+import { FiPrinter, FiPlusCircle } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
 import {
-  FaHouseDamage, FaLocationArrow, FaCheckDouble, FaUserCheck,
+  FaHouseDamage, FaMapMarkerAlt, FaUserCheck, FaSun, FaBolt,
 } from 'react-icons/fa';
 import Header from '../../../components/Header';
+import Chart from '../../../components/Chart';
 
 import {
-  Container, Actions, PrintButton, UserAside, UserAnalytics, UserInfo, UserStats,
+  Container, Actions, RecordButton, PrintButton, UserAside, UserAnalytics, UserInfo, UserStats,
 } from './styles';
 import api from '../../../services/api';
 
@@ -30,10 +31,15 @@ const Show = () => {
 
       <Container>
         <Actions>
+          <RecordButton to="#">
+            <FiPlusCircle size={20} color="#fff" />
+            Novo registro
+          </RecordButton>
           <PrintButton to="#">
             <FiPrinter size={20} color="#fff" />
             Imprimir
           </PrintButton>
+
         </Actions>
         <section>
           <UserAside>
@@ -48,12 +54,36 @@ const Show = () => {
             </UserInfo>
             <UserStats>
               <li>
-                <FaLocationArrow size={16} />
+                <FaMapMarkerAlt size={16} />
                 <span>{user.address}</span>
               </li>
               <li>
-                <FaCheckDouble size={16} />
-                <span>Produção esperada: 200kWp</span>
+                <FaSun size={16} />
+                <span>
+                  Potência de usina:
+                  {' '}
+                  <br />
+                  <strong>
+                    {user.kWp}
+                    {' '}
+                    kWp
+                  </strong>
+
+                </span>
+              </li>
+              <li>
+                <FaBolt size={16} />
+                <span>
+                  Produção esperada:
+                  {' '}
+                  <br />
+                  <strong>
+                    {user.expected}
+                    {' '}
+                    kWh
+                  </strong>
+
+                </span>
               </li>
               <li>
                 <FaUserCheck size={16} />
@@ -63,6 +93,7 @@ const Show = () => {
           </UserAside>
           <UserAnalytics>
             <h1>Resultados centralizados</h1>
+            <Chart />
           </UserAnalytics>
         </section>
       </Container>

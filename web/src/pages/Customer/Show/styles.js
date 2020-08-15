@@ -18,13 +18,39 @@ export const Actions = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+export const RecordButton = styled(Link)`
 
-export const PrintButton = styled(Link)`
-  display: inline-block;
   text-decoration: none;
-  height: 50px;
-  width: 150px;
+  height: 30px;
+  width: fit-content;
   padding: 0 15px;
+  border: 0;
+  border-radius: 4px;
+  margin-right: 5px;
+  font-weight: bold;
+  font-size: 13px;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #138DD2;
+
+  &:hover{
+    background: ${darken(0.05, '#138DD2')}
+  }
+
+  svg {
+    margin-right: 5px;
+  }
+`;
+export const PrintButton = styled(Link)`
+
+  text-decoration: none;
+  height: 30px;
+  width: fit-content;
+  padding: 0 15px;
+
   border: 0;
   border-radius: 4px;
   font-weight: bold;

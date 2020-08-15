@@ -57,7 +57,9 @@ const Show = () => {
               </li>
             </UserStats>
           </UserAside>
-          <UserAnalytics>asdf</UserAnalytics>
+          <UserAnalytics>
+            <h1>Resultados centralizados</h1>
+          </UserAnalytics>
         </section>
       </Container>
     </>

@@ -116,11 +116,9 @@ export const UserStats = styled.ul`
     }
 
     span {
-      text-align: center;
       flex: 1;
-      height: 100%;
-      margin: auto 0;
       margin-left: 12px;
+      text-align: center;
     }
 
     & + li {

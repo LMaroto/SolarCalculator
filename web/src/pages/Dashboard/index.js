@@ -35,11 +35,7 @@ function Dashboard() {
 
             <Link to={`/customer/${customer.id}`} key={customer.id}>
               <strong>
-                {customer.id}
-                {' '}
-                -
-                {' '}
-                {customer.name}
+                {`${customer.id} - ${customer.name}`}
               </strong>
               <FiMaximize2 color="#fff" />
 

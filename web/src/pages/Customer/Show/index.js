@@ -12,7 +12,7 @@ import {
 import api from '../../../services/api';
 
 const Show = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -39,13 +39,17 @@ const Show = () => {
           <UserAside>
             <FaHouseDamage size={150} color="#ccc" />
             <UserInfo>
-              <span>Código: 5</span>
-              <strong>Leonardo Henrique de Braz</strong>
+              <span>
+                Código:
+                {' '}
+                {user.id}
+              </span>
+              <strong>{user.name}</strong>
             </UserInfo>
             <UserStats>
               <li>
                 <FaLocationArrow size={16} />
-                <span>Rua Cristiano de Souza, 14, Centro, Lavras, MG</span>
+                <span>{user.address}</span>
               </li>
               <li>
                 <FaCheckDouble size={16} />

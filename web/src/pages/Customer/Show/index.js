@@ -8,7 +8,6 @@ import Header from '../../../components/Header';
 import Table from '../../../components/Table';
 import Chart from '../../../components/Chart';
 
-
 import {
   Container, Actions, RecordButton, PrintButton, UserAside, UserAnalytics, UserInfo, UserStats,
 } from './styles';

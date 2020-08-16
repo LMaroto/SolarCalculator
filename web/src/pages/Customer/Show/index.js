@@ -5,7 +5,9 @@ import {
   FaHouseDamage, FaMapMarkerAlt, FaUserCheck, FaSun, FaBolt,
 } from 'react-icons/fa';
 import Header from '../../../components/Header';
+import Table from '../../../components/Table';
 import Chart from '../../../components/Chart';
+
 
 import {
   Container, Actions, RecordButton, PrintButton, UserAside, UserAnalytics, UserInfo, UserStats,
@@ -74,7 +76,7 @@ const Show = () => {
               <li>
                 <FaBolt size={16} />
                 <span>
-                  Produção esperada:
+                  Produção contratual:
                   {' '}
                   <br />
                   <strong>
@@ -92,7 +94,9 @@ const Show = () => {
             </UserStats>
           </UserAside>
           <UserAnalytics>
-            <h1>Resultados centralizados</h1>
+            <h1>Resumo da produção</h1>
+            <Table />
+            <h1>Produção nos últimos 12 meses</h1>
             <Chart />
           </UserAnalytics>
         </section>

@@ -4,21 +4,35 @@ import ReportRepository from '../repositories/ReportRepository';
 class ReportCalculator {
   async single(req, res) {
     const { id } = req.params;
-    const { month, year } = req.query;
 
-    const goal = await ReportRepository.searchGoal(id, month, year);
-    const record = await ReportRepository.searchRecord(id, month, year);
-    const percentual = parseFloat(((record / goal) * 100).toFixed(2));
-    const difference = parseFloat((percentual - 100).toFixed(2));
+    // formato: mes/ano/valor_coletado
+    const records = await ReportRepository.searchRecords(id);
 
-    const report = {
-      goal,
-      record,
-      percentual,
-      difference,
-    };
+    if (!records.length) {
+      return res.json([]);
+    }
+    const currentYear = records
+      .map((report) => report.year).reduce((max, current) => Math.max(max, current), -Infinity);
 
-    return res.json(report);
+    const goals = await ReportRepository
+      .searchGoals({ userId: id, interval: [currentYear - 1, currentYear] });
+
+    const mapping = records.map((record) => {
+      const goal = goals[record.year][record.month];
+      const percentual = parseFloat(((record.power / goal) * 100).toFixed(2));
+      const difference = parseFloat((percentual - 100).toFixed(2));
+
+      return {
+        month: record.month,
+        year: record.year,
+        produced: record.power,
+        goal,
+        percentual,
+        difference,
+      };
+    });
+
+    return res.json(mapping);
   }
 
   async general(req, res) {

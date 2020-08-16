@@ -75,10 +75,9 @@ const height = css`
   min-height: 700px;
   height: 75vh;
 
-  margin: 10px;
   border-radius: 10px;
 
-  box-shadow: 1px 5px 10px 0px rgba(0,0,0,0.5);
+  box-shadow: 1px 5px 10px 0px rgba(0,0,0,0.3);
 `;
 
 export const UserAside = styled.aside`
@@ -86,6 +85,7 @@ export const UserAside = styled.aside`
 
   background: #fff;
   width: 25%;
+  margin: 15px 10px 20px 20px;
 
   display: flex;
   flex-direction: column;
@@ -156,8 +156,11 @@ export const UserStats = styled.ul`
 export const UserAnalytics = styled.div`
 
   ${height}
-
   background: #fff;
   width: 75%;
-
+  margin: 15px 0 20px 20px;
+  padding-top: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;

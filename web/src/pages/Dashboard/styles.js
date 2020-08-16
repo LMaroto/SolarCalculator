@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 export const Container = styled.div`
@@ -6,77 +7,99 @@ export const Container = styled.div`
   margin: 20px auto;
   max-width: 900px;
 
-  section{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    span {
-      font-size: 20px;
-    }
-
-    div {
-      display: flex;
-    }
-
-    a{
-      text-decoration: none;
-      height: 30px;
-      padding: 0 15px;
-      border: 0;
-      border-radius: 4px;
-      font-weight: bold;
-      font-size: 13px;
-      color: #fff;
-
-      display: flex;
-      align-items: center;
-    }
-    .print{
-      background: #EE8143;
-      margin: 0 0 0 5px;
-
-      &:hover{
-        background: ${darken(0.05, '#EE8143')};
-      }
-    }
-    .new-customer{
-      background: #138DD2;
-
-
-      &:hover{
-        background: ${darken(0.05, '#138DD2')};
-      }
-    }
-  }
   main{
-
     margin: 20px auto;
+  }
+`;
 
-    a {
+export const Actions = styled.section`
 
-      background: #f2a378;
-      color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-      margin: 15px 0;
-      height: 45px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      border-radius: 4px;
+  span {
+    font-size: 20px;
+  }
 
-      strong{
-        font-size: 16px;
-      }
+  div {
+    display: flex;
+  }
+`;
 
-      &:hover{
-        background: ${darken(0.05, '#f2a378')}
-      }
+export const NewCustomerBtn = styled(Link)`
 
-      svg {
-        margin-right: 10px;
-      }
-    }
-}
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+  height: 30px;
+  margin-right: 5px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 13px;
+  color: #fff;
+
+  background: #138DD2;
+
+  svg {
+    margin-right: 5px;
+  }
+
+  &:hover{
+    background: ${darken(0.05, '#138DD2')};
+  }
+`;
+
+export const NewReportBtn = styled(Link)`
+
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+  height: 30px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 13px;
+  color: #fff;
+
+  background: #EE8143;
+
+  svg {
+    margin-right: 5px;
+  }
+
+  &:hover{
+    background: ${darken(0.05, '#EE8143')};
+  }
+`;
+
+export const UserElement = styled(Link)`
+
+  background: #F2A378;
+  color: #FFF;
+
+  margin: 15px 0;
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 4px;
+
+  strong {
+    font-size: 16px;
+  }
+
+  svg {
+    margin-right: 10px;
+  }
+
+  &:hover{
+    background: ${darken(0.05, '#F2A378')};
+  }
 `;

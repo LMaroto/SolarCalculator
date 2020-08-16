@@ -67,7 +67,7 @@ export const PrintButton = styled(Link)`
   }
 
   svg {
-    margin-right: 15px;
+    margin-right: 5px;
   }
 `;
 

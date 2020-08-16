@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FiPrinter, FiPlusCircle } from 'react-icons/fi';
+import { FiFileText, FiPlusCircle } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
 import {
   FaHouseDamage, FaMapMarkerAlt, FaUserCheck, FaSun, FaBolt,
@@ -36,8 +36,8 @@ const Show = () => {
             Novo registro
           </RecordButton>
           <PrintButton to="#">
-            <FiPrinter size={20} color="#fff" />
-            Imprimir
+            <FiFileText size={20} color="#fff" />
+            Gerar relatório
           </PrintButton>
 
         </Actions>

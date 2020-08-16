@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import { FiMaximize2 } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { FiUserPlus, FiFileText, FiMaximize2 } from 'react-icons/fi';
 import Header from '../../components/Header';
 
-import { Container } from './styles';
+import {
+  Container, Actions, NewCustomerBtn, NewReportBtn, UserElement,
+} from './styles';
 
 import api from '../../services/api';
 
@@ -23,23 +24,29 @@ function Dashboard() {
     <>
       <Header />
       <Container>
-        <section>
+        <Actions>
           <span>Clientes</span>
           <div>
-            <Link to="/new-customer" className="new-customer">Novo Cliente</Link>
-            <Link to="/" className="print">Gerar Relatório</Link>
+            <NewCustomerBtn to="/new-customer">
+              <FiUserPlus size={20} color="#fff" />
+              Novo Cliente
+            </NewCustomerBtn>
+            <NewReportBtn to="/">
+              <FiFileText size={20} color="#fff" />
+              Gerar Relatório
+            </NewReportBtn>
           </div>
-        </section>
+        </Actions>
         <main>
           {customers.map((customer) => (
 
-            <Link to={`/customer/${customer.id}`} key={customer.id}>
+            <UserElement to={`/customer/${customer.id}`} key={customer.id}>
               <strong>
                 {`${customer.id} - ${customer.name}`}
               </strong>
               <FiMaximize2 color="#fff" />
 
-            </Link>
+            </UserElement>
           ))}
         </main>
       </Container>

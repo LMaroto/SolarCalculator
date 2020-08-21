@@ -18,7 +18,7 @@ export const Actions = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-export const RecordButton = styled(Link)`
+export const RecordButton = styled.button`
 
   text-decoration: none;
   height: 30px;

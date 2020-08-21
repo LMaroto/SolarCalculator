@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FiFileText, FiPlusCircle } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
 import {
@@ -8,8 +8,17 @@ import Header from '../../../components/Header';
 import Table from '../../../components/Table';
 import Chart from '../../../components/Chart';
 
+import Swal from 'sweetalert2/dist/sweetalert2';
+
 import {
-  Container, Actions, RecordButton, PrintButton, UserAside, UserAnalytics, UserInfo, UserStats,
+  Container,
+  Actions,
+  RecordButton,
+  PrintButton,
+  UserAside,
+  UserAnalytics,
+  UserInfo,
+  UserStats,
 } from './styles';
 import api from '../../../services/api';
 
@@ -26,13 +35,17 @@ const Show = () => {
     loadUser();
   }, [id]);
 
+  const showRecordModal = useCallback(() => {
+
+  }, []);
+
   return (
     <>
       <Header showBackButton large />
 
       <Container>
         <Actions>
-          <RecordButton to="#">
+          <RecordButton onClick={() => showRecordModal()}>
             <FiPlusCircle size={20} color="#fff" />
             Novo registro
           </RecordButton>

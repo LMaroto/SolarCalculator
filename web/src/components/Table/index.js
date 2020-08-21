@@ -10,37 +10,40 @@ function Table() {
   const [reports, setReports] = useState([]);
   const { id } = useParams();
 
-  useEffect(async () => {
-    await api
-      .get(`customers/${id}/reports`)
-      .then((response) => {
-        setReports(response.data);
-      });
-  }, []);
+  useEffect(() => {
+    async function loadData() {
+      const response = await api.get(`customers/${id}/reports`);
+      setReports(response.data);
+    }
+
+    loadData();
+  }, [id]);
 
   return (
     <Container>
       <ReportTable>
-        <tr>
-          <th>Mês/Ano</th>
-          <th>Esperado (CRESESB)</th>
-          <th>Produção</th>
-          <th>Percentual</th>
-          <th>Diferença</th>
-        </tr>
-        {reports.map((report) => (
+        <thead>
           <tr>
-            <td>
-              {report.month}
-              /
-              {report.year}
-            </td>
-            <td>{report.goal}</td>
-            <td>{report.produced}</td>
-            <td>{report.percentual}</td>
-            <td>{report.difference}</td>
+            <th>Mês/Ano</th>
+            <th>Esperado (CRESESB)</th>
+            <th>Produção</th>
+            <th>Percentual</th>
+            <th>Diferença</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {reports.map((report) => (
+            <tr key={`${report.month}${report.year}`}>
+              <td>
+                {`${report.month}/${report.year}`}
+              </td>
+              <td>{report.goal}</td>
+              <td>{report.produced}</td>
+              <td>{report.percentual}</td>
+              <td>{report.difference}</td>
+            </tr>
+          ))}
+        </tbody>
 
       </ReportTable>
     </Container>

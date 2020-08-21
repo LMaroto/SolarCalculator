@@ -1,39 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  FlexibleWidthXYPlot, XAxis, YAxis, HorizontalGridLines, DiscreteColorLegend, VerticalBarSeries,
+  FlexibleWidthXYPlot, XAxis, YAxis, HorizontalGridLines, DiscreteColorLegend, VerticalBarSeries, Hint,
 } from 'react-vis';
 import '../../../node_modules/react-vis/dist/style.css';
 
-import { Container } from './styles';
+import { Container, CustomHint } from './styles';
 import api from '../../services/api';
 
 function Chart() {
   const [reports, setReports] = useState([]);
+  const [goalData, setGoals] = useState([]);
+  const [productionData, setProductions] = useState([]);
+  const [hint, setHint] = useState(null);
   const { id } = useParams();
 
-  useEffect(async () => {
-    await api
-      .get(`customers/${id}/reports`)
-      .then((response) => {
-        setReports(response.data);
-      });
-  }, []);
-
-  const goalData = reports.map((report) => (
-    {
-      x: `${report.month}/${report.year}`,
-      y: report.goal,
+  useEffect(() => {
+    async function loadData() {
+      const response = await api.get(`customers/${id}/reports`);
+      setReports(response.data);
     }
-  ));
 
-  const productionData = reports.map((report) => (
-    {
-      x: `${report.month}/${report.year}`,
-      y: report.produced,
+    loadData();
+  }, [id]);
+
+  useEffect(() => {
+    if (reports.length > 0) {
+      const goals = reports.map((report) => (
+        {
+          x: `${report.month}/${report.year}`,
+          y: report.goal,
+        }
+      ));
+      const productions = reports.map((report) => (
+        {
+          x: `${report.month}/${report.year}`,
+          y: report.produced,
+        }
+      ));
+
+      console.log(goals);
+      setGoals(goals);
+      setProductions(productions);
     }
-  ));
+  }, [reports]);
 
+
+  const showHint = useCallback((value, label) => {
+    setHint({ position: value, label, value: value.y });
+  });
   return (
     <Container>
       <FlexibleWidthXYPlot height={300} xType="ordinal">
@@ -55,8 +70,23 @@ function Chart() {
         <YAxis title="Produção (kWh)" />
         <XAxis title="Meses" />
 
-        <VerticalBarSeries barWidth={0.5} color="#F2A378" data={goalData} />
-        <VerticalBarSeries barWidth={0.5} color="#138DD2" data={productionData} />
+        <VerticalBarSeries
+          barWidth={0.5}
+          color="#138DD2"
+          onValueMouseOver={(value) => showHint(value, 'Produzido')}
+          onValueMouseOut={() => setHint(null)}
+          data={productionData} />
+        <VerticalBarSeries
+          onValueMouseOver={(value) => showHint(value, 'Esperado')}
+          onValueMouseOut={() => setHint(null)}
+          barWidth={0.5} color="#F2A378"
+          data={goalData} />
+
+        {hint &&
+          (<Hint value={hint.position}>
+            <CustomHint>{`${hint.label}: ${hint.value}`}</CustomHint>
+          </Hint>)
+        }
 
       </FlexibleWidthXYPlot>
     </Container>

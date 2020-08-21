@@ -39,7 +39,6 @@ function Chart() {
         }
       ));
 
-      console.log(goals);
       setGoals(goals);
       setProductions(productions);
     }
@@ -47,8 +46,9 @@ function Chart() {
 
 
   const showHint = useCallback((value, label) => {
-    setHint({ position: value, label, value: value.y });
-  });
+    setHint({ position: value, label, value: value.y + ' kWh' });
+  }, []);
+
   return (
     <Container>
       <FlexibleWidthXYPlot height={300} xType="ordinal">
@@ -70,17 +70,18 @@ function Chart() {
         <YAxis title="Produção (kWh)" />
         <XAxis title="Meses" />
 
+
+        <VerticalBarSeries
+          onValueMouseOver={(value) => showHint(value, 'Esperado')}
+          onValueMouseOut={() => setHint(null)}
+          barWidth={0.5} color="#F2A378"
+          data={goalData} />
         <VerticalBarSeries
           barWidth={0.5}
           color="#138DD2"
           onValueMouseOver={(value) => showHint(value, 'Produzido')}
           onValueMouseOut={() => setHint(null)}
           data={productionData} />
-        <VerticalBarSeries
-          onValueMouseOver={(value) => showHint(value, 'Esperado')}
-          onValueMouseOut={() => setHint(null)}
-          barWidth={0.5} color="#F2A378"
-          data={goalData} />
 
         {hint &&
           (<Hint value={hint.position}>

@@ -1,6 +1,8 @@
 import CustomerRepository from '../repositories/CustomerRepository';
 import ReportRepository from '../repositories/ReportRepository';
 
+
+
 class ReportCalculator {
   async single(req, res) {
     const { id } = req.params;
@@ -31,6 +33,8 @@ class ReportCalculator {
         difference,
       };
     });
+
+
 
     return res.json(mapping);
   }

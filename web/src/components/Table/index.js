@@ -37,10 +37,10 @@ function Table() {
               <td>
                 {`${report.month}/${report.year}`}
               </td>
-              <td>{report.goal}</td>
-              <td>{report.produced}</td>
-              <td>{report.percentual}</td>
-              <td>{report.difference}</td>
+              <td>{report.goal} kWh</td>
+              <td>{report.produced} kWh</td>
+              <td>{report.percentual}%</td>
+              <td>{report.difference}%</td>
             </tr>
           ))}
         </tbody>

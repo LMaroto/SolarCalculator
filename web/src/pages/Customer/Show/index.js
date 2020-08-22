@@ -4,11 +4,12 @@ import { useParams } from 'react-router-dom';
 import {
   FaHouseDamage, FaMapMarkerAlt, FaUserCheck, FaSun, FaBolt,
 } from 'react-icons/fa';
+
+import Swal from 'sweetalert2/dist/sweetalert2';
 import Header from '../../../components/Header';
 import Table from '../../../components/Table';
 import Chart from '../../../components/Chart';
-
-import Swal from 'sweetalert2/dist/sweetalert2';
+import Modal from '../../../components/Modal';
 
 import {
   Container,
@@ -35,9 +36,7 @@ const Show = () => {
     loadUser();
   }, [id]);
 
-  const showRecordModal = useCallback(() => {
-
-  }, []);
+  const showRecordModal = useCallback(() => <Modal />, []);
 
   return (
     <>

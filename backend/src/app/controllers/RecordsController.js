@@ -1,4 +1,4 @@
-import RecordsRepository from '../repositories/RecordsRepository';
+import RecordsRepository from "../repositories/RecordsRepository";
 
 class RecordsController {
   async index(req, res) {
@@ -13,7 +13,7 @@ class RecordsController {
 
     const record = await RecordsRepository.store(customerId, req.body);
 
-    return res.json(record);
+    return res.status(201).json(record);
   }
 
   async update(req, res) {
@@ -28,7 +28,7 @@ class RecordsController {
 
     await RecordsRepository.delete(id, customerId);
 
-    return res.json('Registro excluido com sucesso!');
+    return res.json("Registro excluido com sucesso!");
   }
 }
 

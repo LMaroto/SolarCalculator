@@ -6,7 +6,7 @@ module.exports = {
     connection: {
       database: "solarcalculator",
       user: "postgres",
-      password: "docker",
+      password: "20171130",
     },
     migrations: {
       directory: "./src/database/migrations",

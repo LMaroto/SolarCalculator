@@ -1,24 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
 
-import { useParams } from 'react-router-dom';
+import { Container, ReportTable } from "./styles";
+import PropTypes from "prop-types";
 
-import { Container, ReportTable } from './styles';
-
-import api from '../../services/api';
-
-function Table() {
-  const [reports, setReports] = useState([]);
-  const { id } = useParams();
-
-  useEffect(() => {
-    async function loadData() {
-      const response = await api.get(`customers/${id}/reports`);
-      setReports(response.data);
-    }
-
-    loadData();
-  }, [id]);
-
+function Table({ reports }) {
   return (
     <Container>
       <ReportTable>
@@ -34,9 +19,7 @@ function Table() {
         <tbody>
           {reports.map((report) => (
             <tr key={`${report.month}${report.year}`}>
-              <td>
-                {`${report.month}/${report.year}`}
-              </td>
+              <td>{`${report.month}/${report.year}`}</td>
               <td>{report.goal} kWh</td>
               <td>{report.produced} kWh</td>
               <td>{report.percentual}%</td>
@@ -44,10 +27,13 @@ function Table() {
             </tr>
           ))}
         </tbody>
-
       </ReportTable>
     </Container>
   );
 }
+
+Table.propTypes = {
+  reports: PropTypes.array,
+};
 
 export default Table;

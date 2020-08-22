@@ -1,12 +1,14 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from "styled-components";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { darken } from 'polished';
+import { darken } from "polished";
 
 export const Container = styled.main`
   margin: 20px auto;
   max-width: 1100px;
+
+  overflow-y: hidden;
 
   section {
     display: flex;
@@ -19,7 +21,6 @@ export const Actions = styled.div`
   justify-content: flex-end;
 `;
 export const RecordButton = styled.button`
-
   text-decoration: none;
   height: 30px;
   width: fit-content;
@@ -34,10 +35,10 @@ export const RecordButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #138DD2;
+  background: #138dd2;
 
-  &:hover{
-    background: ${darken(0.05, '#138DD2')}
+  &:hover {
+    background: ${darken(0.05, "#138DD2")};
   }
 
   svg {
@@ -45,7 +46,6 @@ export const RecordButton = styled.button`
   }
 `;
 export const PrintButton = styled(Link)`
-
   text-decoration: none;
   height: 30px;
   width: fit-content;
@@ -60,10 +60,10 @@ export const PrintButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #EE8143;
+  background: #ee8143;
 
-  &:hover{
-    background: ${darken(0.05, '#EE8143')};
+  &:hover {
+    background: ${darken(0.05, "#EE8143")};
   }
 
   svg {
@@ -73,11 +73,11 @@ export const PrintButton = styled(Link)`
 
 const height = css`
   min-height: 700px;
-  height: 75vh;
+  height: 80vh;
 
   border-radius: 10px;
 
-  box-shadow: 1px 5px 10px 0px rgba(0,0,0,0.3);
+  box-shadow: 1px 5px 10px 0px rgba(0, 0, 0, 0.3);
 `;
 
 export const UserAside = styled.aside`
@@ -154,13 +154,160 @@ export const UserStats = styled.ul`
 `;
 
 export const UserAnalytics = styled.div`
-
   ${height}
   background: #fff;
   width: 75%;
   margin: 15px 0 20px 20px;
   padding-top: 15px;
+
+  overflow-y: scroll;
+
+  hr {
+    border-top: 1px solid #ee8143;
+    width: 70%;
+    margin: 10px auto;
+  }
+  section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+
+    h1 {
+      margin-top: 20px;
+    }
+  }
+`;
+
+export const ModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.7);
+
   display: flex;
   align-items: center;
+  justify-content: center;
+`;
+
+const animation = keyframes`
+  from {
+    opacity: 0.5;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+export const ModalContent = styled.div`
+  min-width: 380px;
+  width: 30%;
+
+  background: #fff;
+  padding: 30px;
+
+  border-radius: 4px;
+  box-shadow: 2px 10px 10px 3px rgba(0, 0, 0, 0.5);
+
+  animation: ${animation} 400ms;
+
+  position: relative;
+
+  > button.close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    border: none;
+    background: #ff6b6b;
+    color: #fff;
+
+    box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.5);
+
+    cursor: pointer;
+
+    &:hover {
+      background: ${(props) => darken(0.3, "#ff6b6b")};
+    }
+  }
+
+  h3 {
+    font-size: 20px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  h3::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    margin-top: 5px;
+    height: 1px; // suit your need
+    background: #ee8143; // suit your need
+    top: 100%;
+    left: 0;
+  }
+`;
+
+export const ModalForm = styled.form`
+  display: flex;
   flex-direction: column;
+
+  div.date {
+    display: flex;
+    flex-direction: row;
+
+    label {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+
+      font-size: 14px;
+      font-weight: bold;
+
+      + label {
+        margin-left: 10px;
+      }
+    }
+  }
+  input,
+  select {
+    margin-top: 4px;
+    padding: 5px 10px;
+  }
+
+  > label {
+    font-weight: bold;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  input[type="submit"] {
+    margin-top: 15px;
+    padding: 10px;
+    background: #ee8143;
+    border-radius: 4px;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.5);
+
+    &:hover {
+      background: ${darken(0.05, "#ee8143")};
+    }
+  }
 `;

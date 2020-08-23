@@ -36,6 +36,11 @@ const Show = () => {
 
   const { id } = useParams();
 
+  const loadReports = useCallback(async () => {
+    const reportsResponse = await api.get(`customers/${id}/reports`);
+    setReports(reportsResponse.data);
+  }, [id]);
+
   const submitFormRecord = useCallback(
     async (event) => {
       event.preventDefault();
@@ -55,13 +60,8 @@ const Show = () => {
         alert("Algo de errado aconteceu. :(");
       }
     },
-    [id]
+    [id, loadReports]
   );
-
-  const loadReports = useCallback(async () => {
-    const reportsResponse = await api.get(`customers/${id}/reports`);
-    setReports(reportsResponse.data);
-  }, [id]);
 
   useEffect(() => {
     async function loadData() {

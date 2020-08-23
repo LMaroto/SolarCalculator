@@ -135,7 +135,7 @@ const Show = () => {
                 </section>
               </>
             ) : (
-              <h3>Carregando...</h3>
+              <h3>Não há registros.</h3>
             )}
           </UserAnalytics>
         </section>
@@ -157,7 +157,7 @@ const Show = () => {
             <ModalForm onSubmit={submitFormRecord}>
               <div className="date">
                 <label>
-                  Mês de coleta
+                  Mês
                   <select name="month" required>
                     <option value="">Selecione</option>
                     <option value="jan">Janeiro</option>
@@ -175,22 +175,24 @@ const Show = () => {
                   </select>
                 </label>
                 <label>
-                  Ano de coleta
+                  Ano
                   <input
                     name="year"
                     required
                     type="number"
+                    min="2019"
                     placeholder="Ex: 2020"
                   />
                 </label>
               </div>
               <label>
-                Valor produzido (kWp)
+                Valor produzido (kWh)
                 <input
                   name="produced"
                   required
                   type="number"
-                  placeholder="Digite o valor que foi lido"
+                  step="any"
+                  placeholder="Digite o valor de produção"
                 />
               </label>
 

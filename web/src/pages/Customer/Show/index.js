@@ -9,6 +9,8 @@ import {
   FaBolt,
 } from "react-icons/fa";
 
+import Swal from 'sweetalert2';
+
 import Header from "../../../components/Header";
 import Table from "../../../components/Table";
 import Chart from "../../../components/Chart";
@@ -54,10 +56,20 @@ const Show = () => {
 
       if (response.status === 201) {
         setModalOpened(false);
-        alert("Leitura reportada para o sistema!");
+
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Leitura reportada para o sistema.',
+          icon: 'success',
+        })
+
         await loadReports();
       } else {
-        alert("Algo de errado aconteceu. :(");
+        Swal.fire({
+          title: 'Opa!',
+          text: 'Algo de errado aconteceu.',
+          icon: 'error',
+        })
       }
     },
     [id, loadReports]
@@ -135,7 +147,7 @@ const Show = () => {
                 </section>
               </>
             ) : (
-              <h3>Carregando...</h3>
+              <h3>Não há registros.</h3>
             )}
           </UserAnalytics>
         </section>
@@ -152,12 +164,12 @@ const Show = () => {
               X
             </button>
 
-            <h3>Informe a leitura efetuada</h3>
+            <h3>Nova leitura</h3>
 
             <ModalForm onSubmit={submitFormRecord}>
               <div className="date">
                 <label>
-                  Mês de coleta
+                  Mês
                   <select name="month" required>
                     <option value="">Selecione</option>
                     <option value="jan">Janeiro</option>
@@ -175,22 +187,24 @@ const Show = () => {
                   </select>
                 </label>
                 <label>
-                  Ano de coleta
+                  Ano
                   <input
                     name="year"
                     required
                     type="number"
+                    min="2019"
                     placeholder="Ex: 2020"
                   />
                 </label>
               </div>
               <label>
-                Valor produzido (kWp)
+                Produção (kWh)
                 <input
                   name="produced"
                   required
                   type="number"
-                  placeholder="Digite o valor que foi lido"
+                  step="any"
+                  placeholder="Digite o valor de produção"
                 />
               </label>
 

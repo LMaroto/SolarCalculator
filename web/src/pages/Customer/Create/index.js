@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 import api from '../../../services/api';
 
+import Swal from 'sweetalert2';
 import Header from '../../../components/Header';
 import Input, { CheckBox } from '../../../components/Input';
 import { Container } from './styles';
@@ -52,8 +53,12 @@ const Create = () => {
 
       await api.post('customers', newData);
 
-      // trocar por Toast ?
-      alert('Cadastro realizado com sucesso!');
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Cadastro realizado com sucesso.',
+        icon: 'success',
+      })
+
       history.goBack();
     } catch (err) {
       // problemas de validação do schema
@@ -68,8 +73,13 @@ const Create = () => {
           formRef.current.setErrors(errors);
         }
       } else {
-        // trocar por Toast ?
-        alert('Alguma coisa de errado aconteceu. Tente novamente mais tarde.');
+
+        Swal.fire({
+          title: 'Opa!',
+          text: 'Algo de errado aconteceu. Por favor, tente novamente.',
+          icon: 'error',
+        })
+
       }
     }
   }, [customerSchema, history]);
@@ -92,7 +102,7 @@ const Create = () => {
             {!hasCredentials && (
               <Input
                 name="expected"
-                label="Produção estimada (kWh)"
+                label="Produção estimada contratual (kWh)"
                 type="number"
                 required
                 placeholder="Ex. 198.5"

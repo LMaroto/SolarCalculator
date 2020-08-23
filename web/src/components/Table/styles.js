@@ -20,11 +20,8 @@ export const ReportTable = styled.table`
     text-align: center;
     padding: 8px;
   }
+`;
 
-  .half-bad {
-    background: #fae3aa;
-  }
-  .too-bad {
-    background: #db7070;
-  }
+export const Report = styled.tr`
+  background: ${(props) => (props.warn ? '#fae3aa' : props.danger  ? '#db7070' : '#fff' )}
 `;

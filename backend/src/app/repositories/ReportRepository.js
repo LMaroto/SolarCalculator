@@ -1,18 +1,18 @@
 import connection from '../../database';
 
 const MONTH_TO_INT = {
-  'jan': 1,
-  'fev': 2,
-  'mar': 3,
-  'abr': 4,
-  'mai': 5,
-  'jun': 6,
-  'jul': 7,
-  'aug': 8,
-  'set': 9,
-  'out': 10,
-  'nov': 11,
-  'dez': 12,
+  jan: 1,
+  fev: 2,
+  mar: 3,
+  abr: 4,
+  mai: 5,
+  jun: 6,
+  jul: 7,
+  aug: 8,
+  set: 9,
+  out: 10,
+  nov: 11,
+  dez: 12,
 };
 
 function sortByMonthAndDate(record, anotherRecord) {

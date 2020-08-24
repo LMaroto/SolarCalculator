@@ -1,8 +1,6 @@
 import CustomerRepository from '../repositories/CustomerRepository';
 import ReportRepository from '../repositories/ReportRepository';
 
-
-
 class ReportCalculator {
   async single(req, res) {
     const { id } = req.params;
@@ -25,6 +23,7 @@ class ReportCalculator {
       const difference = parseFloat((percentual - 100).toFixed(2));
 
       return {
+        id: record.id,
         month: record.month,
         year: record.year,
         produced: record.power,
@@ -33,8 +32,6 @@ class ReportCalculator {
         difference,
       };
     });
-
-
 
     return res.json(mapping);
   }

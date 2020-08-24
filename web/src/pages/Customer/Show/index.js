@@ -46,33 +46,92 @@ const Show = () => {
   const submitFormRecord = useCallback(
     async (event) => {
       event.preventDefault();
+
       const record = {
         month: event.target.month.value,
-        year: event.target.year.value,
-        power: event.target.produced.value,
+        year: Number(event.target.year.value),
+        power: Number(event.target.produced.value),
       };
 
-      const response = await api.post(`/customers/${id}/records`, record);
-
-      if (response.status === 201) {
-        setModalOpened(false);
-
+      /*
+      Verificando se existe alguma leitura para o mesmo período.
+      */
+      const recordExists = reports.find((report) =>
+        ((record.month === report.month) && (report.year === record.year))
+      );
+      /*
+        Opção para sobrescrever leitura.
+      */
+      if (recordExists) {
         Swal.fire({
-          title: 'Sucesso!',
-          text: 'Leitura reportada para o sistema.',
-          icon: 'success',
+          icon: 'warning',
+          title: 'Atenção!',
+          text: 'Já existe leitura para o período selecionado. Deseja sobrescrever?',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+          cancelButtonText: 'Cancelar'
         })
+        .then(async (result) => {
+            if(result.value){
+              const response = await api.put(`/customers/${id}/records/${recordExists.id}`, record);
 
-        await loadReports();
-      } else {
-        Swal.fire({
-          title: 'Opa!',
-          text: 'Algo de errado aconteceu.',
-          icon: 'error',
-        })
+              if (response.status === 200) {
+                setModalOpened(false);
+
+                Swal.fire({
+                  title: 'Sucesso!',
+                  text: 'Leitura reportada para o sistema',
+                  icon: 'success',
+                })
+
+                await loadReports();
+              }
+              else {
+                Swal.fire({
+                  title: 'Opa!',
+                  text: 'Algo de errado aconteceu. Por favor, tente novamente.',
+                  icon: 'error',
+                })
+              }
+            }
+
+            /*
+            Caso usuário não queira sobrescrever, apenas fecha o modal.
+            */
+            else{
+              setModalOpened(false);
+            }
+          }
+          )
+
+
       }
-    },
-    [id, loadReports]
+      /*
+        Caso não exista leitura para o período, cria uma nova.
+      */
+      else{
+        const response = await api.post(`customers/${id}/records`, record);
+
+        if (response.status === 201) {
+          setModalOpened(false);
+
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Leitura reportada para o sistema',
+            icon: 'success',
+          })
+
+          await loadReports();
+        }
+        else{
+          Swal.fire({
+            title: 'Opa!',
+            text: 'Algo de errado aconteceu. Por favor, tente novamente.',
+            icon: 'error',
+          })
+        }
+      }
+    }, [id, loadReports, reports]
   );
 
   useEffect(() => {

@@ -1,39 +1,6 @@
 import connection from '../../database';
+import dateOrdinate from '../utils/DateOrdinate';
 
-const MONTH_TO_INT = {
-  jan: 1,
-  fev: 2,
-  mar: 3,
-  abr: 4,
-  mai: 5,
-  jun: 6,
-  jul: 7,
-  aug: 8,
-  set: 9,
-  out: 10,
-  nov: 11,
-  dez: 12,
-};
-
-function sortByMonthAndDate(record, anotherRecord) {
-  if (record.year < anotherRecord.year) {
-    return -1;
-  }
-
-  if (record.year > anotherRecord.year) {
-    return 1;
-  }
-
-  if (MONTH_TO_INT[record.month] < MONTH_TO_INT[anotherRecord.month]) {
-    return -1;
-  }
-
-  if (MONTH_TO_INT[record.month] > MONTH_TO_INT[anotherRecord.month]) {
-    return 1;
-  }
-
-  return 0;
-}
 class ReportRepository {
   async searchGoal(id, month, year) {
     const goal = await connection('goals')
@@ -53,7 +20,7 @@ class ReportRepository {
       .orderBy([{ column: 'year', order: 'asc' }, { column: 'month', order: 'asc' }])
       .select('*');
 
-    records.sort(sortByMonthAndDate);
+    records.sort(dateOrdinate);
 
     return records;
   }

@@ -1,42 +1,33 @@
-import connection from '../../database';
+import connection from "../../database";
 
 class CustomerRepository {
   async index() {
-    const customers = await connection('customers').select('*');
+    const customers = await connection("customers").select("*");
     return customers;
   }
 
   async findById(id) {
-    const customer = await connection('customers').select('*').where('id', id);
+    const customer = await connection("customers").select("*").where("id", id);
 
     return customer[0];
   }
 
-  async store({
-    name, address, kWp, expected, access,
-  }) {
-    const customer = await connection('customers')
-      .returning('*')
-      .insert({
-        name,
-        address,
-        kWp,
-        expected,
-        access,
-      });
+  async store({ name, address, kWp, expected, access }) {
+    const customer = await connection("customers").returning("*").insert({
+      name,
+      address,
+      kWp,
+      expected,
+      access,
+    });
 
-    return (customer[0]);
+    return customer[0];
   }
 
-  async update(
-    id,
-    {
-      name, address, expected, access,
-    },
-  ) {
-    const update = await connection('customers')
-      .returning('*')
-      .where('id', id)
+  async update(id, { name, address, expected, access }) {
+    const update = await connection("customers")
+      .returning("*")
+      .where("id", id)
       .update({
         name,
         address,
@@ -44,11 +35,11 @@ class CustomerRepository {
         access,
       });
 
-    return (update[0]);
+    return update[0];
   }
 
   async delete(id) {
-    await connection('customers').where('id', id).del();
+    await connection("customers").where("id", id).del();
   }
 }
 

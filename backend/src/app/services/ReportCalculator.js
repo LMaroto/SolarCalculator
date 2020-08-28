@@ -1,5 +1,5 @@
-import CustomerRepository from '../repositories/CustomerRepository';
-import ReportRepository from '../repositories/ReportRepository';
+import CustomerRepository from "../repositories/CustomerRepository";
+import ReportRepository from "../repositories/ReportRepository";
 
 class ReportCalculator {
   async single(req, res) {
@@ -12,10 +12,13 @@ class ReportCalculator {
       return res.json([]);
     }
     const currentYear = records
-      .map((report) => report.year).reduce((max, current) => Math.max(max, current), -Infinity);
+      .map((report) => report.year)
+      .reduce((max, current) => Math.max(max, current), -Infinity);
 
-    const goals = await ReportRepository
-      .searchGoals({ userId: id, interval: [currentYear - 1, currentYear] });
+    const goals = await ReportRepository.searchGoals({
+      userId: id,
+      interval: [currentYear - 1, currentYear],
+    });
 
     const mapping = records.map((record) => {
       const goal = goals[record.year][record.month];
@@ -48,19 +51,25 @@ class ReportCalculator {
 
     const report = customers.map((customer) => {
       const goal = goals.find((element) => element.customer_id === customer.id);
-      const record = records.find((element) => element.customer_id === customer.id);
+      const record = records.find(
+        (element) => element.customer_id === customer.id
+      );
 
-      const {
-        id, name, kWp, expected,
-      } = customer;
+      const { id, name, kWp, expected } = customer;
 
       if (!record) {
         return {
-          id, name, kWp, expected, report: null,
+          id,
+          name,
+          kWp,
+          expected,
+          report: null,
         };
       }
 
-      const percentual = parseFloat(((record.power / goal[month]) * 100).toFixed(2));
+      const percentual = parseFloat(
+        ((record.power / goal[month]) * 100).toFixed(2)
+      );
       const difference = parseFloat((percentual - 100).toFixed(2));
 
       const newReport = {

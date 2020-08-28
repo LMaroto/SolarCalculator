@@ -9,7 +9,7 @@ import {
   FaBolt,
 } from "react-icons/fa";
 
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 import Header from "../../../components/Header";
 import Table from "../../../components/Table";
@@ -56,82 +56,78 @@ const Show = () => {
       /*
       Verificando se existe alguma leitura para o mesmo período.
       */
-      const recordExists = reports.find((report) =>
-        ((record.month === report.month) && (report.year === record.year))
+      const recordExists = reports.find(
+        (report) => record.month === report.month && report.year === record.year
       );
       /*
         Opção para sobrescrever leitura.
       */
       if (recordExists) {
         Swal.fire({
-          icon: 'warning',
-          title: 'Atenção!',
-          text: 'Já existe leitura para o período selecionado. Deseja sobrescrever?',
+          icon: "warning",
+          title: "Atenção!",
+          text:
+            "Já existe leitura para o período selecionado. Deseja sobrescrever?",
           showCancelButton: true,
-          cancelButtonColor: '#d33',
-          cancelButtonText: 'Cancelar'
-        })
-        .then(async (result) => {
-            if(result.value){
-              const response = await api.put(`/customers/${id}/records/${recordExists.id}`, record);
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Cancelar",
+        }).then(async (result) => {
+          if (result.value) {
+            const response = await api.put(
+              `/customers/${id}/records/${recordExists.id}`,
+              record
+            );
 
-              if (response.status === 200) {
-                setModalOpened(false);
+            if (response.status === 200) {
+              setModalOpened(false);
 
-                Swal.fire({
-                  title: 'Sucesso!',
-                  text: 'Leitura reportada para o sistema',
-                  icon: 'success',
-                })
+              Swal.fire({
+                title: "Sucesso!",
+                text: "Leitura reportada para o sistema",
+                icon: "success",
+              });
 
-                await loadReports();
-              }
-              else {
-                Swal.fire({
-                  title: 'Opa!',
-                  text: 'Algo de errado aconteceu. Por favor, tente novamente.',
-                  icon: 'error',
-                })
-              }
+              await loadReports();
+            } else {
+              Swal.fire({
+                title: "Opa!",
+                text: "Algo de errado aconteceu. Por favor, tente novamente.",
+                icon: "error",
+              });
             }
-
+          } else {
             /*
             Caso usuário não queira sobrescrever, apenas fecha o modal.
             */
-            else{
-              setModalOpened(false);
-            }
+            setModalOpened(false);
           }
-          )
-
-
-      }
-      /*
+        });
+      } else {
+        /*
         Caso não exista leitura para o período, cria uma nova.
       */
-      else{
         const response = await api.post(`customers/${id}/records`, record);
 
         if (response.status === 201) {
           setModalOpened(false);
 
           Swal.fire({
-            title: 'Sucesso!',
-            text: 'Leitura reportada para o sistema',
-            icon: 'success',
-          })
+            title: "Sucesso!",
+            text: "Leitura reportada para o sistema",
+            icon: "success",
+          });
 
           await loadReports();
-        }
-        else{
+        } else {
           Swal.fire({
-            title: 'Opa!',
-            text: 'Algo de errado aconteceu. Por favor, tente novamente.',
-            icon: 'error',
-          })
+            title: "Opa!",
+            text: "Algo de errado aconteceu. Por favor, tente novamente.",
+            icon: "error",
+          });
         }
       }
-    }, [id, loadReports, reports]
+    },
+    [id, loadReports, reports]
   );
 
   useEffect(() => {
@@ -197,7 +193,30 @@ const Show = () => {
               <>
                 <section>
                   <h1>Resumo da produção</h1>
-                  <Table reports={reports} />
+                  <Table
+                    columns={[
+                      "Mês/Ano",
+                      "Esperado (CRESESB)",
+                      "Produção",
+                      "Percentual",
+                      "Diferença",
+                    ]}
+                    rows={(report) => [
+                      `${report.month}/${report.year}`,
+                      `${report.goal} kWp`,
+                      `${report.produced} kWp`,
+                      `${report.percentual} %`,
+                      `${report.difference} %`,
+                    ]}
+                    warnValidate={(report) => {
+                      return false;
+                    }}
+                    dangerValidate={(report) => {
+                      const difference = report.difference * -1;
+                      return difference > 25;
+                    }}
+                    data={reports}
+                  />
                 </section>
                 <hr></hr>
                 <section>

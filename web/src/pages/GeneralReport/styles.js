@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import {darken} from 'polished';
+import { darken } from "polished";
 export const Container = styled.div``;
 
 export const Content = styled.main`
@@ -40,11 +40,9 @@ export const Form = styled.form`
     padding: 4px 8px;
     margin-right: 8px;
   }
-
 `;
 
 export const GenerateButton = styled.button`
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,14 +59,13 @@ export const GenerateButton = styled.button`
 
   background: #138dd2;
 
-  &:hover{
-    background: ${darken(0.05, '#138dd2')};
+  &:hover {
+    background: ${darken(0.05, "#138dd2")};
   }
 
-  svg{
+  svg {
     margin-right: 4px;
   }
-
 `;
 
 export const Loader = styled.div`

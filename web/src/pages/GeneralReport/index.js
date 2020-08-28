@@ -4,16 +4,37 @@ import api from "../../services/api";
 import Header from "../../components/Header";
 import Table from "../../components/Table";
 
-import { Container, Content, Form, Loader, ReportsArea, GenerateButton } from "./styles";
+import {
+  Container,
+  Content,
+  Form,
+  Loader,
+  ReportsArea,
+  GenerateButton,
+} from "./styles";
 
 import { FiFileText } from "react-icons/fi";
 
 import GridLoader from "react-spinners/GridLoader";
 
+const TABLE_COLUMNS = [
+  "Nome do cliente",
+  "Esperado (CRESESB)",
+  "Produção",
+  "Percentual",
+  "Diferença",
+];
+const TABLE_ROW_TEMPLATE = (customer) => [
+  `${customer.id} - ${customer.name}`,
+  `${customer.expected} kWh`,
+  `${customer.report.record} kWh`,
+  `${customer.report.percentual} %`,
+  `${customer.report.difference} %`,
+];
+
 const GeneralReport = () => {
   const [reports, setReports] = useState(null);
   const [loading, setLoading] = useState(false);
-
 
   const formSubmit = useCallback(async (event) => {
     setLoading(true);
@@ -25,24 +46,25 @@ const GeneralReport = () => {
     const response = await api.get(`/reports?month=${month}&year=${year}`);
 
     const reports = response.data;
-    const warnZones = reports.filter(customer => {
+    const warnZones = reports.filter((customer) => {
       if (customer.report) {
         const difference = customer.report.difference * -1;
-        console.log(difference);
         return difference > 15 && difference < 25;
       }
+
+      return false;
     });
-    const dangerZones = reports.filter(customer => {
+    const dangerZones = reports.filter((customer) => {
       if (customer.report) {
         const difference = customer.report.difference * -1;
         return difference > 25;
       }
+
+      return false;
     });
 
-    setReports({danger: dangerZones, warn: warnZones});
+    setReports({ danger: dangerZones, warn: warnZones });
     setLoading(false);
-
-    window.print();
   }, []);
 
   return (
@@ -54,7 +76,6 @@ const GeneralReport = () => {
         <label>Selecione o período desejado para o relatório:</label>
 
         <Form onSubmit={formSubmit}>
-
           <select name="month">
             <option value="jan">Janeiro</option>
             <option value="fev">Fevereiro</option>
@@ -84,20 +105,49 @@ const GeneralReport = () => {
             Gerar relatório
           </GenerateButton>
         </Form>
-        {loading ?
-          (<Loader><GridLoader color="#ee8143" /></Loader>) :
-          (
-            (reports &&
+        {loading ? (
+          <Loader>
+            <GridLoader color="#ee8143" />
+          </Loader>
+        ) : (
+          reports && (
             <ReportsArea>
-              <Table reports={reports.warn} />
-              <Table reports={reports.danger} />
+              <Table
+                columns={TABLE_COLUMNS}
+                rows={TABLE_ROW_TEMPLATE}
+                data={reports.warn}
+                warnValidate={(customer) =>
+                  customer.report.difference < -15 &&
+                  customer.report.difference > -25
+                }
+                dangerValidate={(customer) => {
+                  const difference = customer.report.difference * -1;
+                  console.log(difference);
+                  return difference > 25;
+                }}
+              />
+              <Table
+                columns={TABLE_COLUMNS}
+                rows={TABLE_ROW_TEMPLATE}
+                data={reports.danger}
+                warnValidate={(customer) =>
+                  customer.report.difference < -15 &&
+                  customer.report.difference > -25
+                }
+                dangerValidate={(customer) => {
+                  const difference = customer.report.difference * -1;
+                  console.log(difference);
+                  return difference > 25;
+                }}
+              />
+              {/* <Table reports={reports.danger} /> */}
               {/* Produção entre 15% a 25% abaixo do esperado - jun/20 */}
               {/* Produção em 25% ou mais abaixo do esperado - jun/20 */}
               {/* Clientes antigos que possivelmente precisam de limpeza */}
               {/* | id - nome | esperado | produção | percentual | diferença | */}
-            </ReportsArea>)
+            </ReportsArea>
           )
-        }
+        )}
       </Content>
     </Container>
   );

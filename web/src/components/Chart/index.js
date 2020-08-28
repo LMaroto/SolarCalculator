@@ -50,7 +50,7 @@ function Chart({ reports }) {
 
         <HorizontalGridLines />
         <YAxis title="Produção (kWh)" />
-        <XAxis/>
+        <XAxis />
 
         <VerticalBarSeries
           onValueMouseOver={(value) => showHint(value, "Esperado")}

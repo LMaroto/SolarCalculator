@@ -1,13 +1,15 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
+  background: #ee8143;
+  padding: 0px;
 
-    background: #EE8143;
-    padding: 0px;
+  @media print {
+    display: none;
+  }
 `;
 
 export const Content = styled.div`
-
   height: 50px;
   max-width: ${(props) => (props.large ? 1100 : 900)}px;
   margin: 0 auto;
@@ -17,7 +19,7 @@ export const Content = styled.div`
 
   font-size: 17px;
 
-  div{
+  div {
     display: flex;
     align-items: center;
 

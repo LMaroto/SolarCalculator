@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import { FiUserPlus, FiFileText, FiMaximize2 } from 'react-icons/fi';
-import Header from '../../components/Header';
+import { FiUserPlus, FiFileText, FiMaximize2 } from "react-icons/fi";
+import Header from "../../components/Header";
 
 import {
-  Container, Actions, NewCustomerBtn, NewReportBtn, UserElement,
-} from './styles';
+  Container,
+  Actions,
+  NewCustomerBtn,
+  NewReportBtn,
+  UserElement,
+} from "./styles";
 
-import api from '../../services/api';
+import api from "../../services/api";
 
 function Dashboard() {
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    api
-      .get('customers')
-      .then((response) => {
-        setCustomers(response.data);
-      });
+    api.get("customers").then((response) => {
+      setCustomers(response.data);
+    });
   }, []);
 
   return (
@@ -31,7 +33,7 @@ function Dashboard() {
               <FiUserPlus size={20} color="#fff" />
               Novo Cliente
             </NewCustomerBtn>
-            <NewReportBtn to="/">
+            <NewReportBtn to="/reports">
               <FiFileText size={20} color="#fff" />
               Gerar Relatório
             </NewReportBtn>
@@ -39,13 +41,9 @@ function Dashboard() {
         </Actions>
         <main>
           {customers.map((customer) => (
-
             <UserElement to={`/customer/${customer.id}`} key={customer.id}>
-              <strong>
-                {`${customer.id} - ${customer.name}`}
-              </strong>
+              <strong>{`${customer.id} - ${customer.name}`}</strong>
               <FiMaximize2 color="#fff" />
-
             </UserElement>
           ))}
         </main>

@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
   padding: 50px;
   width: 100%;
+
+  .danifer {
+    padding: 100px;
+  }
 `;
 
 export const CustomHint = styled.span`

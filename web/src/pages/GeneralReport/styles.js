@@ -1,0 +1,81 @@
+import styled from "styled-components";
+
+import {darken} from 'polished';
+export const Container = styled.div``;
+
+export const Content = styled.main`
+  max-width: 1100px;
+  margin: 0 auto;
+
+  h1 {
+    margin: 20px 0;
+    font-weight: 300;
+    position: relative;
+  }
+
+  label {
+    @media print {
+      display: none;
+    }
+  }
+`;
+
+export const Form = styled.form`
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  @media print {
+    display: none;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  select,
+  input {
+    width: 150px;
+    height: 30px;
+    padding: 4px 8px;
+    margin-right: 8px;
+  }
+
+`;
+
+export const GenerateButton = styled.button`
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 150px;
+  height: 30px;
+  padding: 0 15px;
+
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+
+  background: #138dd2;
+
+  &:hover{
+    background: ${darken(0.05, '#138dd2')};
+  }
+
+  svg{
+    margin-right: 4px;
+  }
+
+`;
+
+export const Loader = styled.div`
+  display: flex;
+  height: 70vh;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ReportsArea = styled.section``;

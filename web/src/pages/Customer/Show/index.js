@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 
 import Header from "../../../components/Header";
 import Table from "../../../components/Table";
-import Chart from "../../../components/Chart";
+import ChartComponent from "../../../components/Chart";
 
 import {
   Container,
@@ -221,7 +221,7 @@ const Show = () => {
                 <hr></hr>
                 <section>
                   <h1>Produção nos últimos 12 meses</h1>
-                  <Chart reports={reports} />
+                  <ChartComponent reports={reports} />
                 </section>
               </>
             ) : (

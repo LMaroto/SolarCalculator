@@ -1,78 +1,35 @@
-import React, { useState, useCallback } from "react";
-import {
-  FlexibleWidthXYPlot,
-  XAxis,
-  YAxis,
-  HorizontalGridLines,
-  DiscreteColorLegend,
-  VerticalBarSeries,
-  Hint,
-} from "react-vis";
-import "../../../node_modules/react-vis/dist/style.css";
+import React from "react";
 
-import { Container, CustomHint } from "./styles";
+import {Chart} from 'react-google-charts'
+
+import { Container, Loader } from "./styles";
+
+import BeatLoader from 'react-spinners/BeatLoader'
 
 import PropTypes from "prop-types";
 
-function Chart({ reports }) {
-  const goalData = reports.map((report) => ({
-    x: `${report.month}/${report.year}`,
-    y: report.goal,
-  }));
+function ChartComponent({ reports }) {
 
-  const productionData = reports.map((report) => ({
-    x: `${report.month}/${report.year}`,
-    y: report.produced,
-  }));
-
-  const [hint, setHint] = useState(null);
-
-  const showHint = useCallback((value, label) => {
-    setHint({ position: value, label, value: value.y + " kWh" });
-  }, []);
+  const reportsData = reports.map((report) => (
+    [`${report.month}/${report.year}`, report.goal, report.produced]
+  ))
 
   return (
     <Container>
-      <FlexibleWidthXYPlot height={300} xType="ordinal">
-        <DiscreteColorLegend
-          orientation="horizontal"
-          items={[
-            {
-              title: "Produção esperada",
-              color: "#F2A378",
-            },
-            {
-              title: "Produção real",
-              color: "#138DD2",
-            },
-          ]}
-        />
-
-        <HorizontalGridLines />
-        <YAxis title="Produção (kWh)" />
-        <XAxis />
-
-        <VerticalBarSeries
-          onValueMouseOver={(value) => showHint(value, "Esperado")}
-          onValueMouseOut={() => setHint(null)}
-          barWidth={0.5}
-          color="#F2A378"
-          data={goalData}
-        />
-        <VerticalBarSeries
-          barWidth={0.5}
-          color="#138DD2"
-          onValueMouseOver={(value) => showHint(value, "Produzido")}
-          onValueMouseOut={() => setHint(null)}
-          data={productionData}
-        />
-
-        {hint && (
-          <Hint value={hint.position}>
-            <CustomHint>{`${hint.label}: ${hint.value}`}</CustomHint>
-          </Hint>
-        )}
-      </FlexibleWidthXYPlot>
+    <Chart
+      width={'100%'}
+      height={'300px'}
+      chartType="ColumnChart"
+      loader={<Loader><BeatLoader color='#F2A378' /></Loader>}
+      data={[
+        ['Mês/Ano', 'Produção esperada', 'Produção real'],
+        ...reportsData
+      ]}
+      options={{
+        colors:['#F2A378', '#138DD2'],
+        legend: {position: 'bottom'},
+      }}
+    />
     </Container>
   );
 }
@@ -81,4 +38,4 @@ Chart.propTypes = {
   reports: PropTypes.array,
 };
 
-export default Chart;
+export default ChartComponent;

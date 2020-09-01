@@ -15,7 +15,7 @@ import {
 
 import { FiFileText } from "react-icons/fi";
 
-import GridLoader from "react-spinners/GridLoader";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const TABLE_COLUMNS = [
   "Nome do cliente",
@@ -107,7 +107,7 @@ const GeneralReport = () => {
         </Form>
         {loading ? (
           <Loader>
-            <GridLoader color="#ee8143" />
+            <BeatLoader color="#ee8143" />
           </Loader>
         ) : (
           reports && (

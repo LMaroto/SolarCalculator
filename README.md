@@ -9,4 +9,4 @@ Aplicação desenvolvida com o intuito de facilitar e agilizar a confecção de 
 - [x] Tela de cadastro de cliente
 - [x] Tela de Relatório do cliente
 - [ ] Impressão de relatório de um único cliente
-- [ ] Impressão de relatório global
+- [x] Impressão de relatório global

@@ -13,11 +13,17 @@ export const Content = styled.main`
     position: relative;
   }
 
-  label {
-    @media print {
+  @media print{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    label {
       display: none;
     }
+
   }
+
 `;
 
 export const Form = styled.form`
@@ -75,4 +81,42 @@ export const Loader = styled.div`
   justify-content: center;
 `;
 
-export const ReportsArea = styled.section``;
+export const ReportsArea = styled.section`
+
+  display: none;
+
+  @media print{
+    -webkit-print-color-adjust: exact;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 10px;
+  }`
+;
+
+export const WarnTitle = styled.div`
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+
+  background: #fae3aa;
+
+`
+export const DangerTitle = styled.div`
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+
+  background: #db7070;
+
+`;

@@ -173,9 +173,9 @@ export const UserAnalytics = styled.div`
     flex-direction: column;
     width: 100%;
     position: relative;
-
+    padding: 0 20px;
     h1 {
-      margin-top: 20px;
+      margin: 20px 0 10px 0;
     }
   }
 `;

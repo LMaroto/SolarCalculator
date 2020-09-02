@@ -11,6 +11,8 @@ import {
   Loader,
   ReportsArea,
   GenerateButton,
+  WarnTitle,
+  DangerTitle
 } from "./styles";
 
 import { FiFileText } from "react-icons/fi";
@@ -26,7 +28,7 @@ const TABLE_COLUMNS = [
 ];
 const TABLE_ROW_TEMPLATE = (customer) => [
   `${customer.id} - ${customer.name}`,
-  `${customer.expected} kWh`,
+  `${customer.report.goal} kWh`,
   `${customer.report.record} kWh`,
   `${customer.report.percentual} %`,
   `${customer.report.difference} %`,
@@ -54,6 +56,7 @@ const GeneralReport = () => {
 
       return false;
     });
+
     const dangerZones = reports.filter((customer) => {
       if (customer.report) {
         const difference = customer.report.difference * -1;
@@ -65,6 +68,7 @@ const GeneralReport = () => {
 
     setReports({ danger: dangerZones, warn: warnZones });
     setLoading(false);
+    window.print();
   }, []);
 
   return (
@@ -112,38 +116,35 @@ const GeneralReport = () => {
         ) : (
           reports && (
             <ReportsArea>
+              {reports.warn.length > 0 ?
+              <>
+              <WarnTitle>
+               <h3>Produção pouco abaixo do esperado</h3>
+              </WarnTitle>
               <Table
                 columns={TABLE_COLUMNS}
                 rows={TABLE_ROW_TEMPLATE}
                 data={reports.warn}
-                warnValidate={(customer) =>
-                  customer.report.difference < -15 &&
-                  customer.report.difference > -25
-                }
-                dangerValidate={(customer) => {
-                  const difference = customer.report.difference * -1;
-                  console.log(difference);
-                  return difference > 25;
-                }}
               />
+              </>
+              : ''
+              }
+              {reports.danger.length > 0 ?
+              <>
+              <DangerTitle>
+                <h3>Produção muito abaixo do esperado</h3>
+              </DangerTitle>
               <Table
                 columns={TABLE_COLUMNS}
                 rows={TABLE_ROW_TEMPLATE}
                 data={reports.danger}
-                warnValidate={(customer) =>
-                  customer.report.difference < -15 &&
-                  customer.report.difference > -25
-                }
-                dangerValidate={(customer) => {
-                  const difference = customer.report.difference * -1;
-                  console.log(difference);
-                  return difference > 25;
-                }}
               />
+              </>
+              : ''
+              }
               {/* <Table reports={reports.danger} /> */}
               {/* Produção entre 15% a 25% abaixo do esperado - jun/20 */}
               {/* Produção em 25% ou mais abaixo do esperado - jun/20 */}
-              {/* Clientes antigos que possivelmente precisam de limpeza */}
               {/* | id - nome | esperado | produção | percentual | diferença | */}
             </ReportsArea>
           )

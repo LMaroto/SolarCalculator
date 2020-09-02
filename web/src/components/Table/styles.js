@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  margin: 10px 0;
-  padding: 10px;
+  margin: 0;
   width: 100%;
 `;
 
@@ -10,10 +9,13 @@ export const ReportTable = styled.table`
   border-collapse: collapse;
   width: 100%;
 
+  .title{
+    display: ${(props) => (props.title ? 'flex' : 'none')}
+
+  }
   th {
     background: #f2a378;
   }
-
   td,
   th {
     border: none;

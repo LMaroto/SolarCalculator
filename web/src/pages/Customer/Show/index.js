@@ -208,9 +208,10 @@ const Show = () => {
                       `${report.percentual} %`,
                       `${report.difference} %`,
                     ]}
-                    warnValidate={(report) => {
-                      return false;
-                    }}
+                    warnValidate={(report) =>
+                      report.difference < -15 &&
+                      report.difference > -25
+                    }
                     dangerValidate={(report) => {
                       const difference = report.difference * -1;
                       return difference > 25;

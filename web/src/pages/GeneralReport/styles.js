@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { darken } from "polished";
+import { darken } from 'polished';
 export const Container = styled.div``;
 
 export const Content = styled.main`
@@ -13,7 +13,7 @@ export const Content = styled.main`
     position: relative;
   }
 
-  @media print{
+  @media print {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,9 +21,7 @@ export const Content = styled.main`
     label {
       display: none;
     }
-
   }
-
 `;
 
 export const Form = styled.form`
@@ -66,7 +64,7 @@ export const GenerateButton = styled.button`
   background: #138dd2;
 
   &:hover {
-    background: ${darken(0.05, "#138dd2")};
+    background: ${darken(0.05, '#138dd2')};
   }
 
   svg {
@@ -82,10 +80,9 @@ export const Loader = styled.div`
 `;
 
 export const ReportsArea = styled.section`
-
   display: none;
 
-  @media print{
+  @media print {
     -webkit-print-color-adjust: exact;
 
     display: flex;
@@ -94,11 +91,10 @@ export const ReportsArea = styled.section`
     justify-content: center;
 
     padding: 0 10px;
-  }`
-;
+  }
+`;
 
 export const WarnTitle = styled.div`
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,10 +102,8 @@ export const WarnTitle = styled.div`
   padding: 10px;
 
   background: #fae3aa;
-
-`
+`;
 export const DangerTitle = styled.div`
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,5 +112,4 @@ export const DangerTitle = styled.div`
   margin-top: 20px;
 
   background: #db7070;
-
 `;

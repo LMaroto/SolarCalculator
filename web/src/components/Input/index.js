@@ -7,16 +7,21 @@ import { useField } from '@unform/core';
 import { Container, CheckBoxContainer, Error } from './styles';
 
 const Input = ({
-  label, type, onClick, placeholder, name, required, disabled, ...props
+  label,
+  type,
+  onClick,
+  placeholder,
+  name,
+  required,
+  disabled,
+  ...props
 }) => {
   const inputRef = useRef(null);
 
   const [focused, setFocused] = React.useState(false);
   const [filled, setFilled] = React.useState(false);
 
-  const {
-    registerField, fieldName, error, defaultValue,
-  } = useField(name);
+  const { registerField, fieldName, error, defaultValue } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -38,9 +43,7 @@ const Input = ({
   }, []);
 
   return (
-
-    !disabled
-    && (
+    !disabled && (
       <Container focused={focused} filled={filled} invalid={!!error}>
         <span>{label}</span>
         <input
@@ -58,7 +61,6 @@ const Input = ({
         <Error>{error}</Error>
       </Container>
     )
-
   );
 };
 
@@ -78,13 +80,9 @@ Input.defaultProps = {
   disabled: false,
 };
 
-export const CheckBox = ({
-  label, required, onClick, name, ...props
-}) => {
+export const CheckBox = ({ label, required, onClick, name, ...props }) => {
   const inputRef = useRef(null);
-  const {
-    registerField, fieldName
-  } = useField(name);
+  const { registerField, fieldName } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -97,12 +95,18 @@ export const CheckBox = ({
   return (
     <CheckBoxContainer>
       <label>
-        <input ref={inputRef} type="checkbox" name={name} {... (onClick ? { onClick } : {})} {...props} />
+        <input
+          ref={inputRef}
+          type="checkbox"
+          name={name}
+          {...(onClick ? { onClick } : {})}
+          {...props}
+        />
         {label}
       </label>
     </CheckBoxContainer>
   );
-}
+};
 
 CheckBox.propTypes = {
   label: PropTypes.string.isRequired,

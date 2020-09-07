@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Dashboard from "../pages/Dashboard";
-import NewCustomer from "../pages/Customer/Create";
-import ShowCustomer from "../pages/Customer/Show";
-import GeneralReport from "../pages/GeneralReport";
+import Dashboard from '../pages/Dashboard';
+import NewCustomer from '../pages/Customer/Create';
+import ShowCustomer from '../pages/Customer/Show';
+import GeneralReport from '../pages/GeneralReport';
 
 export default function Routes() {
   return (

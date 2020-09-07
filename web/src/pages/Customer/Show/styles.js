@@ -1,8 +1,8 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from 'styled-components';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import { darken } from "polished";
+import { darken } from 'polished';
 
 export const Container = styled.main`
   margin: 20px auto;
@@ -38,7 +38,7 @@ export const RecordButton = styled.button`
   background: #138dd2;
 
   &:hover {
-    background: ${darken(0.05, "#138DD2")};
+    background: ${darken(0.05, '#138DD2')};
   }
 
   svg {
@@ -63,7 +63,7 @@ export const PrintButton = styled(Link)`
   background: #ee8143;
 
   &:hover {
-    background: ${darken(0.05, "#EE8143")};
+    background: ${darken(0.05, '#EE8143')};
   }
 
   svg {
@@ -238,7 +238,7 @@ export const ModalContent = styled.div`
     cursor: pointer;
 
     &:hover {
-      background: ${(props) => darken(0.3, "#ff6b6b")};
+      background: ${props => darken(0.3, '#ff6b6b')};
     }
   }
 
@@ -249,7 +249,7 @@ export const ModalContent = styled.div`
   }
 
   h3::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     margin-top: 5px;
@@ -295,7 +295,7 @@ export const ModalForm = styled.form`
     flex-direction: column;
   }
 
-  input[type="submit"] {
+  input[type='submit'] {
     margin-top: 15px;
     padding: 10px;
     background: #ee8143;
@@ -307,7 +307,7 @@ export const ModalForm = styled.form`
     box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.5);
 
     &:hover {
-      background: ${darken(0.05, "#ee8143")};
+      background: ${darken(0.05, '#ee8143')};
     }
   }
 `;

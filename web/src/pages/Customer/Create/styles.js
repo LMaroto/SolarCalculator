@@ -5,12 +5,12 @@ export const Container = styled.div`
   margin: 20px auto;
   max-width: 900px;
 
-  section{
+  section {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    span{
+    span {
       font-size: 20px;
     }
 
@@ -22,9 +22,9 @@ export const Container = styled.div`
       font-weight: bold;
       font-size: 13px;
       color: #fff;
-      background: #6AAA7C;
+      background: #6aaa7c;
 
-      &:hover{
+      &:hover {
         background: ${darken(0.05, '#6AAA7C')};
       }
     }

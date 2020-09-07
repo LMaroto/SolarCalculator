@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { FiUserPlus, FiFileText, FiMaximize2 } from "react-icons/fi";
-import Header from "../../components/Header";
+import { FiUserPlus, FiFileText, FiMaximize2 } from 'react-icons/fi';
+import Header from '../../components/Header';
 
 import {
   Container,
@@ -9,15 +9,15 @@ import {
   NewCustomerBtn,
   NewReportBtn,
   UserElement,
-} from "./styles";
+} from './styles';
 
-import api from "../../services/api";
+import api from '../../services/api';
 
 function Dashboard() {
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
-    api.get("customers").then((response) => {
+    api.get('customers').then(response => {
       setCustomers(response.data);
     });
   }, []);
@@ -40,7 +40,7 @@ function Dashboard() {
           </div>
         </Actions>
         <main>
-          {customers.map((customer) => (
+          {customers.map(customer => (
             <UserElement to={`/customer/${customer.id}`} key={customer.id}>
               <strong>{`${customer.id} - ${customer.name}`}</strong>
               <FiMaximize2 color="#fff" />

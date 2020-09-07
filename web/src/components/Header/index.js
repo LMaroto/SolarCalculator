@@ -17,7 +17,9 @@ function Header({ showBackButton, large }) {
               <FiChevronLeft size={20} color="#fff" />
             </button>
           )}
-          <Link to="/"><strong>Dashboard</strong></Link>
+          <Link to="/">
+            <strong>Dashboard</strong>
+          </Link>
         </div>
 
         <aside>

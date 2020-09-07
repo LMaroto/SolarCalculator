@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   margin: 0;
@@ -9,9 +9,8 @@ export const ReportTable = styled.table`
   border-collapse: collapse;
   width: 100%;
 
-  .title{
-    display: ${(props) => (props.title ? 'flex' : 'none')}
-
+  .title {
+    display: ${props => (props.title ? 'flex' : 'none')};
   }
   th {
     background: #f2a378;
@@ -25,5 +24,6 @@ export const ReportTable = styled.table`
 `;
 
 export const Report = styled.tr`
-  background: ${(props) => (props.warn ? '#fae3aa' : props.danger  ? '#db7070' : '#fff' )}
+  background: ${props =>
+    props.warn ? '#fae3aa' : props.danger ? '#db7070' : '#fff'};
 `;

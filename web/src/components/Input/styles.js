@@ -19,17 +19,22 @@ export const Container = styled.div`
 
     border-radius: 5px;
 
-    ${(props) => (props.focused) && css`
-      border: 1px solid #ee8143;
-    `}
-    ${(props) => (props.filled) && css`
-      border: 1px solid #ee8143;
-    `}
+    ${props =>
+      props.focused &&
+      css`
+        border: 1px solid #ee8143;
+      `}
+    ${props =>
+      props.filled &&
+      css`
+        border: 1px solid #ee8143;
+      `}
 
-    ${(props) => (props.invalid) && css`
-      border: 2px solid #eb4034;
-    `}
-
+    ${props =>
+      props.invalid &&
+      css`
+        border: 2px solid #eb4034;
+      `}
   }
   transition: visibility 2s;
 

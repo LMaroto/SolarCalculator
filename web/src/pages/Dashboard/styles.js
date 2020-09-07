@@ -3,17 +3,15 @@ import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-
   margin: 20px auto;
   max-width: 900px;
 
-  main{
+  main {
     margin: 20px auto;
   }
 `;
 
 export const Actions = styled.section`
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,7 +26,6 @@ export const Actions = styled.section`
 `;
 
 export const NewCustomerBtn = styled(Link)`
-
   display: flex;
   align-items: center;
 
@@ -42,19 +39,18 @@ export const NewCustomerBtn = styled(Link)`
   font-size: 13px;
   color: #fff;
 
-  background: #138DD2;
+  background: #138dd2;
 
   svg {
     margin-right: 5px;
   }
 
-  &:hover{
+  &:hover {
     background: ${darken(0.05, '#138DD2')};
   }
 `;
 
 export const NewReportBtn = styled(Link)`
-
   display: flex;
   align-items: center;
 
@@ -67,21 +63,20 @@ export const NewReportBtn = styled(Link)`
   font-size: 13px;
   color: #fff;
 
-  background: #EE8143;
+  background: #ee8143;
 
   svg {
     margin-right: 5px;
   }
 
-  &:hover{
+  &:hover {
     background: ${darken(0.05, '#EE8143')};
   }
 `;
 
 export const UserElement = styled(Link)`
-
-  background: #F2A378;
-  color: #FFF;
+  background: #f2a378;
+  color: #fff;
 
   margin: 15px 0;
   height: 45px;
@@ -99,7 +94,7 @@ export const UserElement = styled(Link)`
     margin-right: 10px;
   }
 
-  &:hover{
+  &:hover {
     background: ${darken(0.05, '#F2A378')};
   }
 `;

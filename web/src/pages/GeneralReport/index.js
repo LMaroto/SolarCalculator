@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState } from 'react';
 
-import api from "../../services/api";
-import Header from "../../components/Header";
-import Table from "../../components/Table";
+import api from '../../services/api';
+import Header from '../../components/Header';
+import Table from '../../components/Table';
 
 import {
   Container,
@@ -12,21 +12,21 @@ import {
   ReportsArea,
   GenerateButton,
   WarnTitle,
-  DangerTitle
-} from "./styles";
+  DangerTitle,
+} from './styles';
 
-import { FiFileText } from "react-icons/fi";
+import { FiFileText } from 'react-icons/fi';
 
-import BeatLoader from "react-spinners/BeatLoader";
+import BeatLoader from 'react-spinners/BeatLoader';
 
 const TABLE_COLUMNS = [
-  "Nome do cliente",
-  "Esperado (CRESESB)",
-  "Produção",
-  "Percentual",
-  "Diferença",
+  'Nome do cliente',
+  'Esperado (CRESESB)',
+  'Produção',
+  'Percentual',
+  'Diferença',
 ];
-const TABLE_ROW_TEMPLATE = (customer) => [
+const TABLE_ROW_TEMPLATE = customer => [
   `${customer.id} - ${customer.name}`,
   `${customer.report.goal} kWh`,
   `${customer.report.record} kWh`,
@@ -38,7 +38,7 @@ const GeneralReport = () => {
   const [reports, setReports] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const formSubmit = useCallback(async (event) => {
+  const formSubmit = useCallback(async event => {
     setLoading(true);
     event.preventDefault();
 
@@ -48,7 +48,7 @@ const GeneralReport = () => {
     const response = await api.get(`/reports?month=${month}&year=${year}`);
 
     const reports = response.data;
-    const warnZones = reports.filter((customer) => {
+    const warnZones = reports.filter(customer => {
       if (customer.report) {
         const difference = customer.report.difference * -1;
         return difference > 15 && difference < 25;
@@ -57,7 +57,7 @@ const GeneralReport = () => {
       return false;
     });
 
-    const dangerZones = reports.filter((customer) => {
+    const dangerZones = reports.filter(customer => {
       if (customer.report) {
         const difference = customer.report.difference * -1;
         return difference > 25;
@@ -116,32 +116,34 @@ const GeneralReport = () => {
         ) : (
           reports && (
             <ReportsArea>
-              {reports.warn.length > 0 ?
-              <>
-              <WarnTitle>
-               <h3>Produção pouco abaixo do esperado</h3>
-              </WarnTitle>
-              <Table
-                columns={TABLE_COLUMNS}
-                rows={TABLE_ROW_TEMPLATE}
-                data={reports.warn}
-              />
-              </>
-              : ''
-              }
-              {reports.danger.length > 0 ?
-              <>
-              <DangerTitle>
-                <h3>Produção muito abaixo do esperado</h3>
-              </DangerTitle>
-              <Table
-                columns={TABLE_COLUMNS}
-                rows={TABLE_ROW_TEMPLATE}
-                data={reports.danger}
-              />
-              </>
-              : ''
-              }
+              {reports.warn.length > 0 ? (
+                <>
+                  <WarnTitle>
+                    <h3>Produção pouco abaixo do esperado</h3>
+                  </WarnTitle>
+                  <Table
+                    columns={TABLE_COLUMNS}
+                    rows={TABLE_ROW_TEMPLATE}
+                    data={reports.warn}
+                  />
+                </>
+              ) : (
+                ''
+              )}
+              {reports.danger.length > 0 ? (
+                <>
+                  <DangerTitle>
+                    <h3>Produção muito abaixo do esperado</h3>
+                  </DangerTitle>
+                  <Table
+                    columns={TABLE_COLUMNS}
+                    rows={TABLE_ROW_TEMPLATE}
+                    data={reports.danger}
+                  />
+                </>
+              ) : (
+                ''
+              )}
               {/* <Table reports={reports.danger} /> */}
               {/* Produção entre 15% a 25% abaixo do esperado - jun/20 */}
               {/* Produção em 25% ou mais abaixo do esperado - jun/20 */}

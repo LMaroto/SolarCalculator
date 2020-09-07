@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { Container, ReportTable, Report } from "./styles";
-import PropTypes from "prop-types";
+import { Container, ReportTable, Report } from './styles';
+import PropTypes from 'prop-types';
 
 /**
  *
@@ -15,18 +15,18 @@ function Table({ columns, rows, data, dangerValidate, warnValidate }) {
       <ReportTable>
         <thead>
           <tr>
-            {columns.map((column) => (
+            {columns.map(column => (
               <th key={column}>{column}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => {
+          {data.map(item => {
             const cells = rows(item);
 
             return (
               <Report warn={warnValidate(item)} danger={dangerValidate(item)}>
-                {cells.map((cell) => (
+                {cells.map(cell => (
                   <td key={cell}>{cell}</td>
                 ))}
               </Report>

@@ -160,7 +160,7 @@ const Show = () => {
           <UserAside>
             <FaHouseDamage size={150} color="#ccc" />
             <UserInfo>
-              <span>Código: {user.id}</span>
+              <span>Código: {user.registration_number}</span>
               <strong>{user.name}</strong>
             </UserInfo>
             <UserStats>

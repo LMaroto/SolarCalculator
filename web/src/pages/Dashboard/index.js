@@ -42,7 +42,7 @@ function Dashboard() {
         <main>
           {customers.map(customer => (
             <UserElement to={`/customer/${customer.id}`} key={customer.id}>
-              <strong>{`${customer.id} - ${customer.name}`}</strong>
+              <strong>{`${customer.registration_number} - ${customer.name}`}</strong>
               <FiMaximize2 color="#fff" />
             </UserElement>
           ))}

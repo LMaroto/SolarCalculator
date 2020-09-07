@@ -1,6 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('customers', (table) => {
     table.increments('id').primary();
+    table.string('registration_number').notNullable();
     table.string('name').notNullable();
     table.string('address').notNullable();
     table.double('kWp').notNullable();

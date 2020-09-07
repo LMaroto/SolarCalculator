@@ -1,19 +1,20 @@
-import connection from "../../database";
+import connection from '../../database';
 
 class CustomerRepository {
   async index() {
-    const customers = await connection("customers").select("*");
+    const customers = await connection('customers').select('*');
     return customers;
   }
 
   async findById(id) {
-    const customer = await connection("customers").select("*").where("id", id);
+    const customer = await connection('customers').select('*').where('id', id);
 
     return customer[0];
   }
 
-  async store({ name, address, kWp, expected, access }) {
-    const customer = await connection("customers").returning("*").insert({
+  async store({ registration_number, name, address, kWp, expected, access }) {
+    const customer = await connection('customers').returning('*').insert({
+      registration_number,
       name,
       address,
       kWp,
@@ -25,10 +26,11 @@ class CustomerRepository {
   }
 
   async update(id, { name, address, expected, access }) {
-    const update = await connection("customers")
-      .returning("*")
-      .where("id", id)
+    const update = await connection('customers')
+      .returning('*')
+      .where('id', id)
       .update({
+        registration_number,
         name,
         address,
         expected,
@@ -39,7 +41,7 @@ class CustomerRepository {
   }
 
   async delete(id) {
-    await connection("customers").where("id", id).del();
+    await connection('customers').where('id', id).del();
   }
 }
 

@@ -45,6 +45,7 @@ const Create = () => {
         const kWp = parseFloat(data.kWp);
 
         const newData = {
+          registration_number: data['registration_number'],
           name: data.name,
           address: data.address,
           kWp,
@@ -102,6 +103,13 @@ const Create = () => {
             onSubmit={formSubmit}
             defaultValue={{ kWp: 0.0, expected: 0.0 }}
           >
+            <Input
+              name="registration_number"
+              label="Número da Ficha"
+              type="text"
+              placeholder="Ex: 14A"
+              required
+            />
             <Input
               name="name"
               label="Nome completo"

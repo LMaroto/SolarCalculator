@@ -1,18 +1,29 @@
 import React, { useState, useCallback, useRef } from 'react';
 
 import { Form } from '@unform/web';
+import { Scope } from '@unform/core';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
 import api from '../../../services/api';
 
+import { v4 as uuid } from 'uuid';
+
 import Swal from 'sweetalert2';
 import Header from '../../../components/Header';
 import Input, { CheckBox } from '../../../components/Input';
-import { Container } from './styles';
+import {
+  Container,
+  DeviceInput,
+  DevicesContainer,
+  RemoveDeviceIcon,
+} from './styles';
 
 const Create = () => {
   const formRef = useRef(null);
   const [hasCredentials, setHasCredentials] = useState(true);
+
+  // guarda ids uuid para controlar presença de novos inversores
+  const [devices, setDevices] = useState([]);
 
   const history = useHistory();
 
@@ -20,6 +31,10 @@ const Create = () => {
     event => setHasCredentials(!event.target.checked),
     []
   );
+
+  const addNewDevice = useCallback(() => {
+    setDevices([...devices, uuid()]);
+  }, [devices]);
 
   const customerSchema = Yup.object().shape({
     name: Yup.string().required('Nome é obrigatório'),
@@ -39,6 +54,8 @@ const Create = () => {
 
   const formSubmit = useCallback(
     async data => {
+      console.log(data);
+      return;
       try {
         await customerSchema.validate(data, { abortEarly: false });
 
@@ -131,6 +148,27 @@ const Create = () => {
               placeholder="Ex. 288.2"
               required
             />
+
+            <DevicesContainer>
+              {devices.length > 0 && <span>Inversores</span>}
+              {devices.map(device => (
+                <Scope key={device} path={`devices[${device}]`}>
+                  <DeviceInput>
+                    <Input
+                      type="text"
+                      name="identifier"
+                      label="Identificação do inversor"
+                    />
+                    <Input type="date" name="date" label="Data de instalação" />
+                    <RemoveDeviceIcon size={20} />
+                  </DeviceInput>
+                </Scope>
+              ))}
+              <button type="button" onClick={addNewDevice}>
+                Novo inversor
+              </button>
+            </DevicesContainer>
+
             <CheckBox
               name="access"
               label="Tem acesso às credenciais?"

@@ -19,6 +19,8 @@ export const Container = styled.div`
 
     border-radius: 5px;
 
+    height: 42px;
+
     ${props =>
       props.focused &&
       css`

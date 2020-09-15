@@ -36,7 +36,19 @@ const Create = () => {
     setDevices([...devices, uuid()]);
   }, [devices]);
 
+  const removeDevice = useCallback(
+    device => {
+      const newDevices = devices.filter(value => value !== device);
+
+      setDevices(newDevices);
+    },
+    [devices]
+  );
+
   const customerSchema = Yup.object().shape({
+    registration_number: Yup.string().required(
+      'O número da ficha é obrigatório'
+    ),
     name: Yup.string().required('Nome é obrigatório'),
     address: Yup.string().required('O endereço é obrigatório'),
     kWp: Yup.number('Precisa ser um número').required(
@@ -54,13 +66,35 @@ const Create = () => {
 
   const formSubmit = useCallback(
     async data => {
-      console.log(data);
-      return;
       try {
         await customerSchema.validate(data, { abortEarly: false });
 
         const kWp = parseFloat(data.kWp);
 
+        if (!data.devices) {
+          await Swal.fire({
+            title: 'Calma lá!',
+            text: 'Você precisa cadastrar algum inversor',
+            icon: 'warning',
+          });
+
+          return;
+        }
+
+        const devices = Object.values(data.devices);
+        const emptyDevice = devices.find(
+          object => object.name === '' || object.install_date === ''
+        );
+        console.log(devices);
+        if (devices.length === 0 || emptyDevice) {
+          await Swal.fire({
+            title: 'Calma lá!',
+            text: 'Você precisa cadastrar algum inversor',
+            icon: 'warning',
+          });
+
+          return;
+        }
         const newData = {
           registration_number: data['registration_number'],
           name: data.name,
@@ -68,6 +102,7 @@ const Create = () => {
           kWp,
           access: data.access,
           ...(data.expected ? { expected: parseFloat(data.expected) } : {}),
+          devices,
         };
 
         await api.post('customers', newData);
@@ -91,6 +126,8 @@ const Create = () => {
           if (formRef.current) {
             formRef.current.setErrors(errors);
           }
+
+          console.log('teve erros');
         } else {
           Swal.fire({
             title: 'Opa!',
@@ -156,11 +193,20 @@ const Create = () => {
                   <DeviceInput>
                     <Input
                       type="text"
-                      name="identifier"
+                      required
+                      name="name"
                       label="Identificação do inversor"
                     />
-                    <Input type="date" name="date" label="Data de instalação" />
-                    <RemoveDeviceIcon size={20} />
+                    <Input
+                      type="date"
+                      required
+                      name="install_date"
+                      label="Data de instalação"
+                    />
+                    <RemoveDeviceIcon
+                      size={20}
+                      onClick={() => removeDevice(device)}
+                    />
                   </DeviceInput>
                 </Scope>
               ))}

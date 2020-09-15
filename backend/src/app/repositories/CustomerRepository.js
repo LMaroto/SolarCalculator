@@ -12,17 +12,46 @@ class CustomerRepository {
     return customer[0];
   }
 
-  async store({ registration_number, name, address, kWp, expected, access }) {
-    const customer = await connection('customers').returning('*').insert({
-      registration_number,
-      name,
-      address,
-      kWp,
-      expected,
-      access,
+  async store({
+    registration_number,
+    name,
+    address,
+    kWp,
+    expected,
+    access,
+    devices,
+  }) {
+    let customers;
+    await connection.transaction(async (transaction) => {
+      try {
+        customers = await connection('customers')
+          .transacting(transaction)
+          .returning('*')
+          .insert({
+            registration_number,
+            name,
+            address,
+            kWp,
+            expected,
+            access,
+          });
+
+        const customerDevices = devices.map((device) => ({
+          ...device,
+          customer_id: customers[0].id,
+        }));
+
+        await connection('devices')
+          .transacting(transaction)
+          .insert(customerDevices);
+
+        await transaction.commit();
+      } catch (err) {
+        await transaction.rollback();
+      }
     });
 
-    return customer[0];
+    return customers[0];
   }
 
   async update(id, { name, address, expected, access }) {

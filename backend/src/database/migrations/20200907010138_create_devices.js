@@ -3,6 +3,7 @@ exports.up = function (knex) {
     table.increments('id').primary();
     table.string('name').notNullable();
     table.integer('customer_id').notNullable();
+    table.date('install_date').notNullable();
     table
       .foreign('customer_id')
       .references('id')

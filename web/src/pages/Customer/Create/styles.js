@@ -70,5 +70,5 @@ export const DevicesContainer = styled.div`
 
 export const RemoveDeviceIcon = styled(MdDelete)`
   color: #535353;
-  margin-top: 22px;
+  margin-top: 24px;
 `;

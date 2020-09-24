@@ -9,6 +9,14 @@ class CustomerRepository {
   async findById(id) {
     const customer = await connection('customers').select('*').where('id', id);
 
+    if (customer.length > 0) {
+      const devices = await connection('devices')
+        .select(['id', 'name', 'install_date'])
+        .where('customer_id', id);
+
+      return { ...customer[0], devices };
+    }
+
     return customer[0];
   }
 
@@ -22,6 +30,7 @@ class CustomerRepository {
     devices,
   }) {
     let customers;
+    let values;
     await connection.transaction(async (transaction) => {
       try {
         customers = await connection('customers')
@@ -41,8 +50,9 @@ class CustomerRepository {
           customer_id: customers[0].id,
         }));
 
-        await connection('devices')
+        values = await connection('devices')
           .transacting(transaction)
+          .returning(['name', 'install_date'])
           .insert(customerDevices);
 
         await transaction.commit();
@@ -51,7 +61,7 @@ class CustomerRepository {
       }
     });
 
-    return customers[0];
+    return { ...customers[0], devices: values };
   }
 
   async update(id, { name, address, expected, access }) {

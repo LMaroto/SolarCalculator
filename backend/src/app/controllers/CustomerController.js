@@ -12,7 +12,11 @@ class CustomerController {
     const { id } = req.params;
     const customer = await CustomerRepository.findById(id);
 
-    return res.json(customer);
+    if (customer) {
+      return res.json(customer);
+    }
+
+    return res.status(404).json({ message: 'Customer not found.' });
   }
 
   async create(req, res) {

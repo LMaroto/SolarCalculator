@@ -10,7 +10,8 @@ import { v4 as uuid } from 'uuid';
 
 import Swal from 'sweetalert2';
 import Header from '../../../components/Header';
-import Input, { CheckBox } from '../../../components/Input';
+import Input from '../../../components/Input';
+import Checkbox from '../../../components/Checkbox';
 import {
   Container,
   DeviceInput,
@@ -215,7 +216,7 @@ const Create = () => {
               </button>
             </DevicesContainer>
 
-            <CheckBox
+            <Checkbox
               name="access"
               label="Tem acesso às credenciais?"
               onClick={onChangeCredentialsInput}

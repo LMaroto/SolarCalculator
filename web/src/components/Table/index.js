@@ -25,7 +25,11 @@ function Table({ columns, rows, data, dangerValidate, warnValidate }) {
             const cells = rows(item);
 
             return (
-              <Report warn={warnValidate(item)} danger={dangerValidate(item)}>
+              <Report
+                key={item.id}
+                warn={warnValidate(item)}
+                danger={dangerValidate(item)}
+              >
                 {cells.map(cell => (
                   <td key={cell}>{cell}</td>
                 ))}

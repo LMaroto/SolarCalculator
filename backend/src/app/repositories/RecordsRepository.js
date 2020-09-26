@@ -10,24 +10,26 @@ class RecordsRepository {
   }
 
   async store(customer_id, { month, year, power, start, end, observation }) {
-    const record = await connection('records')
-      .returning(['id', 'customer_id', 'month', 'year', 'power'])
-      .insert({
-        customer_id,
-        month,
-        year,
-        power,
-        start,
-        end,
-        observation,
-      });
+    const record = await connection('records').returning('*').insert({
+      customer_id,
+      month,
+      year,
+      power,
+      start,
+      end,
+      observation,
+    });
 
     return record[0];
   }
 
-  async update(id, customer_id, { month, year, power }) {
+  async update(
+    id,
+    customer_id,
+    { month, year, power, start, end, observation }
+  ) {
     const record = await connection('records')
-      .returning(['id', 'customer_id', 'month', 'year', 'power'])
+      .returning('*')
       .where({
         id,
         customer_id,
@@ -36,6 +38,9 @@ class RecordsRepository {
         month,
         year,
         power,
+        start,
+        end,
+        observation,
       });
 
     return record[0];

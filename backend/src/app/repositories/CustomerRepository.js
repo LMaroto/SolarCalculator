@@ -28,11 +28,13 @@ class CustomerRepository {
     expected,
     access,
     devices,
+    sunhour_id,
   }) {
     let customers;
     let values;
     await connection.transaction(async (transaction) => {
       try {
+        console.log(sunhour_id);
         customers = await connection('customers')
           .transacting(transaction)
           .returning('*')
@@ -43,6 +45,7 @@ class CustomerRepository {
             kWp,
             expected,
             access,
+            sunhour_id,
           });
 
         const customerDevices = devices.map((device) => ({

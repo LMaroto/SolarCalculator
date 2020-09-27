@@ -1,6 +1,11 @@
 import HourRepository from '../repositories/HourRepository';
 
 class HourController {
+  async index(req, res) {
+    const hours = await HourRepository.index();
+
+    return res.json(hours);
+  }
   async create(req, res) {
     const hours = await HourRepository.store(req.body);
 

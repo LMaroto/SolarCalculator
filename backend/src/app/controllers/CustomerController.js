@@ -22,7 +22,7 @@ class CustomerController {
   async create(req, res) {
     const customer = await CustomerRepository.store(req.body);
 
-    const hours = await HourRepository.list(new Date().getFullYear());
+    const hours = await HourRepository.getById(customer.sunhour_id);
 
     await GoalCalculator.calculate(customer.id, customer.kWp, hours);
 

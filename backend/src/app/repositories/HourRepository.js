@@ -1,6 +1,18 @@
 import connection from '../../database';
 
 class HourRepository {
+  async index() {
+    const hours = await connection('sunhours').select('*');
+
+    return hours;
+  }
+
+  async getById(id) {
+    const hours = await connection('sunhours').where('id', id).select('*');
+
+    return hours[0];
+  }
+
   async list(year) {
     const hours = await connection('sunhours').where('year', year).select('*');
 
@@ -8,9 +20,7 @@ class HourRepository {
   }
 
   async store(data) {
-    const hours = await connection('sunhours')
-      .returning('*')
-      .insert(data);
+    const hours = await connection('sunhours').returning('*').insert(data);
 
     return hours[0];
   }
@@ -29,9 +39,7 @@ class HourRepository {
   }
 
   async delete(id) {
-    await connection('sunhours')
-      .where('id', id)
-      .del();
+    await connection('sunhours').where('id', id).del();
   }
 }
 

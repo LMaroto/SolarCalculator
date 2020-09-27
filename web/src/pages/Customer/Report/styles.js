@@ -1,14 +1,18 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { darken } from "polished";
+import { darken } from 'polished';
 
 export const Container = styled.div`
-  max-width: 1100px;
+  max-width: 100vw;
+  height: 100vh;
   margin: 0 auto;
+  padding: 30px 60px;
+
+  background: #ff7825;
 `;
 export const IntervalContainer = styled.div`
   h1 {
-    margin: 20px 0;
+    margin: 0;
     font-weight: 300;
     position: relative;
   }
@@ -53,7 +57,7 @@ export const GenerateButton = styled.button`
   background: #138dd2;
 
   &:hover {
-    background: ${darken(0.05, "#138dd2")};
+    background: ${darken(0.05, '#138dd2')};
   }
 
   svg {

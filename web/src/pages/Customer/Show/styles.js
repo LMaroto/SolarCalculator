@@ -11,6 +11,7 @@ export const Container = styled.main`
 
   background: #ff7518;
 
+  overflow: hidden;
   section {
     display: flex;
     flex-direction: row;
@@ -160,8 +161,6 @@ export const UserAnalytics = styled.div`
   width: 75%;
   margin: 15px 0 20px 20px;
   padding-top: 15px;
-
-  overflow-y: scroll;
 
   hr {
     border-top: 1px solid #ff7518;

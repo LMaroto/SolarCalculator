@@ -73,7 +73,7 @@ const GeneralReport = () => {
 
   return (
     <Container>
-      <Header showBackButton title={'Relatório'} />
+      <Header showBackButton title={'Relatório de produção'} />
 
       <Content>
         <h1>Relatório de produção geral</h1>

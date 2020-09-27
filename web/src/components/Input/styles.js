@@ -8,7 +8,7 @@ export const Container = styled.div`
 
   span {
     font-size: 14px;
-    color: #535353;
+    color: ${props => (props.white ? '#fff' : '#535353')};
     margin-bottom: 2px;
   }
 

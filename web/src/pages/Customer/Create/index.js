@@ -143,7 +143,7 @@ const Create = () => {
 
   return (
     <>
-      <Header showBackButton />
+      <Header showBackButton title={'Adicionar cliente'} />
       <Container>
         <section>
           <span>Novo cliente</span>
@@ -159,6 +159,7 @@ const Create = () => {
             defaultValue={{ kWp: 0.0, expected: 0.0 }}
           >
             <Input
+              white
               name="registration_number"
               label="Número da obra"
               type="text"
@@ -166,6 +167,7 @@ const Create = () => {
               required
             />
             <Input
+              white
               name="name"
               label="Nome completo"
               type="text"
@@ -173,6 +175,7 @@ const Create = () => {
               required
             />
             <Input
+              white
               name="address"
               label="Endereço"
               type="text"
@@ -180,6 +183,7 @@ const Create = () => {
               required
             />
             <Input
+              white
               name="kWp"
               label="Potência da usina (kWp)"
               type="number"

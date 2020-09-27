@@ -49,7 +49,7 @@ const Report = () => {
 
   return (
     <>
-      <Header showBackButton large />
+      <Header showBackButton large title={'Relatório de produção'} />
       <Container>
         <IntervalContainer>
           <h1>Relatório de produção individual</h1>

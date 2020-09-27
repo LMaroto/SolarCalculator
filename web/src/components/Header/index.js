@@ -25,7 +25,9 @@ function Header({ showBackButton, large, title }) {
 
         <aside>
           <div>
-            <img src={Logo} alt="SolarCalculator" />
+            <a href="/">
+              <img src={Logo} alt="SolarCalculator" />
+            </a>
           </div>
         </aside>
       </Content>

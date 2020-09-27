@@ -14,6 +14,8 @@ exports.up = function (knex) {
     table.double('out').notNullable();
     table.double('nov').notNullable();
     table.double('dez').notNullable();
+    table.string('city').notNullable();
+    table.string('uf', 2).notNullable();
   });
 };
 

@@ -4,11 +4,13 @@ import { darken } from 'polished';
 export const Container = styled.div``;
 
 export const Content = styled.main`
-  max-width: 1100px;
+  max-width: 100vw;
+  height: 100vh;
   margin: 0 auto;
+  background: #ff7518;
+  padding: 25px 80px;
 
   h1 {
-    margin: 20px 0;
     font-weight: 300;
     position: relative;
   }

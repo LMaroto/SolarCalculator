@@ -22,7 +22,8 @@ function Dashboard() {
 
   return (
     <>
-      <Header white />
+      <Header white title={'Dashboard'} />
+
       <Container>
         <OptionContainer>
           <Option to="/customers">

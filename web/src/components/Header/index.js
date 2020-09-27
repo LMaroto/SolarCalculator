@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 import { FiChevronLeft } from 'react-icons/fi';
 import { Container, Content } from './styles';
-import Logo from '../../assets/123branco.png';
+import Logo from '../../assets/logo-colorida.png';
 
-function Header({ showBackButton, large }) {
+function Header({ showBackButton, large, title }) {
   const history = useHistory();
   return (
     <Container>
@@ -15,11 +15,11 @@ function Header({ showBackButton, large }) {
         <div>
           {showBackButton && (
             <button type="button" onClick={() => history.goBack()}>
-              <FiChevronLeft size={20} color="#fff" />
+              <FiChevronLeft size={20} color={'#ff7518'} />
             </button>
           )}
           <Link to="/">
-            <strong>Dashboard</strong>
+            <strong>{title}</strong>
           </Link>
         </div>
 

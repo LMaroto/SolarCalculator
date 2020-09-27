@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 
 import {
   Container,
+  Content,
   Actions,
   NewCustomerBtn,
   NewReportBtn,
@@ -24,29 +25,26 @@ function CustomerList() {
 
   return (
     <>
-      <Header />
+      <Header showBackButton title={'Clientes'} />
       <Container>
-        <Actions>
-          <span>Clientes</span>
-          <div>
-            <NewCustomerBtn to="/new-customer">
-              <FiUserPlus size={20} color="#fff" />
-              Novo Cliente
-            </NewCustomerBtn>
-            <NewReportBtn to="/reports">
-              <FiFileText size={20} color="#fff" />
-              Gerar Relatório
-            </NewReportBtn>
-          </div>
-        </Actions>
-        <main>
-          {customers.map(customer => (
-            <UserElement to={`/customer/${customer.id}`} key={customer.id}>
-              <strong>{`${customer.registration_number} - ${customer.name}`}</strong>
-              <FiMaximize2 color="#fff" />
-            </UserElement>
-          ))}
-        </main>
+        <Content>
+          <Actions>
+            <div>
+              <NewCustomerBtn to="/new-customer">
+                <FiUserPlus size={20} />
+                Novo Cliente
+              </NewCustomerBtn>
+            </div>
+          </Actions>
+          <main>
+            {customers.map(customer => (
+              <UserElement to={`/customer/${customer.id}`} key={customer.id}>
+                <strong>{`${customer.registration_number} - ${customer.name}`}</strong>
+                <FiMaximize2 color="#fff" />
+              </UserElement>
+            ))}
+          </main>
+        </Content>
       </Container>
     </>
   );

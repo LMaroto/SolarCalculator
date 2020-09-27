@@ -142,7 +142,7 @@ const Show = () => {
 
   return (
     <>
-      <Header showBackButton large />
+      <Header showBackButton large title={user.name} />
       <Container>
         <Actions>
           <RecordButton onClick={() => setOpenedRecordModal(true)}>
@@ -150,7 +150,7 @@ const Show = () => {
             Novo registro
           </RecordButton>
           <PrintButton to={`${user.id}/reports`}>
-            <FiFileText size={20} color="#fff" />
+            <FiFileText size={20} color="#ff7518" />
             Gerar relatório
           </PrintButton>
         </Actions>

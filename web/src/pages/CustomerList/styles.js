@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  margin: 20px auto;
+  background: #ff7518;
+  max-width: 100vw;
+  height: 100vh;
+  padding-top: 20px;
+`;
+
+export const Content = styled.div`
+  margin: 0 auto;
   max-width: 900px;
 
   main {
@@ -13,7 +20,7 @@ export const Container = styled.div`
 
 export const Actions = styled.section`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 
   span {
@@ -61,16 +68,16 @@ export const NewReportBtn = styled(Link)`
   border-radius: 4px;
   font-weight: bold;
   font-size: 13px;
-  color: #fff;
+  color: #ff7518;
 
-  background: #ff7518;
+  background: #fff;
 
   svg {
     margin-right: 5px;
   }
 
   &:hover {
-    background: ${darken(0.05, '#ff7518')};
+    background: ${darken(0.05, '#fff')};
   }
 `;
 

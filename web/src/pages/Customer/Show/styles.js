@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 export const Container = styled.main`
-  margin: 20px auto;
-  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px;
+  max-width: 100vw;
 
-  overflow-y: hidden;
+  background: #ff7518;
 
   section {
     display: flex;
@@ -55,15 +56,15 @@ export const PrintButton = styled(Link)`
   border-radius: 4px;
   font-weight: bold;
   font-size: 13px;
-  color: #fff;
+  color: #ff7518;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ff7518;
+  background: #fff;
 
   &:hover {
-    background: ${darken(0.05, '#ff7518')};
+    background: ${darken(0.05, '#fff')};
   }
 
   svg {

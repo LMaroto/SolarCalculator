@@ -32,7 +32,7 @@ const Show = () => {
   const [user, setUser] = useState([]);
   const [reports, setReports] = useState([]);
 
-  const [openRecordModal, setOpenedRecordModal] = useState(true);
+  const [openRecordModal, setOpenedRecordModal] = useState(false);
 
   const { id } = useParams();
 

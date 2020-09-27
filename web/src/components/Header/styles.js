@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #ff7518;
+  background: ${props => (!props.white ? '#fff' : '#ff7518')};
+
   padding: 0px;
 
   @media print {
@@ -25,7 +26,7 @@ export const Content = styled.div`
 
     strong {
       font-weight: bold;
-      color: #fff;
+      color: ${props => (!props.white ? '#ff7518' : '#fff')};
     }
 
     button {
@@ -42,7 +43,7 @@ export const Content = styled.div`
   aside {
     display: flex;
     align-items: center;
-    color: #fff;
+    color: ${props => (!props.white ? '#ff7518' : '#fff')};
 
     img {
       width: 100px;

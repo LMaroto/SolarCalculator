@@ -1,52 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import { FiUserPlus, FiFileText, FiMaximize2 } from 'react-icons/fi';
 import Header from '../../components/Header';
 
-import {
-  Container,
-  Actions,
-  NewCustomerBtn,
-  NewReportBtn,
-  UserElement,
-} from './styles';
+import { Container, OptionContainer, Option } from './styles';
+import { FiUsers, FiFileText, FiSettings, FiLogOut } from 'react-icons/fi';
 
-import api from '../../services/api';
+import Swal from 'sweetalert2';
 
 function Dashboard() {
-  const [customers, setCustomers] = useState([]);
-
-  useEffect(() => {
-    api.get('customers').then(response => {
-      setCustomers(response.data);
+  const checkLogout = () => {
+    Swal.fire({
+      title: 'Calma lá!',
+      text: 'Deseja realmente sair?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sim, quero sair.',
     });
-  }, []);
+  };
 
   return (
     <>
-      <Header />
+      <Header white />
       <Container>
-        <Actions>
-          <span>Clientes</span>
-          <div>
-            <NewCustomerBtn to="/new-customer">
-              <FiUserPlus size={20} color="#fff" />
-              Novo Cliente
-            </NewCustomerBtn>
-            <NewReportBtn to="/reports">
-              <FiFileText size={20} color="#fff" />
-              Gerar Relatório
-            </NewReportBtn>
-          </div>
-        </Actions>
-        <main>
-          {customers.map(customer => (
-            <UserElement to={`/customer/${customer.id}`} key={customer.id}>
-              <strong>{`${customer.registration_number} - ${customer.name}`}</strong>
-              <FiMaximize2 color="#fff" />
-            </UserElement>
-          ))}
-        </main>
+        <OptionContainer>
+          <Option to="/customers">
+            <FiUsers size={50} />
+            <h2>Clientes</h2>
+          </Option>
+          <Option to="/reports" color={'#138dd2'}>
+            <FiFileText size={50} />
+            <h2>Relatório geral</h2>
+          </Option>
+        </OptionContainer>
+        <OptionContainer>
+          <Option color={'#A54AA0'}>
+            <FiSettings size={50} />
+            <h2>Ajustes</h2>
+          </Option>
+          <Option onClick={checkLogout}>
+            <FiLogOut size={50} />
+            <h2>Sair</h2>
+          </Option>
+        </OptionContainer>
       </Container>
     </>
   );

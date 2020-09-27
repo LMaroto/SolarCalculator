@@ -1,100 +1,49 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { darken } from 'polished';
 
 export const Container = styled.div`
-  margin: 20px auto;
-  max-width: 900px;
-
-  main {
-    margin: 20px auto;
-  }
-`;
-
-export const Actions = styled.section`
+  height: 100%;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+
+  margin: 0 auto;
+  padding-top: 40px;
   align-items: center;
-
-  span {
-    font-size: 20px;
-  }
-
-  div {
-    display: flex;
-  }
-`;
-
-export const NewCustomerBtn = styled(Link)`
-  display: flex;
-  align-items: center;
-
-  text-decoration: none;
-  height: 30px;
-  margin-right: 5px;
-  padding: 0 15px;
-  border: 0;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 13px;
-  color: #fff;
-
-  background: #138dd2;
-
-  svg {
-    margin-right: 5px;
-  }
-
-  &:hover {
-    background: ${darken(0.05, '#138DD2')};
-  }
-`;
-
-export const NewReportBtn = styled(Link)`
-  display: flex;
-  align-items: center;
-
-  text-decoration: none;
-  height: 30px;
-  padding: 0 15px;
-  border: 0;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 13px;
-  color: #fff;
-
   background: #ff7518;
-
-  svg {
-    margin-right: 5px;
-  }
-
-  &:hover {
-    background: ${darken(0.05, '#ff7518')};
-  }
 `;
 
-export const UserElement = styled(Link)`
-  background: #f2a378;
-  color: #fff;
-
-  margin: 15px 0;
-  height: 45px;
+export const OptionContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+
+  height: fit-content;
+  width: fit-content;
+  margin-top: 10px;
+  background: none;
+`;
+
+export const Option = styled(Link)`
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 15px;
+  justify-content: center;
+
   border-radius: 4px;
+  width: 200px;
+  height: 200px;
+  margin: 10px 10px;
+  padding: 30px;
+  background: ${props => (props.color ? props.color : 'white')};
 
-  strong {
-    font-size: 16px;
-  }
+  color: ${props => (props.color ? '#fff' : '#ff7518')};
 
+  transition: transform 0.2s;
   svg {
-    margin-right: 10px;
+    margin-bottom: 20px;
   }
 
   &:hover {
-    background: ${darken(0.05, '#F2A378')};
+    transform: scale(1.03);
   }
 `;

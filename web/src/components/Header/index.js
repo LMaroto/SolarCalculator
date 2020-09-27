@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import { FiChevronLeft } from 'react-icons/fi';
 import { Container, Content } from './styles';
-import Logo from '../../assets/logo.webp';
+import Logo from '../../assets/123branco.png';
 
 function Header({ showBackButton, large }) {
   const history = useHistory();

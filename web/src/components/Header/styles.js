@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #ee8143;
+  background: ;
+
   padding: 0px;
 
   @media print {
@@ -25,7 +26,7 @@ export const Content = styled.div`
 
     strong {
       font-weight: bold;
-      color: #fff;
+      color: #ff7518;
     }
 
     button {
@@ -42,6 +43,11 @@ export const Content = styled.div`
   aside {
     display: flex;
     align-items: center;
-    color: #fff;
+    color: #ff7518;
+
+    img {
+      width: 90px;
+      height: 80%;
+    }
   }
 `;

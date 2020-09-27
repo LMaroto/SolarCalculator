@@ -9,6 +9,8 @@ import {
   FaBolt,
 } from 'react-icons/fa';
 
+import { Scrollbars } from 'react-custom-scrollbars';
+
 import Swal from 'sweetalert2';
 
 import Header from '../../../components/Header';
@@ -32,7 +34,7 @@ const Show = () => {
   const [user, setUser] = useState([]);
   const [reports, setReports] = useState([]);
 
-  const [openRecordModal, setOpenedRecordModal] = useState(true);
+  const [openRecordModal, setOpenedRecordModal] = useState(false);
 
   const { id } = useParams();
 
@@ -142,92 +144,94 @@ const Show = () => {
 
   return (
     <>
-      <Header showBackButton large />
-      <Container>
-        <Actions>
-          <RecordButton onClick={() => setOpenedRecordModal(true)}>
-            <FiPlusCircle size={20} color="#fff" />
-            Novo registro
-          </RecordButton>
-          <PrintButton to="#">
-            <FiFileText size={20} color="#fff" />
-            Gerar relatório
-          </PrintButton>
-        </Actions>
-        <section>
-          <UserAside>
-            <FaHouseDamage size={150} color="#ccc" />
-            <UserInfo>
-              <span>Código: {user.registration_number}</span>
-              <strong>{user.name}</strong>
-            </UserInfo>
-            <UserStats>
-              <li>
-                <FaMapMarkerAlt size={16} />
-                <span>{user.address}</span>
-              </li>
-              <li>
-                <FaSun size={16} />
-                <span>
-                  Potência de usina: <br />
-                  <strong>{user.kWp} kWp</strong>
-                </span>
-              </li>
-              <li>
-                <FaBolt size={16} />
-                <span>
-                  Produção contratual: <br />
-                  <strong>{user.expected} kWh</strong>
-                </span>
-              </li>
-              <li>
-                <FaUserCheck size={16} />
-                <span>Possui credenciais</span>
-              </li>
-            </UserStats>
-          </UserAside>
-          <UserAnalytics>
-            {reports.length ? (
-              <>
-                <section>
-                  <h1>Resumo da produção</h1>
-                  <Table
-                    columns={[
-                      'Mês/Ano',
-                      'Esperado (CRESESB)',
-                      'Produção',
-                      'Percentual',
-                      'Diferença',
-                    ]}
-                    rows={report => [
-                      `${report.month}/${report.year}`,
-                      `${report.goal} kWp`,
-                      `${report.produced} kWp`,
-                      `${report.percentual} %`,
-                      `${report.difference} %`,
-                    ]}
-                    warnValidate={report =>
-                      report.difference < -15 && report.difference > -25
-                    }
-                    dangerValidate={report => {
-                      const difference = report.difference * -1;
-                      return difference > 25;
-                    }}
-                    data={reports}
-                  />
-                </section>
-                <hr></hr>
-                <section>
-                  <h1>Produção nos últimos 12 meses</h1>
-                  <ChartComponent reports={reports} />
-                </section>
-              </>
-            ) : (
-              <h3>Não há registros.</h3>
-            )}
-          </UserAnalytics>
-        </section>
-      </Container>
+      <Scrollbars autoHide autoHideTimeout={1000} autoHideDuration={200}>
+        <Header showBackButton large title={user.name} />
+        <Container>
+          <Actions>
+            <RecordButton onClick={() => setOpenedRecordModal(true)}>
+              <FiPlusCircle size={20} color="#fff" />
+              Novo registro
+            </RecordButton>
+            <PrintButton to={`${user.id}/reports`}>
+              <FiFileText size={20} color="#ff7518" />
+              Gerar relatório
+            </PrintButton>
+          </Actions>
+          <section>
+            <UserAside>
+              <FaHouseDamage size={150} color="#ccc" />
+              <UserInfo>
+                <span>Código: {user.registration_number}</span>
+                <strong>{user.name}</strong>
+              </UserInfo>
+              <UserStats>
+                <li>
+                  <FaMapMarkerAlt size={16} />
+                  <span>{user.address}</span>
+                </li>
+                <li>
+                  <FaSun size={16} />
+                  <span>
+                    Potência de usina: <br />
+                    <strong>{user.kWp} kWp</strong>
+                  </span>
+                </li>
+                <li>
+                  <FaBolt size={16} />
+                  <span>
+                    Produção contratual: <br />
+                    <strong>{user.expected} kWh</strong>
+                  </span>
+                </li>
+                <li>
+                  <FaUserCheck size={16} />
+                  <span>Possui credenciais</span>
+                </li>
+              </UserStats>
+            </UserAside>
+            <UserAnalytics>
+              {reports.length ? (
+                <>
+                  <section>
+                    <h1>Resumo da produção</h1>
+                    <Table
+                      columns={[
+                        'Mês/Ano',
+                        'Esperado (CRESESB)',
+                        'Produção',
+                        'Percentual',
+                        'Diferença',
+                      ]}
+                      rows={report => [
+                        `${report.month}/${report.year}`,
+                        `${report.goal} kWp`,
+                        `${report.produced} kWp`,
+                        `${report.percentual} %`,
+                        `${report.difference} %`,
+                      ]}
+                      warnValidate={report =>
+                        report.difference < -15 && report.difference > -25
+                      }
+                      dangerValidate={report => {
+                        const difference = report.difference * -1;
+                        return difference > 25;
+                      }}
+                      data={reports}
+                    />
+                  </section>
+                  <hr></hr>
+                  <section>
+                    <h1>Produção nos últimos 12 meses</h1>
+                    <ChartComponent reports={reports} />
+                  </section>
+                </>
+              ) : (
+                <h3>Não há registros.</h3>
+              )}
+            </UserAnalytics>
+          </section>
+        </Container>
+      </Scrollbars>
       <ModalAddRecord
         isOpen={openRecordModal}
         setIsOpen={toggleRecordModal}

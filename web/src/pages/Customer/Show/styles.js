@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 export const Container = styled.main`
-  margin: 20px auto;
-  max-width: 1100px;
-
-  overflow-y: hidden;
-
+  margin: 0 auto;
+  padding: 30px;
+  max-width: 100vw;
+  background: #ff7518;
+  overflow: hidden;
   section {
     display: flex;
     flex-direction: row;
@@ -31,16 +31,13 @@ export const RecordButton = styled.button`
   font-weight: bold;
   font-size: 13px;
   color: #fff;
-
   display: flex;
   align-items: center;
   justify-content: center;
   background: #138dd2;
-
   &:hover {
     background: ${darken(0.05, '#138DD2')};
   }
-
   svg {
     margin-right: 5px;
   }
@@ -50,22 +47,18 @@ export const PrintButton = styled(Link)`
   height: 30px;
   width: fit-content;
   padding: 0 15px;
-
   border: 0;
   border-radius: 4px;
   font-weight: bold;
   font-size: 13px;
-  color: #fff;
-
+  color: #ff7518;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ee8143;
-
+  background: #fff;
   &:hover {
-    background: ${darken(0.05, '#EE8143')};
+    background: ${darken(0.05, '#fff')};
   }
-
   svg {
     margin-right: 5px;
   }
@@ -74,28 +67,22 @@ export const PrintButton = styled(Link)`
 const height = css`
   min-height: 700px;
   height: 80vh;
-
   border-radius: 10px;
-
   box-shadow: 1px 5px 10px 0px rgba(0, 0, 0, 0.3);
 `;
 
 export const UserAside = styled.aside`
   ${height}
-
   background: #fff;
   width: 25%;
   margin: 15px 10px 20px 20px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   > svg {
     padding: 10px;
     border: 5px solid #eee;
     border-radius: 50%;
-
     margin-top: 24px;
   }
 `;
@@ -105,16 +92,13 @@ export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-
   span {
     margin-top: 8px;
     font-size: 12px;
   }
-
   strong {
     color: #363636;
     font-size: 24px;
-
     margin: 4px 24px 0px;
     text-align: center;
   }
@@ -123,30 +107,24 @@ export const UserInfo = styled.div`
 export const UserStats = styled.ul`
   list-style: none;
   margin-top: 30px;
-
   li {
     margin: 0 16px;
-
     border: 1px solid #eee;
     padding: 8px 16px;
     border-radius: 10px;
-
     display: flex;
     align-items: center;
     justify-content: center;
     height: 60px;
-
     svg {
       color: #565656;
       margin-left: 2px;
     }
-
     span {
       flex: 1;
       margin-left: 12px;
       text-align: center;
     }
-
     & + li {
       margin-top: 5px;
     }
@@ -159,11 +137,8 @@ export const UserAnalytics = styled.div`
   width: 75%;
   margin: 15px 0 20px 20px;
   padding-top: 15px;
-
-  overflow-y: scroll;
-
   hr {
-    border-top: 1px solid #ee8143;
+    border-top: 1px solid #ff7518;
     width: 70%;
     margin: 10px auto;
   }
@@ -184,12 +159,9 @@ export const ModalContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100vw;
   height: 100vh;
-
   background: rgba(0, 0, 0, 0.7);
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -209,52 +181,40 @@ const animation = keyframes`
 export const ModalContent = styled.div`
   min-width: 380px;
   width: 30%;
-
   background: #fff;
   padding: 30px;
-
   border-radius: 4px;
   box-shadow: 2px 10px 10px 3px rgba(0, 0, 0, 0.5);
-
   animation: ${animation} 400ms;
-
   position: relative;
-
   > button.close {
     position: absolute;
     top: -15px;
     right: -15px;
-
     width: 40px;
     height: 40px;
     border-radius: 50%;
-
     border: none;
     background: #ff6b6b;
     color: #fff;
-
     box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.5);
-
     cursor: pointer;
-
     &:hover {
       background: ${props => darken(0.3, '#ff6b6b')};
     }
   }
-
   h3 {
     font-size: 20px;
     position: relative;
     margin-bottom: 10px;
   }
-
   h3::after {
     content: '';
     position: absolute;
     width: 100%;
     margin-top: 5px;
-    height: 1px; // suit your need
-    background: #ee8143; // suit your need
+    height: 1px;
+    background: #ff7518;
     top: 100%;
     left: 0;
   }
@@ -263,20 +223,16 @@ export const ModalContent = styled.div`
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
-
   div.date {
     display: flex;
     flex-direction: row;
-
     label {
       flex: 1;
       display: flex;
       flex-direction: column;
       margin-top: 15px;
-
       font-size: 14px;
       font-weight: bold;
-
       + label {
         margin-left: 10px;
       }
@@ -287,27 +243,23 @@ export const ModalForm = styled.form`
     margin-top: 4px;
     padding: 5px 10px;
   }
-
   > label {
     font-weight: bold;
     margin-top: 15px;
     display: flex;
     flex-direction: column;
   }
-
   input[type='submit'] {
     margin-top: 15px;
     padding: 10px;
-    background: #ee8143;
+    background: #ff7518;
     border-radius: 4px;
     border: none;
     color: #fff;
     font-weight: bold;
-
     box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.5);
-
     &:hover {
-      background: ${darken(0.05, '#ee8143')};
+      background: ${darken(0.05, '#ff7518')};
     }
   }
 `;

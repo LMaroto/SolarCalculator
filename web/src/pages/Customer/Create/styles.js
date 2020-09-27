@@ -6,6 +6,12 @@ import { MdDelete } from 'react-icons/md';
 export const Container = styled.div`
   margin: 20px auto;
   max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 60px;
+  max-width: 100vw;
+  height: 100vh;
+
+  background: #ff7518;
 
   section {
     display: flex;
@@ -59,7 +65,7 @@ export const DevicesContainer = styled.div`
   margin-top: 10px;
   > span {
     font-size: 16px;
-    color: #535353;
+    color: #000;
     margin-bottom: 2px;
     font-weight: bold;
   }

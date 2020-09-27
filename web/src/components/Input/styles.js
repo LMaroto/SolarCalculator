@@ -8,7 +8,7 @@ export const Container = styled.div`
 
   span {
     font-size: 14px;
-    color: #535353;
+    color: ${props => (props.white ? '#fff' : '#535353')};
     margin-bottom: 2px;
   }
 
@@ -24,12 +24,12 @@ export const Container = styled.div`
     ${props =>
       props.focused &&
       css`
-        border: 1px solid #ee8143;
+        border: 1px solid #ff7518;
       `}
     ${props =>
       props.filled &&
       css`
-        border: 1px solid #ee8143;
+        border: 1px solid #ff7518;
       `}
 
     ${props =>

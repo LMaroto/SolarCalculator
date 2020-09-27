@@ -1,5 +1,5 @@
-import CustomerRepository from "../repositories/CustomerRepository";
-import ReportRepository from "../repositories/ReportRepository";
+import CustomerRepository from '../repositories/CustomerRepository';
+import ReportRepository from '../repositories/ReportRepository';
 
 class ReportCalculator {
   async single(req, res) {
@@ -55,11 +55,12 @@ class ReportCalculator {
         (element) => element.customer_id === customer.id
       );
 
-      const { id, name, kWp, expected } = customer;
+      const { id, registration_number, name, kWp, expected } = customer;
 
       if (!record) {
         return {
           id,
+          registration_number,
           name,
           kWp,
           expected,
@@ -74,6 +75,7 @@ class ReportCalculator {
 
       const newReport = {
         id,
+        registration_number,
         name,
         kWp,
         expected,

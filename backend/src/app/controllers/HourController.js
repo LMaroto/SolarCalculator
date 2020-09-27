@@ -6,6 +6,15 @@ class HourController {
 
     return res.json(hours);
   }
+
+  async findByYear(req, res) {
+    const { year } = req.params;
+
+    const hours = await HourRepository.list(year);
+
+    return res.json(hours);
+  }
+
   async create(req, res) {
     const hours = await HourRepository.store(req.body);
 

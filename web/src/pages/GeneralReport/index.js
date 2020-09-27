@@ -27,7 +27,7 @@ const TABLE_COLUMNS = [
   'Diferença',
 ];
 const TABLE_ROW_TEMPLATE = customer => [
-  `${customer.id} - ${customer.name}`,
+  `${customer.registration_number} - ${customer.name}`,
   `${customer.report.goal} kWh`,
   `${customer.report.record} kWh`,
   `${customer.report.percentual} %`,
@@ -73,10 +73,11 @@ const GeneralReport = () => {
 
   return (
     <Container>
-      <Header showBackButton large />
+      <Header showBackButton title={'Relatório de produção'} />
 
       <Content>
         <h1>Relatório de produção geral</h1>
+        <h2>Clientes com produção abaixo do esperado</h2>
         <label>Selecione o período desejado para o relatório:</label>
 
         <Form onSubmit={formSubmit}>
@@ -111,7 +112,7 @@ const GeneralReport = () => {
         </Form>
         {loading ? (
           <Loader>
-            <BeatLoader color="#ee8143" />
+            <BeatLoader color="#ff7518" />
           </Loader>
         ) : (
           reports && (

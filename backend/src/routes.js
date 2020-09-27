@@ -27,6 +27,7 @@ routes.get('/customers/:id/reports', ReportCalculator.single);
 
 // Hours Management
 routes.get('/sunhours', HourController.index);
+routes.get('/sunhours/:year', HourController.findByYear);
 routes.post('/sunhours', HourController.create);
 routes.put('/sunhours/:id', HourController.update);
 routes.delete('/sunhours/:id', HourController.delete);

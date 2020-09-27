@@ -6,6 +6,7 @@ import Dashboard from '../pages/Dashboard';
 import NewCustomer from '../pages/Customer/Create';
 import ShowCustomer from '../pages/Customer/Show';
 import GeneralReport from '../pages/GeneralReport';
+import Settings from '../pages/Settings';
 
 export default function Routes() {
   return (
@@ -15,6 +16,7 @@ export default function Routes() {
         <Route path="/new-customer" component={NewCustomer} />
         <Route path="/customer/:id" component={ShowCustomer} />
         <Route path="/reports" component={GeneralReport} />
+        <Route path="/settings" component={Settings} />
       </Switch>
     </Router>
   );

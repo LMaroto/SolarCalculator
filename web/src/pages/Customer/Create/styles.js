@@ -5,7 +5,7 @@ import { MdDelete } from 'react-icons/md';
 
 export const Container = styled.div`
   margin: 20px auto;
-  max-width: 900px;
+  max-width: 1100px;
 
   section {
     display: flex;
@@ -31,6 +31,12 @@ export const Container = styled.div`
       }
     }
   }
+`;
+
+export const Loading = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const DeviceInput = styled.div`

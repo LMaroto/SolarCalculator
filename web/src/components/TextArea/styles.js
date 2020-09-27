@@ -12,24 +12,22 @@ export const Container = styled.div`
     margin-bottom: 2px;
   }
 
-  input {
+  textarea {
     padding: 10px;
     border: 1px solid #e5e5e5;
     background: #e5e5e5;
 
     border-radius: 5px;
 
-    height: 42px;
-
     ${props =>
       props.focused &&
       css`
-        border: 1px solid #ff7518;
+        border: 1px solid #ee8143;
       `}
     ${props =>
       props.filled &&
       css`
-        border: 1px solid #ff7518;
+        border: 1px solid #ee8143;
       `}
 
     ${props =>

@@ -2,27 +2,34 @@ import connection from '../../database';
 
 class RecordsRepository {
   async index(customer_id) {
-    const records = await connection('records').where('customer_id', customer_id).select('*');
+    const records = await connection('records')
+      .where('customer_id', customer_id)
+      .select('*');
 
     return records;
   }
 
-  async store(customer_id, { month, year, power }) {
-    const record = await connection('records')
-      .returning(['id', 'customer_id', 'month', 'year', 'power'])
-      .insert({
-        customer_id,
-        month,
-        year,
-        power,
-      });
+  async store(customer_id, { month, year, power, start, end, observation }) {
+    const record = await connection('records').returning('*').insert({
+      customer_id,
+      month,
+      year,
+      power,
+      start,
+      end,
+      observation,
+    });
 
-    return (record[0]);
+    return record[0];
   }
 
-  async update(id, customer_id, { month, year, power }) {
+  async update(
+    id,
+    customer_id,
+    { month, year, power, start, end, observation }
+  ) {
     const record = await connection('records')
-      .returning(['id', 'customer_id', 'month', 'year', 'power'])
+      .returning('*')
       .where({
         id,
         customer_id,
@@ -31,9 +38,12 @@ class RecordsRepository {
         month,
         year,
         power,
+        start,
+        end,
+        observation,
       });
 
-    return (record[0]);
+    return record[0];
   }
 
   async delete(id, customer_id) {

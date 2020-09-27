@@ -21,15 +21,19 @@ export default createGlobalStyle`
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
   }
-  body, input, button{
+
+  body, input, button, textarea{
     font: 14px 'Roboto', sans-serif;
   }
+
   a{
     text-decoration: none;
   }
+
   ul{
-  list-style: none;
+    list-style: none;
   }
+
   button{
     cursor: pointer;
   }

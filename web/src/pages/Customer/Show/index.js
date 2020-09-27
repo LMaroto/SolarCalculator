@@ -24,17 +24,15 @@ import {
   UserAnalytics,
   UserInfo,
   UserStats,
-  ModalContainer,
-  ModalContent,
-  ModalForm,
 } from './styles';
 import api from '../../../services/api';
+import ModalAddRecord from '../../../components/ModalAddRecord';
 
 const Show = () => {
   const [user, setUser] = useState([]);
   const [reports, setReports] = useState([]);
 
-  const [modalOpened, setModalOpened] = useState(false);
+  const [openRecordModal, setOpenedRecordModal] = useState(true);
 
   const { id } = useParams();
 
@@ -43,19 +41,26 @@ const Show = () => {
     setReports(reportsResponse.data);
   }, [id]);
 
+  const toggleRecordModal = useCallback(
+    () => setOpenedRecordModal(!openRecordModal),
+    [openRecordModal, setOpenedRecordModal]
+  );
+
   const submitFormRecord = useCallback(
-    async event => {
-      event.preventDefault();
-
-      const record = {
-        month: event.target.month.value,
-        year: Number(event.target.year.value),
-        power: Number(event.target.produced.value),
-      };
-
+    async data => {
       /*
       Verificando se existe alguma leitura para o mesmo período.
       */
+
+      const record = {
+        month: data.month,
+        year: Number(data.year),
+        power: Number(data.power),
+        start: Number(data.start),
+        end: Number(data.end),
+        observation: data.observation,
+      };
+
       const recordExists = reports.find(
         report => record.month === report.month && report.year === record.year
       );
@@ -79,15 +84,13 @@ const Show = () => {
             );
 
             if (response.status === 200) {
-              setModalOpened(false);
+              await loadReports();
 
               Swal.fire({
                 title: 'Sucesso!',
                 text: 'Leitura reportada para o sistema',
                 icon: 'success',
               });
-
-              await loadReports();
             } else {
               Swal.fire({
                 title: 'Opa!',
@@ -95,12 +98,8 @@ const Show = () => {
                 icon: 'error',
               });
             }
-          } else {
-            /*
-            Caso usuário não queira sobrescrever, apenas fecha o modal.
-            */
-            setModalOpened(false);
           }
+          setOpenedRecordModal(false);
         });
       } else {
         /*
@@ -109,7 +108,7 @@ const Show = () => {
         const response = await api.post(`customers/${id}/records`, record);
 
         if (response.status === 201) {
-          setModalOpened(false);
+          setOpenedRecordModal(false);
 
           Swal.fire({
             title: 'Sucesso!',
@@ -144,10 +143,9 @@ const Show = () => {
   return (
     <>
       <Header showBackButton large />
-
       <Container>
         <Actions>
-          <RecordButton onClick={() => setModalOpened(true)}>
+          <RecordButton onClick={() => setOpenedRecordModal(true)}>
             <FiPlusCircle size={20} color="#fff" />
             Novo registro
           </RecordButton>
@@ -230,67 +228,11 @@ const Show = () => {
           </UserAnalytics>
         </section>
       </Container>
-
-      {modalOpened && (
-        <ModalContainer>
-          <ModalContent>
-            <button
-              type="button"
-              className="close"
-              onClick={() => setModalOpened(false)}
-            >
-              X
-            </button>
-
-            <h3>Nova leitura</h3>
-
-            <ModalForm onSubmit={submitFormRecord}>
-              <div className="date">
-                <label>
-                  Mês
-                  <select name="month" required>
-                    <option value="">Selecione</option>
-                    <option value="jan">Janeiro</option>
-                    <option value="fev">Fevereiro</option>
-                    <option value="mar">Março</option>
-                    <option value="abr">Abril</option>
-                    <option value="mai">Maio</option>
-                    <option value="jun">Junho</option>
-                    <option value="jul">Julho</option>
-                    <option value="ago">Agosto</option>
-                    <option value="set">Setembro</option>
-                    <option value="out">Outubro</option>
-                    <option value="nov">Novembro</option>
-                    <option value="dez">Dezembro</option>
-                  </select>
-                </label>
-                <label>
-                  Ano
-                  <input
-                    name="year"
-                    required
-                    type="number"
-                    min="2019"
-                    placeholder="Ex: 2020"
-                  />
-                </label>
-              </div>
-              <label>
-                Produção (kWh)
-                <input
-                  name="produced"
-                  required
-                  type="number"
-                  step="any"
-                  placeholder="Digite o valor de produção"
-                />
-              </label>
-
-              <input type="submit" />
-            </ModalForm>
-          </ModalContent>
-        </ModalContainer>
-      )}
+      <ModalAddRecord
+        isOpen={openRecordModal}
+        setIsOpen={toggleRecordModal}
+        handleSaveRecord={submitFormRecord}
+      />
     </>
   );
 };

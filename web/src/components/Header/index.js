@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { FiChevronLeft } from 'react-icons/fi';
 import { Container, Content } from './styles';
+import Logo from '../../assets/logo.webp';
 
 function Header({ showBackButton, large }) {
   const history = useHistory();
@@ -24,7 +25,7 @@ function Header({ showBackButton, large }) {
 
         <aside>
           <div>
-            <strong>SolarCalculator</strong>
+            <img src={Logo} alt="SolarCalculator" />
           </div>
         </aside>
       </Content>

@@ -12,11 +12,22 @@ export const Content = styled.main`
     font-weight: 300;
     position: relative;
   }
+  h2 {
+    display: none;
+  }
 
   @media print {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    h1 {
+      display: none;
+    }
+    h2 {
+      display: flex;
+      margin: 20px 0;
+    }
 
     label {
       display: none;

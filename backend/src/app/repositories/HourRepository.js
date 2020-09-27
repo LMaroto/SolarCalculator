@@ -8,9 +8,7 @@ class HourRepository {
   }
 
   async store(data) {
-    const hours = await connection('sunhours')
-      .returning('*')
-      .insert(data);
+    const hours = await connection('sunhours').returning('*').insert(data);
 
     return hours[0];
   }
@@ -29,9 +27,7 @@ class HourRepository {
   }
 
   async delete(id) {
-    await connection('sunhours')
-      .where('id', id)
-      .del();
+    await connection('sunhours').where('id', id).del();
   }
 }
 

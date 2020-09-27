@@ -151,7 +151,7 @@ const Show = () => {
             <FiPlusCircle size={20} color="#fff" />
             Novo registro
           </RecordButton>
-          <PrintButton to="#">
+          <PrintButton to={`${user.id}/reports`}>
             <FiFileText size={20} color="#fff" />
             Gerar relatório
           </PrintButton>

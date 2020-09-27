@@ -60,10 +60,10 @@ export const PrintButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ee8143;
+  background: #ff7518;
 
   &:hover {
-    background: ${darken(0.05, '#EE8143')};
+    background: ${darken(0.05, '#ff7518')};
   }
 
   svg {
@@ -163,7 +163,7 @@ export const UserAnalytics = styled.div`
   overflow-y: scroll;
 
   hr {
-    border-top: 1px solid #ee8143;
+    border-top: 1px solid #ff7518;
     width: 70%;
     margin: 10px auto;
   }
@@ -253,8 +253,8 @@ export const ModalContent = styled.div`
     position: absolute;
     width: 100%;
     margin-top: 5px;
-    height: 1px; // suit your need
-    background: #ee8143; // suit your need
+    height: 1px;
+    background: #ff7518;
     top: 100%;
     left: 0;
   }
@@ -298,7 +298,7 @@ export const ModalForm = styled.form`
   input[type='submit'] {
     margin-top: 15px;
     padding: 10px;
-    background: #ee8143;
+    background: #ff7518;
     border-radius: 4px;
     border: none;
     color: #fff;
@@ -307,7 +307,7 @@ export const ModalForm = styled.form`
     box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.5);
 
     &:hover {
-      background: ${darken(0.05, '#ee8143')};
+      background: ${darken(0.05, '#ff7518')};
     }
   }
 `;

@@ -24,12 +24,12 @@ export const Container = styled.div`
     ${props =>
       props.focused &&
       css`
-        border: 1px solid #ee8143;
+        border: 1px solid #ff7518;
       `}
     ${props =>
       props.filled &&
       css`
-        border: 1px solid #ee8143;
+        border: 1px solid #ff7518;
       `}
 
     ${props =>

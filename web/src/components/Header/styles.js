@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #ee8143;
+  background: #ff7518;
   padding: 0px;
 
   @media print {
@@ -43,5 +43,10 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     color: #fff;
+
+    img {
+      width: 100px;
+      height: 80%;
+    }
   }
 `;

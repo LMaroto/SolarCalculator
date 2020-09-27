@@ -32,17 +32,6 @@ function Table({ columns, rows, data, dangerValidate, warnValidate }) {
               </Report>
             );
           })}
-          {/* {reports.map((report) => (
-            <Report key={`${report.month}${report.year}`}
-            warn={report.difference < (-15) && report.difference > (-25)}
-            danger={report.difference < (-25)}>
-              <td>{`${report.month}/${report.year}`}</td>
-              <td>{report.goal} kWh</td>
-              <td>{report.produced} kWh</td>
-              <td>{report.percentual}%</td>
-              <td>{report.difference}%</td>
-            </Report>
-            ))} */}
         </tbody>
       </ReportTable>
     </Container>

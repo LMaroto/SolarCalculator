@@ -63,14 +63,14 @@ export const NewReportBtn = styled(Link)`
   font-size: 13px;
   color: #fff;
 
-  background: #ee8143;
+  background: #ff7518;
 
   svg {
     margin-right: 5px;
   }
 
   &:hover {
-    background: ${darken(0.05, '#EE8143')};
+    background: ${darken(0.05, '#ff7518')};
   }
 `;
 

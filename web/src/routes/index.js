@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import NewCustomer from '../pages/Customer/Create';
 import ShowCustomer from '../pages/Customer/Show';
+import Report from '../pages/Customer/Report';
 import GeneralReport from '../pages/GeneralReport';
 
 export default function Routes() {
@@ -13,7 +14,8 @@ export default function Routes() {
       <Switch>
         <Route path="/" exact component={Dashboard} />
         <Route path="/new-customer" component={NewCustomer} />
-        <Route path="/customer/:id" component={ShowCustomer} />
+        <Route path="/customer/:id" exact component={ShowCustomer} />
+        <Route path="/customer/:id/reports" component={Report} />
         <Route path="/reports" component={GeneralReport} />
       </Switch>
     </Router>

@@ -47,7 +47,7 @@ const Create = () => {
 
   const customerSchema = Yup.object().shape({
     registration_number: Yup.string().required(
-      'O número da ficha é obrigatório'
+      'O número da obra é obrigatório'
     ),
     name: Yup.string().required('Nome é obrigatório'),
     address: Yup.string().required('O endereço é obrigatório'),
@@ -74,7 +74,7 @@ const Create = () => {
         if (!data.devices) {
           await Swal.fire({
             title: 'Calma lá!',
-            text: 'Você precisa cadastrar algum inversor',
+            text: 'Você precisa cadastrar algum inversor.',
             icon: 'warning',
           });
 
@@ -89,7 +89,7 @@ const Create = () => {
         if (devices.length === 0 || emptyDevice) {
           await Swal.fire({
             title: 'Calma lá!',
-            text: 'Você precisa cadastrar algum inversor',
+            text: 'Você precisa cadastrar algum inversor.',
             icon: 'warning',
           });
 
@@ -159,7 +159,7 @@ const Create = () => {
           >
             <Input
               name="registration_number"
-              label="Número da Ficha"
+              label="Número da obra"
               type="text"
               placeholder="Ex: 14A"
               required

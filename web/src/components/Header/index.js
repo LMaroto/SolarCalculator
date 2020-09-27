@@ -13,7 +13,7 @@ function Header({ showBackButton, large }) {
       <Content large={large}>
         <div>
           {showBackButton && (
-            <button type="button" onClick={() => history.goBack()}>
+            <button type="button" onClick={() => history.push('/')}>
               <FiChevronLeft size={20} color="#fff" />
             </button>
           )}

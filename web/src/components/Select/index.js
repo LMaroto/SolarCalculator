@@ -34,7 +34,7 @@ const customSelectStyle = {
   }),
 };
 
-const Select = ({ name, label, placeholder, ...rest }) => {
+const Select = ({ name, label, placeholder, options, ...rest }) => {
   const selectRef = useRef(null);
 
   const { fieldName, defaultValue, registerField, error } = useField(name);
@@ -63,15 +63,19 @@ const Select = ({ name, label, placeholder, ...rest }) => {
     });
   }, [fieldName, registerField, rest.isMulti]);
 
+  const defaultSelectValue = options.find(
+    option => option.value === defaultValue
+  );
   return (
     <Container>
       <span>{label}</span>
       <ReactSelect
-        defaultValue={defaultValue}
+        defaultValue={defaultSelectValue}
         ref={selectRef}
         classNamePrefix="react-select"
         styles={customSelectStyle}
         placeholder={placeholder}
+        options={options}
         {...rest}
       />
 

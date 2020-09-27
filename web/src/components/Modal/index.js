@@ -29,6 +29,7 @@ const Modal = ({ children, isOpen, setIsOpen }) => {
           color: '#000000',
           borderRadius: '8px',
           width: '550px',
+          maxWidth: '550px',
           border: 'none',
         },
         overlay: {

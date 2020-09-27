@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   height: 50px;
-  max-width: ${props => (props.large ? 1100 : 900)}px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;

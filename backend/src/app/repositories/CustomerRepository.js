@@ -2,12 +2,28 @@ import connection from '../../database';
 
 class CustomerRepository {
   async index() {
-    const customers = await connection('customers').select('*');
-    return customers;
+    const customers = await connection('customers')
+      .select('customers.*', 'sunhours.city', 'sunhours.uf')
+      .join('sunhours', 'sunhours.id', 'customers.sunhour_id');
+
+    const customersWithDevices = [];
+
+    for (var customer of customers) {
+      const devices = await connection('devices')
+        .select(['id', 'name', 'install_date'])
+        .where('customer_id', customer.id);
+
+      customersWithDevices.push({ ...customer, devices });
+    }
+
+    return customersWithDevices;
   }
 
   async findById(id) {
-    const customer = await connection('customers').select('*').where('id', id);
+    const customer = await connection('customers')
+      .select('customers.*', 'sunhours.city', 'sunhours.uf')
+      .join('sunhours', 'sunhours.id', 'customers.sunhour_id')
+      .where('id', id);
 
     if (customer.length > 0) {
       const devices = await connection('devices')

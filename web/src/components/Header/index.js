@@ -14,13 +14,15 @@ function Header({ showBackButton, large, title }) {
       <Content large={large}>
         <div>
           {showBackButton && (
-            <button type="button" onClick={() => history.push('/')}>
+            <button type="button" onClick={() => history.goBack()}>
               <FiChevronLeft size={20} color={'#ff7518'} />
             </button>
           )}
-          <Link to="/">
-            <strong>{title}</strong>
-          </Link>
+          {title && (
+            <Link to="/">
+              <strong>{title}</strong>
+            </Link>
+          )}
         </div>
 
         <aside>

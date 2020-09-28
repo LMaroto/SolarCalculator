@@ -25,27 +25,30 @@ const Report = () => {
   const [loading, setLoading] = useState(false);
   const user = useParams();
 
-  const formSubmit = useCallback(async evt => {
-    setLoading(true);
-    evt.preventDefault();
+  const formSubmit = useCallback(
+    async evt => {
+      setLoading(true);
+      evt.preventDefault();
 
-    const month = evt.target.month.value;
-    const year = evt.target.year.value;
+      const month = evt.target.month.value;
+      const year = evt.target.year.value;
 
-    const customerResponse = await api.get(`customers/${user.id}`);
-    console.log(customerResponse.data.devices[0].name);
-    const reportResponse = await api.get(
-      `customers/${user.id}/reports?month=${month}&year=${year}`
-    );
+      const customerResponse = await api.get(`customers/${user.id}`);
+      console.log(customerResponse.data.devices[0].name);
+      const reportResponse = await api.get(
+        `customers/${user.id}/reports?month=${month}&year=${year}`
+      );
 
-    const hoursResponse = await api.get(`sunhours/${year}`);
+      const hoursResponse = await api.get(`sunhours/${year}`);
 
-    setCustomer(customerResponse.data);
-    setReports(reportResponse.data);
-    setSunhours(hoursResponse.data);
-    setLoading(false);
-    window.print();
-  });
+      setCustomer(customerResponse.data);
+      setReports(reportResponse.data);
+      setSunhours(hoursResponse.data);
+      setLoading(false);
+      window.print();
+    },
+    [user.id]
+  );
 
   return (
     <>

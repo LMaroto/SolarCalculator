@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { FiUserPlus, FiFileText, FiMaximize2 } from 'react-icons/fi';
+import { FiUserPlus, FiMaximize2 } from 'react-icons/fi';
 import Header from '../../components/Header';
 
 import {
@@ -8,7 +8,6 @@ import {
   Content,
   Actions,
   NewCustomerBtn,
-  NewReportBtn,
   UserElement,
 } from './styles';
 
@@ -25,10 +24,11 @@ function CustomerList() {
 
   return (
     <>
-      <Header showBackButton title={'Clientes'} />
+      <Header showBackButton title="Dashboard" />
       <Container>
         <Content>
           <Actions>
+            <span>Listagem de Clientes</span>
             <div>
               <NewCustomerBtn to="/new-customer">
                 <FiUserPlus size={20} />

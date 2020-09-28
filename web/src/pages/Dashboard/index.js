@@ -22,7 +22,7 @@ function Dashboard() {
 
   return (
     <>
-      <Header white title={'Dashboard'} />
+      <Header white />
 
       <Container>
         <OptionContainer>

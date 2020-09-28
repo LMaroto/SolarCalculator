@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 1100px;
 
   main {
     margin: 20px auto;
@@ -20,11 +20,13 @@ export const Content = styled.div`
 
 export const Actions = styled.section`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 
   span {
     font-size: 20px;
+    font-weight: bold;
+    color: #fff;
   }
 
   div {

@@ -1,25 +1,27 @@
 import styled from 'styled-components';
 
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 
 export const Container = styled.div`
   max-width: 1100px;
   margin: 0 auto;
+
+  color: #fff;
 
   section {
     margin-top: 32px;
     position: relative;
 
     h1 {
-      font-weight: normal;
+      font-weight: bold;
       font-size: 28px;
       margin-bottom: 16px;
     }
 
     p {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: normal;
-      color: #666;
+      color: #fff;
 
       max-width: 80%;
 
@@ -50,18 +52,18 @@ export const Table = styled.table`
   margin-top: 20px;
   width: 100%;
   border-collapse: collapse;
-
+  color: black;
   thead th {
     height: 50px;
   }
 
   th,
   td {
-    border: 1px solid #ee8143;
+    border: 1px solid #fff;
   }
 
   th {
-    background: #ee8143;
+    background: #fff;
   }
 
   th,
@@ -71,7 +73,7 @@ export const Table = styled.table`
 
   td {
     text-align: center;
-
+    background: ${lighten(0.25, '#ff7518')};
     svg {
       cursor: pointer;
     }
@@ -81,6 +83,6 @@ export const Table = styled.table`
   }
 
   tbody tr:hover {
-    background-color: #f5f5f5;
+    background-color: #fff;
   }
 `;

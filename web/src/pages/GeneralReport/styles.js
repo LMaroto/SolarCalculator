@@ -4,16 +4,19 @@ import { darken } from 'polished';
 export const Container = styled.div``;
 
 export const Content = styled.main`
-  max-width: 100vw;
-  height: 100vh;
+  width: 1100px;
+  height: calc(100vh - 50px);
   margin: 0 auto;
-  background: #ff7518;
-  padding: 25px 80px;
+  padding: 25px 0;
+
+  color: #fff;
 
   h1 {
-    font-weight: 300;
+    font-weight: bold;
+    font-size: 28px;
     position: relative;
   }
+
   h2 {
     display: none;
   }
@@ -56,6 +59,8 @@ export const Form = styled.form`
     height: 30px;
     padding: 4px 8px;
     margin-right: 8px;
+
+    font-size: 12px;
   }
 `;
 

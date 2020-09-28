@@ -20,6 +20,8 @@ export default createGlobalStyle`
     display: flex;
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
+
+    background: #ff7518;
   }
 
   body, input, button, textarea{

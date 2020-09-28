@@ -5,11 +5,15 @@ import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 export const Container = styled.main`
-  margin: 0 auto;
-  padding: 30px;
-  max-width: 100vw;
+  height: 100vh;
   background: #ff7518;
-  overflow: hidden;
+`;
+
+export const Content = styled.main`
+  height: calc(100%-50px);
+  margin: 20px auto 0;
+  width: 1100px;
+
   section {
     display: flex;
     flex-direction: row;
@@ -20,6 +24,7 @@ export const Actions = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
 export const RecordButton = styled.button`
   text-decoration: none;
   height: 30px;
@@ -42,6 +47,7 @@ export const RecordButton = styled.button`
     margin-right: 5px;
   }
 `;
+
 export const PrintButton = styled(Link)`
   text-decoration: none;
   height: 30px;
@@ -75,7 +81,7 @@ export const UserAside = styled.aside`
   ${height}
   background: #fff;
   width: 25%;
-  margin: 15px 10px 20px 20px;
+  margin: 15px 10px 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;

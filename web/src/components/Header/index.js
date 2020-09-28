@@ -11,7 +11,7 @@ function Header({ showBackButton, large, title }) {
   const history = useHistory();
   return (
     <Container>
-      <Content large={large}>
+      <Content>
         <div>
           {showBackButton && (
             <button type="button" onClick={() => history.goBack()}>

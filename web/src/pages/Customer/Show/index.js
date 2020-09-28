@@ -19,6 +19,7 @@ import ChartComponent from '../../../components/Chart';
 
 import {
   Container,
+  Content,
   Actions,
   RecordButton,
   PrintButton,
@@ -143,10 +144,10 @@ const Show = () => {
   }, [id, loadReports]);
 
   return (
-    <>
+    <Container>
       <Scrollbars autoHide autoHideTimeout={1000} autoHideDuration={200}>
-        <Header showBackButton large title={user.name} />
-        <Container>
+        <Header showBackButton large title="Listagem de Clientes" />
+        <Content>
           <Actions>
             <RecordButton onClick={() => setOpenedRecordModal(true)}>
               <FiPlusCircle size={20} color="#fff" />
@@ -230,14 +231,14 @@ const Show = () => {
               )}
             </UserAnalytics>
           </section>
-        </Container>
+        </Content>
       </Scrollbars>
       <ModalAddRecord
         isOpen={openRecordModal}
         setIsOpen={toggleRecordModal}
         handleSaveRecord={submitFormRecord}
       />
-    </>
+    </Container>
   );
 };
 

@@ -113,7 +113,7 @@ const Settings = () => {
 
   return (
     <>
-      <Header showBackButton />
+      <Header showBackButton title="Dashboard" />
       <Container>
         <section>
           <h1>Configurações do sistema</h1>

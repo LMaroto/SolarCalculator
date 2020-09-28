@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Dashboard from '../pages/Dashboard';
-import CustomerList from '../pages/CustomerList';
+import CustomerList from '../pages/Customer/List';
 import NewCustomer from '../pages/Customer/Create';
 import ShowCustomer from '../pages/Customer/Show';
 import Report from '../pages/Customer/Report';

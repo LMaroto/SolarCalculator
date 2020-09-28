@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  height: 100%;
+  height: calc(100vh - 50px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,6 @@ export const Container = styled.div`
 export const OptionContainer = styled.div`
   display: flex;
   flex-direction: row;
-  height: fit-content;
   width: fit-content;
   margin-top: 10px;
   background: none;

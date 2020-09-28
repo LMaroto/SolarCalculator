@@ -78,7 +78,7 @@ const GeneralReport = () => {
       <Content>
         <h1>Relatório de produção geral</h1>
         <h2>Clientes com produção abaixo do esperado</h2>
-        <label>Selecione o período desejado para o relatório:</label>
+        <span>Selecione o período desejado para o relatório:</span>
 
         <Form onSubmit={formSubmit}>
           <select name="month">

@@ -23,7 +23,7 @@ class CustomerRepository {
     const customer = await connection('customers')
       .select('customers.*', 'sunhours.city', 'sunhours.uf')
       .join('sunhours', 'sunhours.id', 'customers.sunhour_id')
-      .where('id', id);
+      .where('customers.id', id);
 
     if (customer.length > 0) {
       const devices = await connection('devices')

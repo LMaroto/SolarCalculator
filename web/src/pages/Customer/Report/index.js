@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { FiFileText } from 'react-icons/fi';
 import {
   Container,
   IntervalContainer,
@@ -15,7 +16,6 @@ import {
 
 import Header from '../../../components/Header';
 import ChartComponent from '../../../components/Chart';
-import { FiFileText } from 'react-icons/fi';
 import api from '../../../services/api';
 
 const Report = () => {
@@ -34,7 +34,6 @@ const Report = () => {
       const year = evt.target.year.value;
 
       const customerResponse = await api.get(`customers/${user.id}`);
-      console.log(customerResponse.data.devices[0].name);
       const reportResponse = await api.get(
         `customers/${user.id}/reports?month=${month}&year=${year}`
       );
@@ -45,18 +44,18 @@ const Report = () => {
       setReports(reportResponse.data);
       setSunhours(hoursResponse.data);
       setLoading(false);
-      window.print();
+      // window.print();
     },
     [user.id]
   );
 
   return (
     <>
-      <Header showBackButton large title={'Relatório de produção'} />
+      <Header showBackButton large title="Relatório de produção" />
       <Container>
         <IntervalContainer>
           <h1>Relatório de produção individual</h1>
-          <label>Selecione o período desejado para o relatório</label>
+          <span>Selecione o período desejado para o relatório</span>
 
           <Form onSubmit={formSubmit}>
             <select name="month">
@@ -218,7 +217,7 @@ const Report = () => {
                 Os dados a seguir foram analisados de <strong>28/04/20</strong>{' '}
                 a <strong>31/07/20</strong>. As informações de produção de
                 energia foram enviadas pelo módulo de monitoramento, conectado
-                ao inversor <strong></strong>
+                ao inversor <strong />
                 que está instalado no local da obra e retiradas do site de
                 monitoramento <strong>MONITORAMENTO.SICESSOLAR.COM.BR</strong>.
               </Paragraph>
@@ -226,7 +225,7 @@ const Report = () => {
               <ChartComponent reports={reports} />
             </ReportContainer>
             {reports.map(report => {
-              const month = report.month;
+              const { month } = report;
 
               return (
                 <Reporter>

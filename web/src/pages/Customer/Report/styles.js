@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  max-width: 100vw;
+  max-width: 1100px;
   height: 100vh;
-  margin: 0 auto;
-  padding: 30px 60px;
-
-  background: #ff7825;
+  margin: 30px auto 0;
 `;
+
 export const IntervalContainer = styled.div`
+  color: white;
   h1 {
     margin: 0;
     font-weight: 300;
     position: relative;
   }
 `;
+
 export const Form = styled.form`
   margin-top: 16px;
   display: flex;
@@ -30,7 +30,6 @@ export const Form = styled.form`
   select,
   input {
     width: 150px;
-    height: 30px;
     padding: 4px 8px;
     margin-right: 8px;
   }
@@ -39,13 +38,13 @@ export const Form = styled.form`
     display: none;
   }
 `;
+
 export const GenerateButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
 
   width: 150px;
-  height: 30px;
   padding: 0 15px;
 
   border: none;
@@ -64,6 +63,7 @@ export const GenerateButton = styled.button`
     margin-right: 4px;
   }
 `;
+
 export const ReportContainer = styled.div`
   display: none;
 
@@ -73,6 +73,8 @@ export const ReportContainer = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 20px;
+
+    background: #fff;
   }
 `;
 

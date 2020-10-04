@@ -13,11 +13,16 @@ class ReportRepository {
     return goal[0][month];
   }
 
-  async searchRecords(id) {
+  async searchRecords(id, { month_start, year_start, month_end, year_end }) {
     const records = await connection('records')
-      .where({ customer_id: id })
-      .limit(12)
-      .orderBy([{ column: 'year', order: 'asc' }, { column: 'month', order: 'asc' }])
+      .whereBetween('month', [month_start, month_end])
+      .whereBetween('year', [year_start, year_end])
+      .andWhere({ customer_id: id })
+
+      .orderBy([
+        { column: 'year', order: 'asc' },
+        { column: 'month', order: 'asc' },
+      ])
       .select('*');
 
     records.sort(dateOrdinate);
@@ -38,11 +43,33 @@ class ReportRepository {
 
       if (goal) {
         const {
-          jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez,
+          jan,
+          fev,
+          mar,
+          abr,
+          mai,
+          jun,
+          jul,
+          ago,
+          set,
+          out,
+          nov,
+          dez,
         } = goal;
 
         mapping[year] = {
-          jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez,
+          jan,
+          fev,
+          mar,
+          abr,
+          mai,
+          jun,
+          jul,
+          ago,
+          set,
+          out,
+          nov,
+          dez,
         };
       }
     });

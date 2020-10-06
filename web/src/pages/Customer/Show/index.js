@@ -205,8 +205,8 @@ const Show = () => {
                       ]}
                       rows={report => [
                         `${report.month}/${report.year}`,
-                        `${report.goal} kWp`,
-                        `${report.produced} kWp`,
+                        `${report.goal} kWh`,
+                        `${report.produced} kWh`,
                         `${report.percentual} %`,
                         `${report.difference} %`,
                       ]}

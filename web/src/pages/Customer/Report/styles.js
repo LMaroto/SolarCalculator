@@ -7,8 +7,11 @@ export const Container = styled.div`
   height: 100vh;
   margin: 0 auto;
   padding: 30px 60px;
-
+  color: #fff;
   background: #ff7825;
+  @media print {
+    color: #000;
+  }
 `;
 export const IntervalContainer = styled.div`
   h1 {

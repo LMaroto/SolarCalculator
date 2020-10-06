@@ -4,7 +4,8 @@ class CustomerRepository {
   async index() {
     const customers = await connection('customers')
       .select('customers.*', 'sunhours.city', 'sunhours.uf')
-      .join('sunhours', 'sunhours.id', 'customers.sunhour_id');
+      .join('sunhours', 'sunhours.id', 'customers.sunhour_id')
+      .orderBy('registration_number');
 
     const customersWithDevices = [];
 

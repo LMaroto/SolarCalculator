@@ -25,6 +25,7 @@ export const Content = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #000;
 
     h1 {
       display: none;

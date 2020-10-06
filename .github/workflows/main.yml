@@ -1,0 +1,60 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Backend
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      # instalação do nodejs
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.2
+        with:
+          node_version: 12.x
+      
+      - name: Install dependencies
+        run: |
+          cd backend
+          npm install
+      
+      # Converte o código com Sucrase
+      - name: Run build
+        run: |
+          cd backend
+          npm run build
+      
+      # Copia o código para o servidor online
+      - name: Copy to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "./backend,!node_modules"
+          target: "~/solarcalculator/backend"
+        
+      # Instala as dependências no servidor online
+      # Executa todas as migrations
+      # Reinicia a aplicação
+      - name: Run production scripts
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/solarcalculator/backend/
+            npm install
+            npx knex migrate:latest --env=production
+            pm2 restart solarcalculator-api
+            
+            

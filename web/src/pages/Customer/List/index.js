@@ -59,7 +59,7 @@ function CustomerList() {
                       {customer.city} - {customer.uf}
                     </span>
 
-                    <img src={energyIcon} />
+                    <img src={energyIcon} alt="Background do card" />
 
                     <Devices>
                       {customer.devices.map(device => (

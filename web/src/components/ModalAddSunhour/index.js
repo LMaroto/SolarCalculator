@@ -1,11 +1,9 @@
 import React, { useCallback, useRef } from 'react';
+import PropTypes from 'prop-types';
+import * as yup from 'yup';
 import Modal from '../Modal';
 import Select from '../Select';
 import Input from '../Input';
-
-import PropTypes from 'prop-types';
-
-import * as yup from 'yup';
 
 import { Container, Form, VerticalInputs } from './styles';
 import extractValidationMessage from '../../utils/extractValidatorErrors';
@@ -148,8 +146,10 @@ const ModalAddSunhour = ({
 
 ModalAddSunhour.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  setIsOpen: PropTypes.func,
-  handleSave: PropTypes.func,
+  setIsOpen: PropTypes.func.isRequired,
+  handleSave: PropTypes.func.isRequired,
+  edit: PropTypes.shape({}).isRequired,
+  handleEdit: PropTypes.func.isRequired,
 };
 
 export default ModalAddSunhour;

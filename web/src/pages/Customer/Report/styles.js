@@ -5,7 +5,6 @@ import { darken } from 'polished';
 export const Container = styled.div`
   max-width: 1100px;
   height: 100vh;
-<<<<<<< HEAD
   margin: 0 auto;
   padding: 30px 60px;
   color: #fff;
@@ -13,9 +12,6 @@ export const Container = styled.div`
   @media print {
     color: #000;
   }
-=======
-  margin: 30px auto 0;
->>>>>>> 20fce1b4c0a2577626e037f75c3593019375172d
 `;
 
 export const IntervalContainer = styled.div`

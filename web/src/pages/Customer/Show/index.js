@@ -67,7 +67,6 @@ const Show = () => {
       /*
       Verificando se existe alguma leitura para o mesmo período.
       */
-
       const record = {
         month: data.month,
         year: Number(data.year),

@@ -25,7 +25,6 @@ function CustomerList() {
   useEffect(() => {
     setLoading(true);
     api.get('customers').then(response => {
-      console.log(response.data);
       setCustomers(response.data);
       setLoading(false);
     });

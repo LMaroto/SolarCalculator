@@ -44,7 +44,7 @@ const Report = () => {
       setReports(reportResponse.data);
       setSunhours(hoursResponse.data);
       setLoading(false);
-      // window.print();
+      window.print();
     },
     [user.id]
   );

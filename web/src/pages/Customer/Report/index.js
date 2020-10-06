@@ -88,6 +88,7 @@ const Report = () => {
             </GenerateButton>
           </Form>
         </IntervalContainer>
+        {loading && <p>Carregando...</p>}
         {reports && (
           <>
             <ReportContainer>

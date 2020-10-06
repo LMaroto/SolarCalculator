@@ -1,11 +1,10 @@
 import React from 'react';
 
+import { FiUsers, FiFileText, FiSettings, FiLogOut } from 'react-icons/fi';
+import Swal from 'sweetalert2';
 import Header from '../../components/Header';
 
 import { Container, OptionContainer, Option } from './styles';
-import { FiUsers, FiFileText, FiSettings, FiLogOut } from 'react-icons/fi';
-
-import Swal from 'sweetalert2';
 
 function Dashboard() {
   const checkLogout = () => {
@@ -30,13 +29,13 @@ function Dashboard() {
             <FiUsers size={50} />
             <h2>Clientes</h2>
           </Option>
-          <Option to="/reports" color={'#138dd2'}>
+          <Option to="/reports" color="#138dd2">
             <FiFileText size={50} />
             <h2>Relatório geral</h2>
           </Option>
         </OptionContainer>
         <OptionContainer>
-          <Option to="/settings" color={'#A54AA0'}>
+          <Option to="/settings" color="#A54AA0">
             <FiSettings size={50} />
             <h2>Ajustes</h2>
           </Option>

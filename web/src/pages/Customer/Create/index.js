@@ -4,12 +4,12 @@ import { Form } from '@unform/web';
 import { Scope } from '@unform/core';
 import * as Yup from 'yup';
 import { useHistory } from 'react-router-dom';
-import api from '../../../services/api';
 
 import { v4 as uuid } from 'uuid';
 
 import Swal from 'sweetalert2';
 import { ClipLoader } from 'react-spinners';
+import api from '../../../services/api';
 
 import Header from '../../../components/Header';
 import Input from '../../../components/Input';
@@ -47,8 +47,6 @@ const Create = () => {
         value: city.id,
         label: `${city.city} - ${city.uf}`,
       }));
-
-      console.log(values);
 
       setCities(values);
       setLoading(false);
@@ -114,12 +112,11 @@ const Create = () => {
           return;
         }
 
-        const devices = Object.values(data.devices);
-        const emptyDevice = devices.find(
+        const userDevices = Object.values(data.devices);
+        const emptyDevice = userDevices.find(
           object => object.name === '' || object.install_date === ''
         );
-        console.log(devices);
-        if (devices.length === 0 || emptyDevice) {
+        if (userDevices.length === 0 || emptyDevice) {
           await Swal.fire({
             title: 'Calma lá!',
             text: 'Você precisa cadastrar algum inversor.',
@@ -129,14 +126,14 @@ const Create = () => {
           return;
         }
         const newData = {
-          registration_number: data['registration_number'],
+          registration_number: data.registration_number,
           name: data.name,
           address: data.address,
           kWp,
           access: data.access,
           sunhour_id: data.sunhour_id,
           ...(data.expected ? { expected: parseFloat(data.expected) } : {}),
-          devices,
+          userDevices,
         };
 
         await api.post('customers', newData);
@@ -160,8 +157,6 @@ const Create = () => {
           if (formRef.current) {
             formRef.current.setErrors(errors);
           }
-
-          console.log('teve erros');
         } else {
           Swal.fire({
             title: 'Opa!',
@@ -176,7 +171,7 @@ const Create = () => {
 
   return (
     <>
-      <Header showBackButton title={'Adicionar cliente'} />
+      <Header showBackButton title="Adicionar cliente" />
       <Container>
         {loading ? (
           <Loading>

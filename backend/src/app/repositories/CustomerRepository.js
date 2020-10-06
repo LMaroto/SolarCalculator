@@ -50,7 +50,6 @@ class CustomerRepository {
     let values;
     await connection.transaction(async (transaction) => {
       try {
-        console.log(sunhour_id);
         customers = await connection('customers')
           .transacting(transaction)
           .returning('*')

@@ -13,6 +13,8 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import Swal from 'sweetalert2';
 
+import { startOfYear, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import Header from '../../../components/Header';
 import Table from '../../../components/Table';
 import ChartComponent from '../../../components/Chart';
@@ -39,15 +41,26 @@ const Show = () => {
 
   const { id } = useParams();
 
-  const loadReports = useCallback(async () => {
-    const reportsResponse = await api.get(`customers/${id}/reports`);
-    setReports(reportsResponse.data);
-  }, [id]);
-
   const toggleRecordModal = useCallback(
     () => setOpenedRecordModal(!openRecordModal),
     [openRecordModal, setOpenedRecordModal]
   );
+
+  const loadReports = useCallback(async () => {
+    const startDate = startOfYear(new Date());
+    const currentDate = new Date();
+
+    const reportsResponse = await api.get(`customers/${id}/reports`, {
+      params: {
+        month_start: format(startDate, 'MMM', { locale: ptBR }),
+        year_start: startDate.getFullYear(),
+
+        month_end: format(currentDate, 'MMM', { locale: ptBR }),
+        year_end: currentDate.getFullYear(),
+      },
+    });
+    setReports(reportsResponse.data);
+  }, [id]);
 
   const submitFormRecord = useCallback(
     async data => {
@@ -220,7 +233,7 @@ const Show = () => {
                       data={reports}
                     />
                   </section>
-                  <hr></hr>
+                  <hr />
                   <section>
                     <h1>Produção nos últimos 12 meses</h1>
                     <ChartComponent reports={reports} />

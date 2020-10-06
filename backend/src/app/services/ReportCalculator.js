@@ -5,8 +5,15 @@ class ReportCalculator {
   async single(req, res) {
     const { id } = req.params;
 
+    const { month_start, year_start, month_end, year_end } = req.query;
+
     // formato: mes/ano/valor_coletado
-    const records = await ReportRepository.searchRecords(id);
+    const records = await ReportRepository.searchRecords(id, {
+      month_start,
+      year_start,
+      month_end,
+      year_end,
+    });
 
     if (!records.length) {
       return res.json([]);

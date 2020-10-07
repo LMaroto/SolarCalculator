@@ -19,16 +19,28 @@ jobs:
         with:
           node_version: 12.x
       
-      - name: Install dependencies
-        run: |
-          cd backend
-          npm install
+#       - name: Install dependencies
+#         run: |
+#           cd backend
+#           npm install
       
-      # Converte o código com Sucrase
-      - name: Run build
-        run: |
-          cd backend
-          npm run build
+#       # Converte o código com Sucrase
+#       - name: Run build
+#         run: |
+#           cd backend
+#           npm run build
+          
+      # Apaga antiga pasta de distribuição no servidor
+      - name: Delete old dist
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            rm -r ~/solarcalculator/backend/dist
+            mkdir ~/solarcalculator/backend/dist
       
       # Copia o código para o servidor online
       - name: Copy to EC2
@@ -54,6 +66,7 @@ jobs:
           script: |
             cd ~/solarcalculator/backend/
             npm install
+            npm run build
             npx knex migrate:latest --env=production
             pm2 restart solarcalculator-api
             

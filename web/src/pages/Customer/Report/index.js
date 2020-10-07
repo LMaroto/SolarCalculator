@@ -30,15 +30,18 @@ const Report = () => {
       setLoading(true);
       evt.preventDefault();
 
-      const month = evt.target.month.value;
-      const year = evt.target.year.value;
+      const month_start = evt.target.month_start.value;
+      const year_start = evt.target.year_start.value;
+
+      const month_end = evt.target.month_end.value;
+      const year_end = evt.target.year_end.value;
 
       const customerResponse = await api.get(`customers/${user.id}`);
       const reportResponse = await api.get(
-        `customers/${user.id}/reports?month=${month}&year=${year}`
+        `customers/${user.id}/reports?month_start=${month_start}&year_start=${year_start}&month_end=${month_end}&year_end=${year_end}`
       );
 
-      const hoursResponse = await api.get(`sunhours/${year}`);
+      const hoursResponse = await api.get(`sunhours/${year_start}`);
 
       setCustomer(customerResponse.data);
       setReports(reportResponse.data);
@@ -55,10 +58,11 @@ const Report = () => {
       <Container>
         <IntervalContainer>
           <h1>Relatório de produção individual</h1>
-          <span>Selecione o período desejado para o relatório</span>
+          <span>Selecione o período desejado para o relatório:</span>
 
           <Form onSubmit={formSubmit}>
-            <select name="month">
+            <span>Início do período</span>
+            <select name="month_start">
               <option value="jan">Janeiro</option>
               <option value="fev">Fevereiro</option>
               <option value="mar">Março</option>
@@ -74,7 +78,31 @@ const Report = () => {
             </select>
 
             <input
-              name="year"
+              name="year_start"
+              required
+              type="number"
+              min="2019"
+              defaultValue={new Date().getFullYear()}
+              placeholder="Ex.: 2020"
+            />
+            <span>Fim do período</span>
+            <select name="month_end">
+              <option value="jan">Janeiro</option>
+              <option value="fev">Fevereiro</option>
+              <option value="mar">Março</option>
+              <option value="abr">Abril</option>
+              <option value="mai">Maio</option>
+              <option value="jun">Junho</option>
+              <option value="jul">Julho</option>
+              <option value="ago">Agosto</option>
+              <option value="set">Setembro</option>
+              <option value="out">Outubro</option>
+              <option value="nov">Novembro</option>
+              <option value="dez">Dezembro</option>
+            </select>
+
+            <input
+              name="year_end"
               required
               type="number"
               min="2019"
@@ -89,7 +117,7 @@ const Report = () => {
           </Form>
         </IntervalContainer>
         {loading && <p>Carregando...</p>}
-        {reports && (
+        {reports.length && (
           <>
             <ReportContainer>
               <Title>
@@ -107,6 +135,11 @@ const Report = () => {
                   </tr>
                   <tr>
                     <td>Endereço da instalação: {customer.address}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Cidade: {customer.city} - {customer.uf}
+                    </td>
                   </tr>
                   <tr>
                     <td>Potência instalada: {customer.kWp} kWp</td>
@@ -133,13 +166,14 @@ const Report = () => {
 
               <Paragraph>
                 A produção de energia varia de mês para mês, pois a incidência
-                de luz solar não é a mesma o ano todo, sendo assim, o número de
+                de luz solar não é a mesma o ano todo. Sendo assim, o número de
                 horas de sol consideradas para o cálculo de produção mensal é
-                variável, como consequência se tem meses de maior produção e
-                meses de menor produção, popularmente chamado de meses de alta e
-                meses de baixa. Segue abaixo a tabela com o número de horas de
-                sol consideradas por dia de produção de cada mês: (Informações
-                de irradiação solar retiradas do site WWW.CRESESB.CEPEL.BR)
+                variável. Como consequência, tem-se meses de maior produção e
+                meses de menor produção, popularmente conhecidos como meses de
+                alta e meses de baixa. Segue abaixo a tabela com o número de
+                horas de sol consideradas por dia de produção de cada mês:
+                (Informações de irradiação solar retiradas do site
+                WWW.CRESESB.CEPEL.BR)
               </Paragraph>
 
               <Info>
@@ -201,26 +235,40 @@ const Report = () => {
                 </tbody>
               </Info>
 
-              <Paragraph>
-                O TOTAL Produzido no mês é somente a soma de todos os dias
-                Produzidos. Para Saber o total que deve ser produzido em um mês
-                basta multiplicar os dados: (𝑃.𝐼𝑛𝑠𝑡𝑎𝑙𝑎𝑑𝑎 × %𝑑𝑒 𝑒𝑓𝑖𝑐𝑖𝑒𝑛𝑐𝑖𝑎 𝑑𝑜
-                𝑚ó𝑑𝑢𝑙𝑜 × ℎ𝑜𝑟𝑎𝑠 × 𝑑𝑖𝑎𝑠 𝑑𝑜 𝑚ê𝑠 ).
-                <br />
-                <br />
-                EXEMPLO MÊS DE MARÇO: ({customer.kWp} × 0,80 × {sunHours.mar} ×
-                31 = {(customer.kWp * 0, 8 * sunHours.mar * 31)} 𝑘𝑊ℎ)
+              <Paragraph align>
+                O TOTAL produzido no mês consiste na soma das produções de cada
+                dia.
               </Paragraph>
 
               <Title>Análise de produção</Title>
 
               <Paragraph>
-                Os dados a seguir foram analisados de <strong>28/04/20</strong>{' '}
-                a <strong>31/07/20</strong>. As informações de produção de
-                energia foram enviadas pelo módulo de monitoramento, conectado
-                ao inversor <strong />
-                que está instalado no local da obra e retiradas do site de
-                monitoramento <strong>MONITORAMENTO.SICESSOLAR.COM.BR</strong>.
+                Os dados a seguir foram analisados de{' '}
+                <strong>
+                  {reports[0].start}/{reports[0].month}/{reports[0].year}
+                </strong>{' '}
+                a{' '}
+                <strong>
+                  {reports[`${reports.length - 1}`].end}/
+                  {reports[`${reports.length - 1}`].month}/
+                  {reports[`${reports.length - 1}`].year}
+                </strong>
+                . As informações de produção de energia foram enviadas{' '}
+                {customer.devices.length === 1 ? (
+                  <>
+                    pelo módulo de monitoramento conectado ao inversor
+                    <strong> {customer.devices[0].name} </strong>
+                    que está instalado no local da obra.
+                  </>
+                ) : (
+                  <>
+                    pelos módulos de monitoramento conectados aos inversores
+                    <strong>
+                      {customer.devices.map(device => ` ${device.name}, `)}
+                    </strong>
+                    que estão instalados no local da obra.
+                  </>
+                )}
               </Paragraph>
 
               <ChartComponent reports={reports} />

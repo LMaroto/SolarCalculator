@@ -133,7 +133,7 @@ const Create = () => {
           access: data.access,
           sunhour_id: data.sunhour_id,
           ...(data.expected ? { expected: parseFloat(data.expected) } : {}),
-          userDevices,
+          devices: userDevices,
         };
 
         await api.post('customers', newData);

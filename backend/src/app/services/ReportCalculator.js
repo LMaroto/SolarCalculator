@@ -40,6 +40,9 @@ class ReportCalculator {
         goal,
         percentual,
         difference,
+        start: record.start,
+        end: record.end,
+        obs: record.observation,
       };
     });
 

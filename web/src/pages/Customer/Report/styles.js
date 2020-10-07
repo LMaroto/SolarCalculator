@@ -21,6 +21,10 @@ export const IntervalContainer = styled.div`
     font-weight: 300;
     position: relative;
   }
+  span {
+    align-self: left;
+    padding: 0 5px;
+  }
 `;
 
 export const Form = styled.form`

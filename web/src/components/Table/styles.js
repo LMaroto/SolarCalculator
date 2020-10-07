@@ -9,6 +9,9 @@ export const ReportTable = styled.table`
   border-collapse: collapse;
   width: 100%;
 
+  @media print {
+    font-size: 20px;
+  }
   .title {
     display: ${props => (props.title ? 'flex' : 'none')};
   }
@@ -26,4 +29,8 @@ export const ReportTable = styled.table`
 export const Report = styled.tr`
   background: ${props =>
     props.warn ? '#fae3aa' : props.danger ? '#db7070' : '#fff'};
+
+  @media print {
+    font-size: 20px;
+  }
 `;

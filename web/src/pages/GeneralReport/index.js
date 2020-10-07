@@ -13,6 +13,7 @@ import {
   GenerateButton,
   WarnTitle,
   DangerTitle,
+  ObsTitle,
 } from './styles';
 
 import { FiFileText } from 'react-icons/fi';
@@ -20,6 +21,7 @@ import { FiFileText } from 'react-icons/fi';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 const TABLE_COLUMNS = [
+  'ID',
   'Nome do cliente',
   'Esperado (CRESESB)',
   'Produção',
@@ -27,7 +29,8 @@ const TABLE_COLUMNS = [
   'Diferença',
 ];
 const TABLE_ROW_TEMPLATE = customer => [
-  `${customer.registration_number} - ${customer.name}`,
+  `${customer.registration_number}`,
+  `${customer.name}`,
   `${customer.report.goal} kWh`,
   `${customer.report.record} kWh`,
   `${customer.report.percentual} %`,
@@ -37,15 +40,19 @@ const TABLE_ROW_TEMPLATE = customer => [
 const GeneralReport = () => {
   const [reports, setReports] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [month, setMonth] = useState(null);
+  const [year, setYear] = useState(null);
 
   const formSubmit = useCallback(async event => {
     setLoading(true);
     event.preventDefault();
 
-    const month = event.target.month.value;
-    const year = event.target.year.value;
+    setMonth(event.target.month.value);
+    setYear(event.target.year.value);
 
-    const response = await api.get(`/reports?month=${month}&year=${year}`);
+    const response = await api.get(
+      `/reports?month=${event.target.month.value}&year=${event.target.year.value}`
+    );
 
     const reports = response.data;
     const warnZones = reports.filter(customer => {
@@ -77,7 +84,9 @@ const GeneralReport = () => {
 
       <Content>
         <h1>Relatório de produção geral</h1>
-        <h2>Clientes com produção abaixo do esperado</h2>
+        <h2>
+          Clientes com produção abaixo do esperado - {month}/{year}
+        </h2>
         <span>Selecione o período desejado para o relatório:</span>
 
         <Form onSubmit={formSubmit}>
@@ -145,10 +154,6 @@ const GeneralReport = () => {
               ) : (
                 ''
               )}
-              {/* <Table reports={reports.danger} /> */}
-              {/* Produção entre 15% a 25% abaixo do esperado - jun/20 */}
-              {/* Produção em 25% ou mais abaixo do esperado - jun/20 */}
-              {/* | id - nome | esperado | produção | percentual | diferença | */}
             </ReportsArea>
           )
         )}

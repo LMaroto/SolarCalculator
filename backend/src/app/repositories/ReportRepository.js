@@ -126,7 +126,7 @@ class ReportRepository {
         month,
         year,
       })
-      .select('customer_id', 'power');
+      .select('customer_id', 'power', 'observation');
 
     return records;
   }

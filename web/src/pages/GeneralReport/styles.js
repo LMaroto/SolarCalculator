@@ -34,6 +34,9 @@ export const Content = styled.main`
       display: flex;
       margin: 20px 0;
     }
+    span {
+      display: none;
+    }
 
     label {
       display: none;
@@ -105,10 +108,10 @@ export const ReportsArea = styled.section`
     -webkit-print-color-adjust: exact;
 
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     padding: 0 10px;
   }
 `;
@@ -119,6 +122,7 @@ export const WarnTitle = styled.div`
   align-items: center;
   width: 100%;
   padding: 10px;
+  font-size: 16px;
 
   background: #fae3aa;
 `;
@@ -129,6 +133,7 @@ export const DangerTitle = styled.div`
   width: 100%;
   padding: 10px;
   margin-top: 20px;
+  font-size: 16px;
 
   background: #db7070;
 `;

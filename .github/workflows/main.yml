@@ -19,16 +19,16 @@ jobs:
         with:
           node_version: 12.x
       
-      - name: Install dependencies
-        run: |
-          cd backend
-          npm install
+#       - name: Install dependencies
+#         run: |
+#           cd backend
+#           npm install
       
-      # Converte o código com Sucrase
-      - name: Run build
-        run: |
-          cd backend
-          npm run build
+#       # Converte o código com Sucrase
+#       - name: Run build
+#         run: |
+#           cd backend
+#           npm run build
           
       # Apaga antiga pasta de distribuição no servidor
       - name: Delete old dist
@@ -66,6 +66,7 @@ jobs:
           script: |
             cd ~/solarcalculator/backend/
             npm install
+            npm run build
             npx knex migrate:latest --env=production
             pm2 restart solarcalculator-api
             

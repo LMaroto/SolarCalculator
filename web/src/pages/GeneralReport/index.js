@@ -13,7 +13,6 @@ import {
   GenerateButton,
   WarnTitle,
   DangerTitle,
-  ObsTitle,
 } from './styles';
 
 import { FiFileText } from 'react-icons/fi';

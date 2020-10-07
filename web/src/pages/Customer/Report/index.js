@@ -12,6 +12,8 @@ import {
   Info,
   Paragraph,
   Reporter,
+  ChartArea,
+  Reinforcement,
 } from './styles';
 
 import Header from '../../../components/Header';
@@ -24,6 +26,36 @@ const Report = () => {
   const [sunHours, setSunhours] = useState([]);
   const [loading, setLoading] = useState(false);
   const user = useParams();
+
+  const monthToNumber = {
+    jan: '1',
+    fev: '2',
+    mar: '3',
+    abr: '4',
+    mai: '5',
+    jun: '6',
+    jul: '7',
+    ago: '8',
+    set: '9',
+    out: '10',
+    nov: '11',
+    dez: '12',
+  };
+
+  const completeMonths = {
+    jan: 'Janeiro',
+    fev: 'Fevereiro',
+    mar: 'Março',
+    abr: 'Abril',
+    mai: 'Maio',
+    jun: 'Junho',
+    jul: 'Julho',
+    ago: 'Agosto',
+    set: 'Setembro',
+    out: 'Outubro',
+    nov: 'Novembro',
+    dez: 'Dezembro',
+  };
 
   const formSubmit = useCallback(
     async evt => {
@@ -117,7 +149,7 @@ const Report = () => {
           </Form>
         </IntervalContainer>
         {loading && <p>Carregando...</p>}
-        {reports.length && (
+        {!!reports.length && (
           <>
             <ReportContainer>
               <Title>
@@ -235,7 +267,7 @@ const Report = () => {
                 </tbody>
               </Info>
 
-              <Paragraph align>
+              <Paragraph>
                 O TOTAL produzido no mês consiste na soma das produções de cada
                 dia.
               </Paragraph>
@@ -245,12 +277,13 @@ const Report = () => {
               <Paragraph>
                 Os dados a seguir foram analisados de{' '}
                 <strong>
-                  {reports[0].start}/{reports[0].month}/{reports[0].year}
+                  {reports[0].start}/{monthToNumber[reports[0].month]}/
+                  {reports[0].year}
                 </strong>{' '}
                 a{' '}
                 <strong>
                   {reports[`${reports.length - 1}`].end}/
-                  {reports[`${reports.length - 1}`].month}/
+                  {monthToNumber[reports[`${reports.length - 1}`].month]}/
                   {reports[`${reports.length - 1}`].year}
                 </strong>
                 . As informações de produção de energia foram enviadas{' '}
@@ -270,27 +303,59 @@ const Report = () => {
                   </>
                 )}
               </Paragraph>
-
-              <ChartComponent reports={reports} />
+              <ChartArea>
+                <ChartComponent reports={reports} />
+              </ChartArea>
             </ReportContainer>
             {reports.map(report => {
               const { month } = report;
 
               return (
                 <Reporter>
-                  Mês: <strong>{month}</strong>
-                  <br />
-                  Potência instalada: {customer.kWp} kWp.
-                  <br />
-                  Horas de sol: {sunHours[month]} horas.
-                  <br />A produção ESPERADA para o mês de {month} era de:{' '}
-                  {report.goal} kWh.
-                  <br />A produção REAL do mês de {month} foi de:{' '}
-                  {report.produced} kWh (<strong>{report.percentual}%</strong>{' '}
-                  do esperado).
+                  <Paragraph>
+                    <br />
+                    Mês: <strong>{completeMonths[month]}</strong>
+                    <br />
+                    Potência instalada: {customer.kWp} kWp.
+                    <br />
+                    Horas de sol: {sunHours[month]} horas.
+                    <br />
+                    Dias de produção: {report.end - report.start + 1} dias.
+                    <br />A produção ESPERADA para o mês de {month} era de:{' '}
+                    {report.goal} kWh.
+                    <br />A produção REAL do mês de {month} foi de:{' '}
+                    {report.produced} kWh (<strong>{report.difference}%</strong>{' '}
+                    do esperado).
+                    {report.obs !== '' ? (
+                      <>
+                        <br />
+                        <br />
+                        <strong>Observações:</strong> {report.obs}
+                      </>
+                    ) : (
+                      ''
+                    )}
+                  </Paragraph>
                 </Reporter>
               );
             })}
+            <Reinforcement>
+              <Paragraph>
+                <strong>REFORÇO:</strong> O estudo feito para produção de
+                energia fotovoltaica é feito com média anual de 5,10 horas. Os
+                meses de baixa e alta produção já são esperados e colocados nos
+                orçamentos destinados a clientes. Essas informações são
+                encontradas na página 6 dos orçamentos.
+              </Paragraph>
+              <Paragraph>
+                <strong>ATENÇÃO:</strong> Os meses de baixa produção são os
+                meses de seca do Estado de Mato Grosso - MT. Como consequência
+                desse período, há um acúmulo de poeira nos painéis
+                fotovoltaicos, diminuindo a eficiência da produção. Portanto,
+                entre os meses de ABRIL e JULHO, uma limpeza deve ser feita nos
+                painéis para diminuir a queda de produção.
+              </Paragraph>
+            </Reinforcement>
           </>
         )}
       </Container>

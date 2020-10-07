@@ -25,12 +25,16 @@ export const IntervalContainer = styled.div`
     align-self: left;
     padding: 0 5px;
   }
+
+  @media print {
+    display: none;
+  }
 `;
 
 export const Form = styled.form`
   margin-top: 16px;
   display: flex;
-  flex-direction: row;
+  flex-direction: columns;
 
   label {
     display: block;
@@ -46,6 +50,28 @@ export const Form = styled.form`
 
   @media print {
     display: none;
+  }
+`;
+
+export const Conclusion = styled.div`
+  width: 100%;
+
+  margin: 10px 0 10px 0;
+
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+
+  input {
+    margin-top: 20px;
+    width: 80%;
+    height: 200px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+  }
+  span {
+    margin-top: 10px;
   }
 `;
 
@@ -112,11 +138,30 @@ export const Paragraph = styled.p`
   text-align: justify;
   margin: 5px 0 10px 0;
 `;
-export const Reporter = styled.p`
+export const Reporter = styled.div`
   display: none;
+
   @media print {
     display: flex;
     flex-direction: column;
+
+    justify-content: left;
+
     margin: 20px 0;
   }
+`;
+export const Reinforcement = styled.div`
+  display: none;
+
+  @media print {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const ChartArea = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `;

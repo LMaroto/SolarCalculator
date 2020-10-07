@@ -29,6 +29,16 @@ jobs:
         run: |
           cd backend
           npm run build
+          
+      # Apaga antiga pasta de distribuição no servidor
+      - name: Run production scripts
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: rm -r ~/solarcalculator/backend/dist
       
       # Copia o código para o servidor online
       - name: Copy to EC2

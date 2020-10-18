@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { FiFileText } from 'react-icons/fi';
@@ -25,6 +25,9 @@ const Report = () => {
   const [reports, setReports] = useState([]);
   const [sunHours, setSunhours] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [graphReady, setGraphReady] = useState(false);
+
   const user = useParams();
 
   const monthToNumber = {
@@ -59,7 +62,9 @@ const Report = () => {
 
   const formSubmit = useCallback(
     async evt => {
+      setGraphReady(false);
       setLoading(true);
+
       evt.preventDefault();
 
       const month_start = evt.target.month_start.value;
@@ -77,12 +82,18 @@ const Report = () => {
 
       setCustomer(customerResponse.data);
       setReports(reportResponse.data);
+
       setSunhours(hoursResponse.data);
       setLoading(false);
-      window.print();
     },
     [user.id]
   );
+
+  useEffect(() => {
+    if (!loading && graphReady) {
+      window.print();
+    }
+  }, [loading, graphReady]);
 
   return (
     <>
@@ -123,7 +134,9 @@ const Report = () => {
               <option value="fev">Fevereiro</option>
               <option value="mar">Março</option>
               <option value="abr">Abril</option>
-              <option value="mai">Maio</option>
+              <option selected value="mai">
+                Maio
+              </option>
               <option value="jun">Junho</option>
               <option value="jul">Julho</option>
               <option value="ago">Agosto</option>
@@ -294,24 +307,29 @@ const Report = () => {
                     que está instalado no local da obra.
                   </>
                 ) : (
-                  <>
-                    pelos módulos de monitoramento conectados aos inversores
+                    <>
+                      pelos módulos de monitoramento conectados aos inversores
                     <strong>
-                      {customer.devices.map(device => ` ${device.name}, `)}
-                    </strong>
+                        {customer.devices.map(device => ` ${device.name}, `)}
+                      </strong>
                     que estão instalados no local da obra.
                   </>
-                )}
+                  )}
               </Paragraph>
               <ChartArea>
-                <ChartComponent reports={reports} />
+                <ChartComponent
+                  width="80%"
+                  height="auto"
+                  reports={reports}
+                  onReady={() => setGraphReady(true)}
+                />
               </ChartArea>
             </ReportContainer>
             {reports.map(report => {
-              const { month } = report;
+              const { month, year } = report;
 
               return (
-                <Reporter>
+                <Reporter key={`${month}-${year}`}>
                   <Paragraph>
                     <br />
                     Mês: <strong>{completeMonths[month]}</strong>
@@ -333,8 +351,8 @@ const Report = () => {
                         <strong>Observações:</strong> {report.obs}
                       </>
                     ) : (
-                      ''
-                    )}
+                        ''
+                      )}
                   </Paragraph>
                 </Reporter>
               );

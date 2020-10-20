@@ -22,6 +22,7 @@ export const IntervalContainer = styled.div`
     position: relative;
   }
   span {
+    margin: 10px;
     align-self: left;
     padding: 0 5px;
   }
@@ -34,45 +35,64 @@ export const IntervalContainer = styled.div`
 export const Form = styled.form`
   margin-top: 16px;
   display: flex;
-  flex-direction: columns;
+  flex-direction: column;
 
   label {
     display: block;
     margin-bottom: 10px;
   }
 
-  select,
-  input {
-    width: 150px;
-    padding: 4px 8px;
-    margin-right: 8px;
+  .subgrid{
+
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+
+    textarea{
+      width: 100%;
+      height: 250px;
+      padding: 5px;
+      border-radius: 4px;
+      border: none;
+    }
   }
 
   @media print {
     display: none;
   }
+
+
+`;
+
+export const InputBlock = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  select,
+  input {
+    width: 150px;
+    padding: 4px 8px;
+    margin-right: 3px;
+  }
+
 `;
 
 export const Conclusion = styled.div`
-  width: 100%;
 
-  margin: 10px 0 10px 0;
+  display: none;
 
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-
-  input {
-    margin-top: 20px;
-    width: 80%;
-    height: 200px;
-    border-radius: 4px;
-    border: 1px solid #fff;
+  @media print {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    margin-bottom: 15px;
+    strong {
+      margin: 10px auto;
+    }
   }
-  span {
-    margin-top: 10px;
-  }
+
+
 `;
 
 export const GenerateButton = styled.button`
@@ -80,9 +100,9 @@ export const GenerateButton = styled.button`
   align-items: center;
   justify-content: center;
 
-  width: 150px;
-  padding: 0 15px;
-
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
   border: none;
   border-radius: 4px;
   font-weight: bold;
@@ -115,7 +135,7 @@ export const ReportContainer = styled.div`
 `;
 
 export const Title = styled.h4`
-  margin: 10px 0;
+  margin: 5px 0;
 `;
 export const Info = styled.table`
   margin: 10px 0;
@@ -150,6 +170,7 @@ export const Reporter = styled.div`
     margin: 20px 0;
   }
 `;
+
 export const Reinforcement = styled.div`
   display: none;
 
@@ -163,5 +184,6 @@ export const ChartArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* width: 100%; */
+  margin-bottom: 50px;
+
 `;

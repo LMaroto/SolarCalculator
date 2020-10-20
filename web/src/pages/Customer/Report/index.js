@@ -12,6 +12,8 @@ import {
   Info,
   Paragraph,
   Reporter,
+  InputBlock,
+  Conclusion,
   ChartArea,
   Reinforcement,
 } from './styles';
@@ -24,9 +26,12 @@ const Report = () => {
   const [customer, setCustomer] = useState([]);
   const [reports, setReports] = useState([]);
   const [sunHours, setSunhours] = useState([]);
+  const [conclusions, setConclusions] = useState([]);
+  const [chartWrapper, setChartWrapper] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [graphReady, setGraphReady] = useState(false);
+
 
   const user = useParams();
 
@@ -73,6 +78,8 @@ const Report = () => {
       const month_end = evt.target.month_end.value;
       const year_end = evt.target.year_end.value;
 
+      const conclusionInput = evt.target.conclude.value;
+
       const customerResponse = await api.get(`customers/${user.id}`);
       const reportResponse = await api.get(
         `customers/${user.id}/reports?month_start=${month_start}&year_start=${year_start}&month_end=${month_end}&year_end=${year_end}`
@@ -82,6 +89,7 @@ const Report = () => {
 
       setCustomer(customerResponse.data);
       setReports(reportResponse.data);
+      setConclusions(conclusionInput);
 
       setSunhours(hoursResponse.data);
       setLoading(false);
@@ -101,9 +109,12 @@ const Report = () => {
       <Container>
         <IntervalContainer>
           <h1>Relatório de produção individual</h1>
-          <span>Selecione o período desejado para o relatório:</span>
+
 
           <Form onSubmit={formSubmit}>
+          <span>Selecione o período desejado para o relatório:</span>
+            <InputBlock>
+
             <span>Início do período</span>
             <select name="month_start">
               <option value="jan">Janeiro</option>
@@ -119,7 +130,6 @@ const Report = () => {
               <option value="nov">Novembro</option>
               <option value="dez">Dezembro</option>
             </select>
-
             <input
               name="year_start"
               required
@@ -128,6 +138,7 @@ const Report = () => {
               defaultValue={new Date().getFullYear()}
               placeholder="Ex.: 2020"
             />
+
             <span>Fim do período</span>
             <select name="month_end">
               <option value="jan">Janeiro</option>
@@ -154,11 +165,19 @@ const Report = () => {
               defaultValue={new Date().getFullYear()}
               placeholder="Ex.: 2020"
             />
-
-            <GenerateButton type="submit" value="Consultar">
+            </InputBlock>
+            <InputBlock className="subgrid">
+            <textarea name="conclude"
+            type="text"
+            placeholder="Após analisar tensões e correntes, insira aqui as conclusões a respeito do sistema analisado." />
+             <GenerateButton type="submit" value="Consultar">
               <FiFileText color="#fff" size={20} />
               Gerar relatório
             </GenerateButton>
+            </InputBlock>
+
+
+
           </Form>
         </IntervalContainer>
         {loading && <p>Carregando...</p>}
@@ -318,7 +337,6 @@ const Report = () => {
               </Paragraph>
               <ChartArea>
                 <ChartComponent
-                  width="80%"
                   height="auto"
                   reports={reports}
                   onReady={() => setGraphReady(true)}
@@ -332,16 +350,18 @@ const Report = () => {
                 <Reporter key={`${month}-${year}`}>
                   <Paragraph>
                     <br />
-                    Mês: <strong>{completeMonths[month]}</strong>
+                    <center>
+                    <strong>{completeMonths[month]}</strong>
+                    </center>
                     <br />
                     Potência instalada: {customer.kWp} kWp.
                     <br />
                     Horas de sol: {sunHours[month]} horas.
                     <br />
                     Dias de produção: {report.end - report.start + 1} dias.
-                    <br />A produção ESPERADA para o mês de {month} era de:{' '}
+                    <br />A produção ESPERADA para o mês de {completeMonths[month]} era de:{' '}
                     {report.goal} kWh.
-                    <br />A produção REAL do mês de {month} foi de:{' '}
+                    <br />A produção REAL do mês de {completeMonths[month]} foi de:{' '}
                     {report.produced} kWh (<strong>{report.difference}%</strong>{' '}
                     do esperado).
                     {report.obs !== '' ? (
@@ -357,6 +377,10 @@ const Report = () => {
                 </Reporter>
               );
             })}
+            {conclusions ? (<Conclusion>
+              <strong>Conclusão</strong>
+              {conclusions}
+            </Conclusion>) : ''}
             <Reinforcement>
               <Paragraph>
                 <strong>REFORÇO:</strong> O estudo feito para produção de

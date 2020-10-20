@@ -27,7 +27,6 @@ const Report = () => {
   const [reports, setReports] = useState([]);
   const [sunHours, setSunhours] = useState([]);
   const [conclusions, setConclusions] = useState([]);
-  const [chartWrapper, setChartWrapper] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [graphReady, setGraphReady] = useState(false);

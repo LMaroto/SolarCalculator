@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { FiFileText, FiLayout } from 'react-icons/fi';

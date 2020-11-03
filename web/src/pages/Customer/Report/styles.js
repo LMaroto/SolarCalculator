@@ -13,19 +13,52 @@ export const Container = styled.div`
     background: #fff;
 
     font-size: 14pt;
+
+    > h1 {
+      display: none;
+    }
   }
 `;
 
-export const IntervalContainer = styled.div`
+export const Step = styled.span`
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  text-decoration: underline;
+
+  display: inline-block;
+
+  margin-left: 10px;
+  margin-top: 8px;
+`;
+
+export const StepContainer = styled.div`
   color: white;
-  h1 {
-    margin: 0;
-    font-weight: 300;
-    position: relative;
+
+  border: 1px solid #fff;
+  border-radius: 10px;
+
+  margin-top: 16px;
+
+  div.header {
+    height: 32px;
+    background: #fff;
+
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
-  span {
-    margin: 10px 0;
-    align-self: left;
+
+  div.content {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 10px;
+    background: #f2eadf;
+    color: #000;
+    h1 {
+      margin: 0;
+      font-weight: 300;
+      position: relative;
+    }
   }
 
   @media print {
@@ -74,11 +107,9 @@ export const InputBlock = styled.div`
 export const Conclusion = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: justify;
+  width: 100%;
+  margin-top: 10px;
   margin-bottom: 15px;
-  strong {
-    margin: 10px auto;
-  }
 `;
 
 export const GenerateButton = styled.button`
@@ -115,13 +146,6 @@ export const ReportPreview = styled.div`
 
   border-radius: 10px;
 
-  > span {
-    color: #666;
-    font-size: 18px;
-    margin-top: 10px;
-    margin-left: 10px;
-  }
-
   @media print {
     border: none;
 
@@ -141,6 +165,10 @@ export const ReportContainer = styled.div`
   background: #fff;
 
   color: black;
+
+  div.reports {
+    width: 100%;
+  }
 `;
 
 export const PageBreaker = styled.div`
@@ -163,7 +191,7 @@ export const Info = styled.table`
 
   th {
     border: 1px solid #000;
-    background: #fbc000;
+    background: #f5d5b0;
   }
 
   td {
@@ -171,6 +199,13 @@ export const Info = styled.table`
     /* padding: 0 4px; */
     font-size: 12px;
     font-weight: bold;
+  }
+
+  @media print {
+    td,
+    th {
+      font-size: 12pt;
+    }
   }
 `;
 
@@ -191,6 +226,13 @@ export const Reporter = styled.div`
 
   & + div {
     margin-top: 10px;
+  }
+
+  @media print {
+    &:first-child {
+      /* Tentativa de quebrar a linha para não interferir na quebra de página */
+      /* margin-top: 70px; */
+    }
   }
 `;
 
@@ -213,7 +255,10 @@ export const PrintForm = styled.form`
   }
 
   textarea {
+    margin-top: 16px;
     width: 100%;
+
+    padding: 8px;
   }
 `;
 
@@ -231,10 +276,10 @@ export const PrintButton = styled.button`
   text-decoration: none;
   color: #fff;
 
-  background: #138dd2;
+  background: #27cc78;
 
   &:hover {
-    background: ${darken(0.05, '#138dd2')};
+    background: ${darken(0.05, '#27CC78')};
   }
 
   svg {

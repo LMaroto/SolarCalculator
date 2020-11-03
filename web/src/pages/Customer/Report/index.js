@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import { FiFileText, FiLayout } from 'react-icons/fi';
 import {
   Container,
-  IntervalContainer,
+  StepContainer,
+  Step,
   Form,
   GenerateButton,
   ReportPreview,
@@ -19,6 +20,7 @@ import {
   ChartArea,
   Reinforcement,
   PrintForm,
+  PrintButton,
 } from './styles';
 
 import Header from '../../../components/Header';
@@ -29,12 +31,10 @@ const Report = () => {
   const [customer, setCustomer] = useState([]);
   const [reports, setReports] = useState([]);
   const [sunHours, setSunhours] = useState([]);
-  const [conclusions, setConclusions] = useState([]);
+  const [conclusions, setConclusions] = useState('');
   const [loading, setLoading] = useState(false);
 
   const formRef = useRef(null);
-
-  const [graphReady, setGraphReady] = useState(false);
 
   const user = useParams();
 
@@ -70,24 +70,17 @@ const Report = () => {
 
   const formSubmit = useCallback(
     async evt => {
-      setGraphReady(false);
       setLoading(true);
 
       if (evt) evt.preventDefault();
 
-      // const month_start = evt.target.month_start.value;
-      // const year_start = evt.target.year_start.value;
+      const month_start = evt.target.month_start.value;
+      const year_start = evt.target.year_start.value;
 
-      // const month_end = evt.target.month_end.value;
-      // const year_end = evt.target.year_end.value;
+      const month_end = evt.target.month_end.value;
+      const year_end = evt.target.year_end.value;
 
       // const conclusionInput = evt.target.conclude.value;
-
-      const month_start = 'jan';
-      const year_start = '2020';
-      const month_end = 'mai';
-      const year_end = '2020';
-      const conclusionInput = '';
 
       const customerResponse = await api.get(`customers/${user.id}`);
       const reportResponse = await api.get(
@@ -98,7 +91,6 @@ const Report = () => {
 
       setCustomer(customerResponse.data);
       setReports(reportResponse.data);
-      setConclusions(conclusionInput);
 
       setSunhours(hoursResponse.data);
       setLoading(false);
@@ -106,90 +98,92 @@ const Report = () => {
     [user.id]
   );
 
-  const printReport = useCallback(() => {}, []);
+  const printReport = useCallback(event => {
+    event.preventDefault();
 
-  useEffect(() => {
-    if (!loading && graphReady) {
-      // window.print();
-    }
-  }, [loading, graphReady]);
+    const conclusion = event.target.conclusion.value;
 
-  useEffect(() => {
-    formSubmit();
-  }, [formSubmit]);
+    setConclusions(conclusion);
+
+    setTimeout(() => window.print(), 500);
+  }, []);
 
   return (
     <>
       <Header showBackButton large title="Relatório de produção" />
       <Container>
-        <IntervalContainer>
-          <h1>Relatório de produção individual</h1>
+        <h1>Relatório de produção individual</h1>
+        <StepContainer>
+          <div className="header">
+            <Step>
+              Etapa 1/3: Selecione o período desejado para o relatório
+            </Step>
+          </div>
 
-          <Form ref={formRef} onSubmit={formSubmit}>
-            <span>Selecione o período desejado para o relatório:</span>
-            <InputBlock>
-              <span>Início do período</span>
-              <select name="month_start">
-                <option value="jan">Janeiro</option>
-                <option value="fev">Fevereiro</option>
-                <option value="mar">Março</option>
-                <option value="abr">Abril</option>
-                <option value="mai">Maio</option>
-                <option value="jun">Junho</option>
-                <option value="jul">Julho</option>
-                <option value="ago">Agosto</option>
-                <option value="set">Setembro</option>
-                <option value="out">Outubro</option>
-                <option value="nov">Novembro</option>
-                <option value="dez">Dezembro</option>
-              </select>
-              <input
-                name="year_start"
-                required
-                type="number"
-                min="2019"
-                defaultValue={new Date().getFullYear()}
-                placeholder="Ex.: 2020"
-              />
+          <div className="content">
+            <Form ref={formRef} onSubmit={formSubmit}>
+              <InputBlock>
+                <span>Início do período</span>
+                <select name="month_start">
+                  <option value="jan">Janeiro</option>
+                  <option value="fev">Fevereiro</option>
+                  <option value="mar">Março</option>
+                  <option value="abr">Abril</option>
+                  <option value="mai">Maio</option>
+                  <option value="jun">Junho</option>
+                  <option value="jul">Julho</option>
+                  <option value="ago">Agosto</option>
+                  <option value="set">Setembro</option>
+                  <option value="out">Outubro</option>
+                  <option value="nov">Novembro</option>
+                  <option value="dez">Dezembro</option>
+                </select>
+                <input
+                  name="year_start"
+                  required
+                  type="number"
+                  min="2019"
+                  defaultValue={new Date().getFullYear()}
+                  placeholder="Ex.: 2020"
+                />
 
-              <span>Fim do período</span>
-              <select name="month_end">
-                <option value="jan">Janeiro</option>
-                <option value="fev">Fevereiro</option>
-                <option value="mar">Março</option>
-                <option value="abr">Abril</option>
-                <option selected value="mai">
-                  Maio
-                </option>
-                <option value="jun">Junho</option>
-                <option value="jul">Julho</option>
-                <option value="ago">Agosto</option>
-                <option value="set">Setembro</option>
-                <option value="out">Outubro</option>
-                <option value="nov">Novembro</option>
-                <option value="dez">Dezembro</option>
-              </select>
+                <span>Fim do período</span>
+                <select name="month_end">
+                  <option value="jan">Janeiro</option>
+                  <option value="fev">Fevereiro</option>
+                  <option value="mar">Março</option>
+                  <option value="abr">Abril</option>
+                  <option value="mai">Maio</option>
+                  <option value="jun">Junho</option>
+                  <option value="jul">Julho</option>
+                  <option value="ago">Agosto</option>
+                  <option value="set">Setembro</option>
+                  <option value="out">Outubro</option>
+                  <option value="nov">Novembro</option>
+                  <option value="dez">Dezembro</option>
+                </select>
 
-              <input
-                name="year_end"
-                required
-                type="number"
-                min="2019"
-                defaultValue={new Date().getFullYear()}
-                placeholder="Ex.: 2020"
-              />
-            </InputBlock>
-            <GenerateButton type="submit" value="Consultar">
-              <FiLayout color="#fff" size={20} />
-              Carregar informações
-            </GenerateButton>
-          </Form>
-        </IntervalContainer>
+                <input
+                  name="year_end"
+                  required
+                  type="number"
+                  min="2019"
+                  defaultValue={new Date().getFullYear()}
+                  placeholder="Ex.: 2020"
+                />
+              </InputBlock>
+              <GenerateButton type="submit" value="Consultar">
+                <FiLayout color="#fff" size={20} />
+                Consultar período
+              </GenerateButton>
+            </Form>
+          </div>
+        </StepContainer>
         {loading && <p>Carregando...</p>}
         {!!reports.length && (
           <>
             <ReportPreview>
-              <span>Visualização do relatório (pré impressão)</span>
+              <Step>Etapa 2/3: Visualização do relatório (pré impressão)</Step>
               <ReportContainer>
                 <Title>
                   Relatório analítico de produção de energia fotovoltaica
@@ -220,16 +214,16 @@ const Report = () => {
 
                 <Paragraph>
                   Atendendo à solicitação de V.S. ª estamos encaminhando um
-                  relatório de fácil compreensão para esclarecer qualquer tipo
-                  de dúvidas sobre a Produção de Energia Fotovoltaica.
+                  relatório de fácil compreensão para esclarecer quaisquer tipos
+                  de dúvidas sobre a produção de energia fotovoltaica.
                 </Paragraph>
                 <Paragraph>
-                  A leitura de Produção da ENERGISA é diferente da leitura
-                  enviada pelo INVERSOR, pois durante o dia a energia produzida
-                  pelos PAINÉIS FOTOVOLTAICOS e enviada para o INVERSOR pode ser
-                  parcialmente - ou totalmente - consumida pela própria unidade
-                  consumidora no exato momento em que foi gerado. Ou seja, o
-                  valor exibido no medidor da ENERGISA é o excedente não
+                  A leitura de produção da ENERGISA é diferente da leitura
+                  enviada pelo INVERSOR, uma vez que, durante o dia a energia
+                  produzida pelos PAINÉIS FOTOVOLTAICOS e enviada para o
+                  INVERSOR pode ser parcial ou totalmente consumida pela própria
+                  unidade consumidora no exato momento em que foi gerado. Isto
+                  é, o valor exibido no medidor da ENERGISA é o excedente não
                   consumido na unidade.
                 </Paragraph>
 
@@ -343,45 +337,56 @@ const Report = () => {
                   )}
                 </Paragraph>
                 <ChartArea>
-                  <ChartComponent
-                    height="400px"
-                    reports={reports}
-                    onReady={() => setGraphReady(true)}
-                  />
+                  <ChartComponent height="400px" reports={reports} />
                 </ChartArea>
                 <PageBreaker> </PageBreaker>
-                {reports.map(report => {
-                  const { month, year } = report;
 
-                  return (
-                    <Reporter key={`${month}-${year}`}>
-                      <strong>{completeMonths[month]}</strong>
-                      <span>Potência instalada: {customer.kWp} kWp.</span>
-                      <span>Horas de sol: {sunHours[month]} horas.</span>
-                      <span>
-                        Dias de produção: {report.end - report.start + 1} dias.
-                      </span>
-                      <span>
-                        A produção ESPERADA para o mês de{' '}
-                        {completeMonths[month]} era de: {report.goal} kWh.
-                      </span>
-                      <span>
-                        A produção REAL do mês de {completeMonths[month]} foi
-                        de: {report.produced} kWh (
-                        <strong>{report.difference}%</strong> do esperado).
-                      </span>
-                      {report.obs !== '' ? (
-                        <>
-                          <br />
-                          <br />
-                          <strong>Observações:</strong> {report.obs}
-                        </>
-                      ) : (
-                        ''
-                      )}
-                    </Reporter>
-                  );
-                })}
+                <div className="reports">
+                  {reports.map(report => {
+                    const { month, year } = report;
+
+                    return (
+                      <Reporter key={`${month}-${year}`}>
+                        <strong>{completeMonths[month]}</strong>
+                        <span>Potência instalada: {customer.kWp} kWp.</span>
+                        <span>Horas de sol: {sunHours[month]} horas.</span>
+                        <span>
+                          Dias de produção: {report.end - report.start + 1}{' '}
+                          dias.
+                        </span>
+                        <span>
+                          A produção ESPERADA para o mês de{' '}
+                          {completeMonths[month]} era de: {report.goal} kWh.
+                        </span>
+                        <span>
+                          A produção REAL do mês de {completeMonths[month]} foi
+                          de: {report.produced} kWh (
+                          {report.difference < 1 ? (
+                            <>
+                              <strong>{report.difference * -1}% abaixo</strong>{' '}
+                              estimado
+                            </>
+                          ) : (
+                            <>
+                              <strong>{report.difference}% acima</strong> do
+                              estimado
+                            </>
+                          )}
+                          )
+                        </span>
+                        {report.obs !== '' ? (
+                          <>
+                            <br />
+                            <br />
+                            <strong>Observações:</strong> {report.obs}
+                          </>
+                        ) : (
+                          ''
+                        )}
+                      </Reporter>
+                    );
+                  })}
+                </div>
                 {conclusions ? (
                   <Conclusion>
                     <strong>Conclusão</strong>
@@ -410,22 +415,30 @@ const Report = () => {
               </ReportContainer>
             </ReportPreview>
 
-            <PrintForm onSubmit={printReport}>
-              <span>
-                Insira aqui as observações que você deseja adicionar ao
-                relatório
-              </span>
-              <textarea
-                name="conclude"
-                type="text"
-                rows="4"
-                placeholder="Após analisar tensões e correntes, insira aqui as conclusões a respeito do sistema analisado."
-              />
-              <GenerateButton type="submit" value="Consultar">
-                <FiFileText color="#fff" size={20} />
-                Imprimir relatório
-              </GenerateButton>
-            </PrintForm>
+            <StepContainer>
+              <div className="header">
+                <Step>Etapa 3/3: Conclusões e impressão</Step>
+              </div>
+
+              <div className="content">
+                <PrintForm onSubmit={printReport}>
+                  <span>
+                    (Opcional) Após analisar a produção, tensões e correntes,
+                    insira aqui conclusões a respeito do sistema fotovoltaico.
+                  </span>
+                  <textarea
+                    type="textarea"
+                    name="conclusion"
+                    rows="4"
+                    placeholder="Seu texto de conclusão aqui"
+                  />
+                  <PrintButton type="submit" value="Consultar">
+                    <FiFileText color="#fff" size={20} />
+                    Imprimir relatório
+                  </PrintButton>
+                </PrintForm>
+              </div>
+            </StepContainer>
           </>
         )}
       </Container>

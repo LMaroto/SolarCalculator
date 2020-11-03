@@ -8,8 +8,6 @@ import PropTypes from 'prop-types';
 import { Container, Loader } from './styles';
 
 function ChartComponent({ reports, onReady, ...props }) {
-
-
   const reportsData = reports.map(report => [
     `${report.month}/${report.year}`,
     report.goal,
@@ -19,8 +17,6 @@ function ChartComponent({ reports, onReady, ...props }) {
   return (
     <Container>
       <Chart
-        width="100%"
-        height="300px"
         {...props}
         chartType="ColumnChart"
         loader={
@@ -36,7 +32,6 @@ function ChartComponent({ reports, onReady, ...props }) {
           colors: ['#F2A378', '#138DD2'],
           legend: { position: 'bottom' },
         }}
-
         chartEvents={[{ eventName: 'ready', callback: onReady }]}
       />
     </Container>

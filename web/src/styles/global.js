@@ -40,4 +40,10 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  @media print {
+    body {
+      background: #fff;
+    }
+  }
+
 `;

@@ -5,8 +5,8 @@ Aplicação desenvolvida com o intuito de facilitar e agilizar a confecção de 
 
 ## Features
 
-- [x] Página inicial
-- [x] Tela de cadastro de cliente
-- [x] Tela de Relatório do cliente
+- [ ] Página inicial
+- [ ] Tela de cadastro de cliente
+- [ ] Tela de Relatório do cliente
 - [ ] Impressão de relatório de um único cliente
-- [x] Impressão de relatório global
+- [ ] Impressão de relatório global

@@ -13,12 +13,14 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ showBackButton, title }) => {
+  const history = useHistory();
+
   return (
     <Container>
       <Content>
         <div>
           {showBackButton && (
-            <button type="button" onClick={() => alert('tum')}>
+            <button type="button" onClick={() => history.goBack()}>
               <FiChevronLeft size={20} color="#ff7518" />
             </button>
           )}

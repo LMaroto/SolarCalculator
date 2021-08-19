@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { FiChevronLeft } from 'react-icons/fi';
-import Logo from '../../assets/logo192.png';
+import Logo from '../../assets/logo1.png';
 
 import { Container, Content } from './styles';
 
@@ -33,6 +33,7 @@ const Header: React.FC<HeaderProps> = ({ showBackButton, title }) => {
           <div>
             <a href="/">
               <img src={Logo} alt="SolarCalculator" />
+              <strong>SolarCalculator</strong>
             </a>
           </div>
         </aside>

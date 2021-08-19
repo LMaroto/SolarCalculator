@@ -41,11 +41,22 @@ export const Content = styled.div`
   aside {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     color: #ff7518;
 
+    a {
+      display: flex;
+      align-items: center;
+    }
+
     img {
-      width: 90px;
+      width: 2.5rem;
       height: 80%;
+    }
+
+    strong {
+      font-size: 0.9rem;
+      margin-left: 0.5rem;
     }
   }
 `;

@@ -36,7 +36,7 @@ export const Option = styled(Link)`
   transition: transform 0.2s;
 
   svg {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.2rem;
   }
   &:hover {
     transform: scale(1.03);

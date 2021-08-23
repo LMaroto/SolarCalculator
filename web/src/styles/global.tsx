@@ -21,6 +21,7 @@ body{
   -webkit-font-smoothing: antialiased;
 
   background: #ff7518;
+  overflow-y: hidden;
 }
 
 body, input, button, textarea{

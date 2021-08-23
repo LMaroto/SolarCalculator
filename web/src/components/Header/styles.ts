@@ -24,6 +24,7 @@ export const Content = styled.div`
 
     strong {
       font-weight: bold;
+      font-size: 0.9rem;
       color: #ff7518;
     }
 

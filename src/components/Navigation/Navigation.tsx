@@ -5,7 +5,7 @@ const Navigation = () => {
     return (
         <Container>
             <a href="#">Home</a>
-            <h1>SolarCalculator</h1>
+            <h1>SolarCalculataor</h1>
         </Container>
     )
 

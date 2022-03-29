@@ -1,7 +1,5 @@
-import  Navigation  from "../../components/Navigation/Navigation"
+import Navigation from '../../components/Navigation/Navigation'
 
 export const Dashboard = () => {
-    return (
-        <Navigation />
-    )
+  return <Navigation title="Dashboard" showBackButton={false} />
 }

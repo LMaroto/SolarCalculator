@@ -1,14 +1,26 @@
-import { Container } from "./styles"
+import { FC } from 'react'
+import { Container, PageTitle } from './styles'
+import { FiChevronLeft } from 'react-icons/fi'
 
-const Navigation = () => {
-
-    return (
-        <Container>
-            <a href="#">Home</a>
-            <h1>SolarCalculataor</h1>
-        </Container>
-    )
-
+export interface NavigationProps {
+  title: string
+  showBackButton: boolean
 }
 
-export default Navigation;
+const Navigation: FC<NavigationProps> = ({ title, showBackButton }) => {
+  return (
+    <Container>
+      {showBackButton ? (
+        <div>
+          <FiChevronLeft size={20} />
+          <PageTitle href="#">{title}</PageTitle>
+        </div>
+      ) : (
+        <PageTitle href="#">{title}</PageTitle>
+      )}
+      <h1>SolarCalculator</h1>
+    </Container>
+  )
+}
+
+export default Navigation
